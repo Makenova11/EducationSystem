@@ -1,15 +1,42 @@
-﻿@{
+﻿@model IEnumerable<EducationSystem.Models.Subject>
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ВКР</h1>
-    <p class="lead">Информационная система обучения и сертификации экспертов 
-        массовых процедур оценки оценки качества образования </p>
-</div>
+<p class="lead">
+    Информационная система обучения и сертификации экспертов
+    массовых процедур оценки качества образования
+</p>
 
-<div class="row">
-    <div class="col-md-4">
-        <p><a class="btn btn-default" @Html.ActionLink("Эксперты", "Index", "Experts")</a></p>
-    </div>
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
 </div>
+@foreach (var subject in Model)
+{
+    <p>
+        <a class="btn btn-default"
+           @Html.ActionLink((string)@subject.Name, "Details", new { id = subject.SubjectCode }
+               , new {@class = "item"}) <a/>
+    </p>
+}
+@section scripts
+{
+    <script type="text/javascript">
+ 
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".item").click(function (e) {
+ 
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+    </script>
+}
+@* <div class="col-md-4">
+            <p><a class="btn btn-default" @Html.ActionLink("Предметы", "Index", "Subjects")</a></p>
+        </div>
+    </div>*@

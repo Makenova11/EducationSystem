@@ -1,16 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using EducationSystem.Models;
 
 namespace EducationSystem.Controllers
 {
     public class HomeController : Controller
     {
+        private EducationSystemDB db = new EducationSystemDB();
+        private List<Subject> subjects = new List<Subject>();
         public ActionResult Index()
         {
-            return View();
+            subjects = db.Subject.ToList();
+            return View(subjects);
+        }
+
+        // GET: Subjects/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Subject sub = subjects.FirstOrDefault(c => c.SubjectCode == id);
+            if (sub == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(sub);
         }
 
     }
