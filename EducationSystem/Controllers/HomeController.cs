@@ -25,12 +25,13 @@ namespace EducationSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject sub = subjects.FirstOrDefault(c => c.SubjectCode == id);
-            if (sub == null)
+            //Subject sub = subjects.FirstOrDefault(c => c.SubjectCode == id);
+            ViewBag.subTask = db.SubjectTask.Where(c => c.SubjectCode == id).ToList();
+            if (ViewBag.subTask == null)
             {
                 return HttpNotFound();
             }
-            return PartialView(sub);
+            return PartialView(ViewBag.subTask);
         }
 
     }

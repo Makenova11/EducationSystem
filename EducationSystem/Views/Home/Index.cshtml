@@ -1,25 +1,91 @@
 ﻿@model IEnumerable<EducationSystem.Models.Subject>
+
 @{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p class="lead">
-    Информационная система обучения и сертификации экспертов
+<style>
+    .subjectsHalf {
+        margin-bottom: 10px;
+    }
+
+    .item {
+        font-size: 20px;
+    }
+
+    #raz {
+        visibility: hidden;
+        margin: 0;
+        width: 220px;
+        display: flex
+    }
+
+    #raz #containerListSub, .lead {
+        visibility: visible;
+    }
+
+    #raz:hover {
+        visibility: visible;
+    }
+
+    #raz ul {
+        position: absolute;
+        z-index: 10;
+        /*top: 10px;*/
+        left: 380px;
+        width: 128px;
+        min-height: 200px;
+        text-align: center;
+        margin: 0;
+        box-shadow: 0 0 5px rgba(120, 120, 120, .5);
+        list-style: none;
+        padding: 0;
+    }
+
+    #raz li {
+        padding: 5px 10px;
+    }
+
+    #raz li:not(:last-child) {
+        border-bottom: 1px solid gray;
+    }
+
+    #raz a {
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .linlistmmodal:hover {
+        color: #FF00FF;
+    }
+</style>
+
+<p class="lead">Информационная система обучения и сертификации экспертов
     массовых процедур оценки качества образования
 </p>
 
-<div id="modDialog" class="modal fade">
+@*<div id="modDialog" class="modal fade">
     <div id="dialogContent" class="modal-dialog"></div>
-</div>
+</div>*@
 @foreach (var subject in Model)
-{
-    <p>
-        <a class="btn btn-default"
-           @Html.ActionLink((string)@subject.Name, "Details", new { id = subject.SubjectCode }
-               , new {@class = "item"}) <a/>
-    </p>
+{   
+    <div id="raz">
+        <div id="containerListSub" class="subjectsHalf">
+            @Html.ActionLink((string)@subject.Name, "Details", new { id = subject.SubjectCode }, new { @class = "item btn btn-default" })
+        </div>
+        @*<ul class="listModalWindow">
+            <li><a class="linlistmmodal" href="#">13 задание</a></li>
+            <li><a class="linlistmmodal" href="#">14 задание</a></li>
+            <li><a class="linlistmmodal" href="#">15 задание</a></li>
+            <li><a class="linlistmmodal" href="#">16 задание</a></li>
+            <li><a class="linlistmmodal" href="#">17 задание</a></li>
+            <li><a class="linlistmmodal" href="#">18 задание</a></li>
+            <li><a class="linlistmmodal" href="#">19 задание</a></li>
+        </ul>*@
+    </div>
 }
-@section scripts
+@*@section scripts
 {
     <script type="text/javascript">
  
@@ -35,8 +101,8 @@
             });
         })
     </script>
-}
-@* <div class="col-md-4">
+}*@
+ <div class="col-md-4">
             <p><a class="btn btn-default" @Html.ActionLink("Предметы", "Index", "Subjects")</a></p>
         </div>
-    </div>*@
+    </div>

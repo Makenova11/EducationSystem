@@ -1,46 +1,17 @@
-﻿@model EducationSystem.Models.Subject
+﻿@model IEnumerable<EducationSystem.Models.SubjectTask>
 
 @{
     ViewBag.Title = "Details";
 }
 
 <div class="modal-content">
-    <div class="modal-header">
-        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
-    </div>
     <div class="modal-body">
-        <dl class="dl-horizontal">
-            <dt>Название модели:</dt>
-            <dd>@Html.DisplayFor(model => model.Name)</dd>
+        <ul class="dl-horizontal">
+            @foreach (var num in @ViewBag.subTask)
+            {
+                <li>@num.Number задание</li>
+            }
 
-
-        </dl>
+        </ul>
     </div>
 </div>
-
-<!--<div>
-    <h4>Subject</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Class)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Class)
-        </dd>
-
-    </dl>
-</div>
-<p>-->
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.SubjectCode }) |*@
-    <!--@Html.ActionLink("Back to List", "Index")
-</p>-->
