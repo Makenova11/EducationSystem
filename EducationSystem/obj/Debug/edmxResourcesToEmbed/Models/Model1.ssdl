@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище EducationSystemDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Criterion">
+    <Key>
+      <PropertyRef Name="CriterionCode" />
+    </Key>
+    <Property Name="CriterionCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaxScore" Type="int" Nullable="false" />
+    <Property Name="SubjectTaskCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="EventCode" />
+    </Key>
+    <Property Name="EventCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Examination">
+    <Key>
+      <PropertyRef Name="ExamCode" />
+    </Key>
+    <Property Name="ExamCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExamDate" Type="datetime" Nullable="false" />
+    <Property Name="SubjectCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Expert">
+    <Key>
+      <PropertyRef Name="ExpertCode" />
+    </Key>
+    <Property Name="ExpertCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SecondName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Patronymic" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExpertSubject">
+    <Key>
+      <PropertyRef Name="CodeSubjectExpert" />
+    </Key>
+    <Property Name="CodeSubjectExpert" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubjectCode" Type="int" Nullable="false" />
+    <Property Name="ExpertCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Graduate">
+    <Key>
+      <PropertyRef Name="GraduateCode" />
+    </Key>
+    <Property Name="GraduateCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="CodeSubjectExpert" Type="bigint" Nullable="false" />
+    <Property Name="VariantCode" Type="bigint" Nullable="false" />
+    <Property Name="ExamCode" Type="bigint" />
+  </EntityType>
+  <EntityType Name="GraduateAnswer">
+    <Key>
+      <PropertyRef Name="GraduateCode" />
+      <PropertyRef Name="VariantTaskCode" />
+      <PropertyRef Name="CriterionCode" />
+    </Key>
+    <Property Name="Score" Type="int" Nullable="false" />
+    <Property Name="GraduateCode" Type="bigint" Nullable="false" />
+    <Property Name="VariantTaskCode" Type="bigint" Nullable="false" />
+    <Property Name="CriterionCode" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Solution">
+    <Key>
+      <PropertyRef Name="SolutionCode" />
+    </Key>
+    <Property Name="SolutionCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SolutionImage" Type="image" Nullable="false" />
+    <Property Name="TaskCode" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SolutionCriterionScore">
+    <Key>
+      <PropertyRef Name="SolutionCriterionCode" />
+    </Key>
+    <Property Name="SolutionCriterionCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="isValid" Type="bit" Nullable="false" />
+    <Property Name="PossibleScore" Type="int" Nullable="false" />
+    <Property Name="SolutionCode" Type="bigint" Nullable="false" />
+    <Property Name="CriterionCode" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="SubjectCode" />
+    </Key>
+    <Property Name="SubjectCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Class" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubjectTask">
+    <Key>
+      <PropertyRef Name="SubjectTaskCode" />
+    </Key>
+    <Property Name="SubjectTaskCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="SubjectCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="TaskCode" />
+    </Key>
+    <Property Name="TaskCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskImage" Type="image" Nullable="false" />
+    <Property Name="Year" Type="date" Nullable="false" />
+    <Property Name="CriterionFile" Type="image" Nullable="false" />
+    <Property Name="CriterionFileName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EventCode" Type="int" Nullable="false" />
+    <Property Name="SubjectTaskCode" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Variant">
+    <Key>
+      <PropertyRef Name="VariantCode" />
+      <PropertyRef Name="ExamCode" />
+    </Key>
+    <Property Name="VariantCode" Type="bigint" Nullable="false" />
+    <Property Name="ExamCode" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VariantSolution">
+    <Key>
+      <PropertyRef Name="VariantTaskCode" />
+    </Key>
+    <Property Name="VariantTaskCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="bigint" Nullable="false" />
+    <Property Name="SolutionCode" Type="bigint" Nullable="false" />
+    <Property Name="VariantCode" Type="bigint" Nullable="false" />
+    <Property Name="ExamCode" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="Вариант - Балл">
+    <End Role="VariantSolution" Type="Self.VariantSolution" Multiplicity="1" />
+    <End Role="GraduateAnswer" Type="Self.GraduateAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VariantSolution">
+        <PropertyRef Name="VariantTaskCode" />
+      </Principal>
+      <Dependent Role="GraduateAnswer">
+        <PropertyRef Name="VariantTaskCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Вариант - Решение">
+    <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+    <End Role="VariantSolution" Type="Self.VariantSolution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Solution">
+        <PropertyRef Name="SolutionCode" />
+      </Principal>
+      <Dependent Role="VariantSolution">
+        <PropertyRef Name="SolutionCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Задание - Мероприятие">
+    <End Role="Event" Type="Self.Event" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="EventCode" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="EventCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Задание - Решение">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="Solution" Type="Self.Solution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="TaskCode" />
+      </Principal>
+      <Dependent Role="Solution">
+        <PropertyRef Name="TaskCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Комментарии к решению - Решение">
+    <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+    <End Role="SolutionCriterionScore" Type="Self.SolutionCriterionScore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Solution">
+        <PropertyRef Name="SolutionCode" />
+      </Principal>
+      <Dependent Role="SolutionCriterionScore">
+        <PropertyRef Name="SolutionCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Критерий - Балл">
+    <End Role="Criterion" Type="Self.Criterion" Multiplicity="1" />
+    <End Role="GraduateAnswer" Type="Self.GraduateAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Criterion">
+        <PropertyRef Name="CriterionCode" />
+      </Principal>
+      <Dependent Role="GraduateAnswer">
+        <PropertyRef Name="CriterionCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Критерий - Комментарии к решению">
+    <End Role="Criterion" Type="Self.Criterion" Multiplicity="1" />
+    <End Role="SolutionCriterionScore" Type="Self.SolutionCriterionScore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Criterion">
+        <PropertyRef Name="CriterionCode" />
+      </Principal>
+      <Dependent Role="SolutionCriterionScore">
+        <PropertyRef Name="CriterionCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Назначение - Балл">
+    <End Role="Graduate" Type="Self.Graduate" Multiplicity="1" />
+    <End Role="GraduateAnswer" Type="Self.GraduateAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Graduate">
+        <PropertyRef Name="GraduateCode" />
+      </Principal>
+      <Dependent Role="GraduateAnswer">
+        <PropertyRef Name="GraduateCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Номер варианта - Вариант">
+    <End Role="Variant" Type="Self.Variant" Multiplicity="1" />
+    <End Role="VariantSolution" Type="Self.VariantSolution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Variant">
+        <PropertyRef Name="VariantCode" />
+        <PropertyRef Name="ExamCode" />
+      </Principal>
+      <Dependent Role="VariantSolution">
+        <PropertyRef Name="VariantCode" />
+        <PropertyRef Name="ExamCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Номер варианта - Назначение">
+    <End Role="Variant" Type="Self.Variant" Multiplicity="0..1" />
+    <End Role="Graduate" Type="Self.Graduate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Variant">
+        <PropertyRef Name="VariantCode" />
+        <PropertyRef Name="ExamCode" />
+      </Principal>
+      <Dependent Role="Graduate">
+        <PropertyRef Name="VariantCode" />
+        <PropertyRef Name="ExamCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Номер задания - Задание">
+    <End Role="SubjectTask" Type="Self.SubjectTask" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTask">
+        <PropertyRef Name="SubjectTaskCode" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="SubjectTaskCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Номер задания - Критерий">
+    <End Role="SubjectTask" Type="Self.SubjectTask" Multiplicity="1" />
+    <End Role="Criterion" Type="Self.Criterion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubjectTask">
+        <PropertyRef Name="SubjectTaskCode" />
+      </Principal>
+      <Dependent Role="Criterion">
+        <PropertyRef Name="SubjectTaskCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Предмет - Номер задания">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="SubjectTask" Type="Self.SubjectTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectCode" />
+      </Principal>
+      <Dependent Role="SubjectTask">
+        <PropertyRef Name="SubjectCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Предмет - Специализация эксперта">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="ExpertSubject" Type="Self.ExpertSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectCode" />
+      </Principal>
+      <Dependent Role="ExpertSubject">
+        <PropertyRef Name="SubjectCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Предмет на экзамене">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectCode" />
+      </Principal>
+      <Dependent Role="Examination">
+        <PropertyRef Name="SubjectCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Специализация - Назначение">
+    <End Role="ExpertSubject" Type="Self.ExpertSubject" Multiplicity="1" />
+    <End Role="Graduate" Type="Self.Graduate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpertSubject">
+        <PropertyRef Name="CodeSubjectExpert" />
+      </Principal>
+      <Dependent Role="Graduate">
+        <PropertyRef Name="CodeSubjectExpert" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Специализация - Эксперт">
+    <End Role="Expert" Type="Self.Expert" Multiplicity="1" />
+    <End Role="ExpertSubject" Type="Self.ExpertSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expert">
+        <PropertyRef Name="ExpertCode" />
+      </Principal>
+      <Dependent Role="ExpertSubject">
+        <PropertyRef Name="ExpertCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Экзамен - Вариант">
+    <End Role="Examination" Type="Self.Examination" Multiplicity="1" />
+    <End Role="Variant" Type="Self.Variant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Examination">
+        <PropertyRef Name="ExamCode" />
+      </Principal>
+      <Dependent Role="Variant">
+        <PropertyRef Name="ExamCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище EducationSystemDBModelContainer">
+    <EntitySet Name="Criterion" EntityType="Self.Criterion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Examination" EntityType="Self.Examination" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Expert" EntityType="Self.Expert" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpertSubject" EntityType="Self.ExpertSubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Graduate" EntityType="Self.Graduate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GraduateAnswer" EntityType="Self.GraduateAnswer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Solution" EntityType="Self.Solution" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SolutionCriterionScore" EntityType="Self.SolutionCriterionScore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubjectTask" EntityType="Self.SubjectTask" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Variant" EntityType="Self.Variant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VariantSolution" EntityType="Self.VariantSolution" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="Вариант - Балл" Association="Self.Вариант - Балл">
+      <End Role="VariantSolution" EntitySet="VariantSolution" />
+      <End Role="GraduateAnswer" EntitySet="GraduateAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="Вариант - Решение" Association="Self.Вариант - Решение">
+      <End Role="Solution" EntitySet="Solution" />
+      <End Role="VariantSolution" EntitySet="VariantSolution" />
+    </AssociationSet>
+    <AssociationSet Name="Задание - Мероприятие" Association="Self.Задание - Мероприятие">
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="Задание - Решение" Association="Self.Задание - Решение">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="Solution" EntitySet="Solution" />
+    </AssociationSet>
+    <AssociationSet Name="Комментарии к решению - Решение" Association="Self.Комментарии к решению - Решение">
+      <End Role="Solution" EntitySet="Solution" />
+      <End Role="SolutionCriterionScore" EntitySet="SolutionCriterionScore" />
+    </AssociationSet>
+    <AssociationSet Name="Критерий - Балл" Association="Self.Критерий - Балл">
+      <End Role="Criterion" EntitySet="Criterion" />
+      <End Role="GraduateAnswer" EntitySet="GraduateAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="Критерий - Комментарии к решению" Association="Self.Критерий - Комментарии к решению">
+      <End Role="Criterion" EntitySet="Criterion" />
+      <End Role="SolutionCriterionScore" EntitySet="SolutionCriterionScore" />
+    </AssociationSet>
+    <AssociationSet Name="Назначение - Балл" Association="Self.Назначение - Балл">
+      <End Role="Graduate" EntitySet="Graduate" />
+      <End Role="GraduateAnswer" EntitySet="GraduateAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="Номер варианта - Вариант" Association="Self.Номер варианта - Вариант">
+      <End Role="Variant" EntitySet="Variant" />
+      <End Role="VariantSolution" EntitySet="VariantSolution" />
+    </AssociationSet>
+    <AssociationSet Name="Номер варианта - Назначение" Association="Self.Номер варианта - Назначение">
+      <End Role="Variant" EntitySet="Variant" />
+      <End Role="Graduate" EntitySet="Graduate" />
+    </AssociationSet>
+    <AssociationSet Name="Номер задания - Задание" Association="Self.Номер задания - Задание">
+      <End Role="SubjectTask" EntitySet="SubjectTask" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+    <AssociationSet Name="Номер задания - Критерий" Association="Self.Номер задания - Критерий">
+      <End Role="SubjectTask" EntitySet="SubjectTask" />
+      <End Role="Criterion" EntitySet="Criterion" />
+    </AssociationSet>
+    <AssociationSet Name="Предмет - Номер задания" Association="Self.Предмет - Номер задания">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="SubjectTask" EntitySet="SubjectTask" />
+    </AssociationSet>
+    <AssociationSet Name="Предмет - Специализация эксперта" Association="Self.Предмет - Специализация эксперта">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="ExpertSubject" EntitySet="ExpertSubject" />
+    </AssociationSet>
+    <AssociationSet Name="Предмет на экзамене" Association="Self.Предмет на экзамене">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Examination" EntitySet="Examination" />
+    </AssociationSet>
+    <AssociationSet Name="Специализация - Назначение" Association="Self.Специализация - Назначение">
+      <End Role="ExpertSubject" EntitySet="ExpertSubject" />
+      <End Role="Graduate" EntitySet="Graduate" />
+    </AssociationSet>
+    <AssociationSet Name="Специализация - Эксперт" Association="Self.Специализация - Эксперт">
+      <End Role="Expert" EntitySet="Expert" />
+      <End Role="ExpertSubject" EntitySet="ExpertSubject" />
+    </AssociationSet>
+    <AssociationSet Name="Экзамен - Вариант" Association="Self.Экзамен - Вариант">
+      <End Role="Examination" EntitySet="Examination" />
+      <End Role="Variant" EntitySet="Variant" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
