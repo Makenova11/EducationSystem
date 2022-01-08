@@ -1,39 +1,32 @@
-﻿@model IEnumerable<EducationSystem.Models.Subject>
+﻿@using EducationSystem.Controllers
+@using EducationSystem.Helpers
+@model IEnumerable<EducationSystem.Models.Subject>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>11 класс</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Class)
-        </th>
-        <th></th>
-    </tr>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Class)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SubjectCode }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SubjectCode }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SubjectCode })
-        </td>
-    </tr>
-}
+<div class="container">
+    <div class="accordion">
+        <ul class="accordion-list">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <input type="checkbox" checked>
+                    <i></i>
+                    <h2 class="title_block">@Html.DisplayFor(modelItem => item.Name)</h2>
+                    <div class="msg">
+                       @ListHelper.CreateList(item.SubjectCode,null)
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
 
-</table>

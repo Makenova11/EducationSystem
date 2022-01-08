@@ -5,36 +5,55 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace EducationSystem.Controllers
 {
+    /// <summary>
+    /// Предметы.
+    /// </summary>
     public class SubjectsController : Controller
     {
+        /// <summary>
+        /// База данных.
+        /// </summary>
         private EducationSystemDB db = new EducationSystemDB();
 
-        // GET: Subjects
-        public ActionResult Index()
+        /// <summary>
+        /// Список предметов, отфильтрованный по классу.
+        /// </summary>
+        /// <param name="numClass"> Класс. </param>
+        /// <returns> Task<ActionResult> </returns>
+        [HttpGet]
+        public async Task<ActionResult> Index(int numClass)
         {
-            return View(db.Subject.ToList());
+            var subjects = await db.Subject.Where(c => c.Class == numClass).ToListAsync();
+            return View(subjects);
         }
 
-        // GET: Subjects/Details/5
-        public ActionResult Details(int? id)
+        [HttpGet]
+        public SubjectTask[] GetTasks(int subjCode)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //Subject subject = db.Subject.Find(id);
-            Subject subject = db.Subject.Find(id);
-            if (subject == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subject);
+            var result = db.SubjectTask.Where(c => c.SubjectCode == subjCode).ToArray();
+            return result;
         }
+        //// GET: Subjects/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    //Subject subject = db.Subject.Find(id);
+        //    Subject subject = db.Subject.Find(id);
+        //    if (subject == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(subject);
+        //}
 
         // GET: Subjects/Create
         public ActionResult Create()

@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Education system</title>
 
@@ -19,27 +19,299 @@
         .header {
             height: 100px;
             background-color: #77FAAD;
+            display: flex;
+            align-items: center;
         }
         .header-container {
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            padding-left: 50px !important;
+            font-size: 14pt;
         }
         .container {
-            width: 900px;
+            width: 1000px;
+        }
+        .header-link-main {
+            left: auto;
+            font-size: 18pt;
+            border: 1px solid black;
+            border-radius: 7px;
+            padding: 5px 15px;
+        }
+        .header-link-main:hover {
+            text-decoration: none;
+            color: blue;
+            border-color: blue;
+            background-color: lightgreen;
+        }
+        .header-login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: auto;
+        }
+        .linkStr {
+            color: black;
+            text-decoration: none;
+        }
+        .linkStr:hover {
+            text-decoration: none;
+        }
+        .linkStr:link {
+            text-decoration: none;
+        }
+
+
+        .main {
+            display: flex;
+        }
+        .main-hero-content {
+            margin-top: 50px;
+            display: flex;
+        }
+        .main-hero-text {
+            border: 1px solid black;
+            border-radius: 10px;
+            font-size: 25px;
+            padding: 15px 25px;
+            width: 370px;
+            margin: 0;
+            text-align: center;
+            line-height: 40px;
+        }
+        .main-choice {
+            display: flex;
+            margin-left: auto;
+            font-size: 22pt;
+            display: flex;
+            width: 500px;
+            height: 600px;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding-bottom: 60px;
+            position: relative;
+        }
+        .linkStrAccor {
+            display: block;
+            background-color: white;
+            width: 250px;
+            text-align: center;
+        }
+        .linkStrAccor1::before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 50%;
+            bottom: 0;
+            background: url(../../Source/img/lecture-in-college1.jpg) no-repeat;
+            background-size: cover;
+            z-index: -5;
+        }
+        .linkStrAccor1::after {
+            content: " ";
+            position: absolute;
+            right: 50%;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            @* background: rgba(0,0,0,.25); *@
+        }
+        .linkStrAccor1:hover:before {
+            content: " ";
+            position: absolute;
+            right: 30%;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background-image: url(../../Source/img/lecture-in-college2.jpg);
+            background-size: cover;
+            z-index: -4;
+            transition: 0.1s ease;
+        }
+        .linkStrAccor2::before {
+            content: " ";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: url(../../Source/img/classroom-in-an-exam1.jpg) no-repeat;
+            background-size: cover;
+            z-index: -5;
+        }
+        .linkStrAccor2::after {
+            content: " ";
+            position: absolute;
+            right: 0;
+            top: 0;
+            left: 50%;
+            bottom: 0;
+            @* background: rgba(0,0,0,.25); *@
+        }
+        .linkStrAccor2:hover:before {
+            content: " ";
+            position: absolute;
+            right: 0;
+            top: 0;
+            left: 30%;
+            bottom: 0;
+            background-image: url(../../Source/img/classroom-in-an-exam2.jpg);
+            background-size: cover;
+            z-index: -4;
+            transition: 0.1s ease;
+        }
+
+
+        .accordion {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 100px;
+        /* относительное позиционирование */
+            padding: 0;
+            overflow: hidden;
+        }
+        .accordion li {
+            width: 300px;
+        }
+        /* заголовки панелей аккордеона */
+        .accordion h2 {
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            display: block;
+            margin: 0;
+            padding: 10px 40px;
+            cursor: pointer;
+            color: #4F4F4F;
+            border: 1px solid #828282;
+            border-radius: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        /* Формируем блоки с содержанием */
+        .msg {
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* оформляем параграфы */
+        .msg li {
+            color: rgba(48, 69, 92, 0.8);
+            font-size: 16px;
+            line-height: 2.5;
+            letter-spacing: 1px;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        /* Формируем неупорядоченный список */
+        .accordion ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin: 0 0 10px 0;
+        }
+
+        /* Определяем и формируем отдельный элемент списка
+        * в который поместим скрытый флажек,
+        * заголовок панелей и блок с содержанием
+        */
+        .accordion ul li {
+            position: relative;
+            padding: 0;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+        }
+        .accordion li:not(:last-child) {
+            margin: 0 0 10px 0;
+        }
+        .msg ul {
+            margin: 0;
+        }
+        /* устанавливаем время ожидания перед воспроизведением анимации
+        * на основе нумерации в дереве элементов
+        */
+        .accordion ul li:nth-of-type(1) {
+            animation-delay: 0.5s;
+        }
+        .accordion ul li:nth-of-type(2) {
+            animation-delay: 0.75s;
+        }
+        .accordion ul li:nth-of-type(3) {
+            animation-delay: 1s;
+        }
+        .accordion ul li:last-of-type {
+            padding-bottom: 0;
+        }
+
+        /* Сформируем  указатель переключения состояния аккордеона */
+        .accordion ul li i {
+            position: absolute;
+            transform: translate(-6px, 0);
+            margin-top: 16px;
+            /* расположим указатель на панели заголовка справа */
+            left: 25px;
+        }
+
+        /* "Рисуем " сам указатель */
+        .accordion ul li i:before, .accordion ul li i:after {
+            content: "";
+            position: absolute;
+            background-color: #A1A1A1;
+            width: 3px;
+            height: 9px;
+        }
+        /* Добавляем элемент трансформации указателя при переключении */
+        .accordion ul li i:before {
+            transform: translate(-2px, 0) rotate(45deg);
+        }
+        .accordion ul li i:after {
+            transform: translate(2px, 0) rotate(-45deg);
+        }
+
+        /* Делаем чекбокс скрытым*/
+        .accordion ul li input[type=checkbox] {
+            position: absolute;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+        }
+        /* Когда у флажка установлен checked блок с содержанием скрыт */
+        .accordion ul li input[type=checkbox]:checked ~ div.msg {
+            margin-top: 0;
+            max-height: 0;
+            opacity: 0;
+            transform: translate(0, 50%);
+        }
+        /* А указатель показывает вниз */
+        .accordion ul li input[type=checkbox]:checked ~ i:before {
+            transform: translate(2px, 0) rotate(45deg);
+        }
+        .accordion ul li input[type=checkbox]:checked ~ i:after {
+            transform: translate(-2px, 0) rotate(-45deg);
+        }
+        /*  Устанавливаем эффект перехода между двумя состояниями указателя */
+        div.msg, ul li i:before, ul li i:after {
+            transition: all 0.5s ease-in-out;
         }
     </style>
 </head>
 <body class="body">
     <header class="header">
         <div class="container header-container">
-            <a href="#" class="header-link-main">Главная</a>
+            <a href="#" class="header-link-main linkStr">Главная</a>
 
             <div class="header-login">
-                <img src="../../Source/img/loginImage.svg" class="header-login_img" alt="login">
+                <img src="../../Source/img/loginImage.svg" class="header-login_img" alt="login" width="50px">
 
-                <a href="#" class="header-login_link">Войти</a>
+                <a href="#" class="header-login_link linkStr">Войти</a>
             </div>
         </div>
     </header>
@@ -47,12 +319,22 @@
     <main class="main">
         <div class="container main-container">
             <!--<h1 class="main-heading"></h1>-->
-            <p class="main-hero-text">Система поддержки обучения и сертификации экспертов массовых процедур оценки качества образования</p>
+            <div class="main-hero-content">
+                <div class="main-hero-text-fornormal">
+                    <p class="main-hero-text">Система поддержки обучения и сертификации экспертов массовых процедур оценки качества образования</p>
+                </div>
 
-            <div class="main-choice">
-                <a href="#" class="main-choice_link">9 класс</a>
+                <div class="main-choice">
+                    @Html.ActionLink("9 класс", "Index", "Subjects", new
+                    {
+                        numClass = 9
+                    }, new { @class = "main-choice_link linkStr linkStrAccor linkStrAccor1" })
 
-                <a href="#" class="main-choice_link">11 класс</a>
+                    @Html.ActionLink("11 класс", "Index", "Subjects", new
+                    {
+                        numClass = 11
+                    }, new { @class = "main-choice_link linkStr linkStrAccor linkStrAccor2" })
+                </div>
             </div>
         </div>
     </main>
