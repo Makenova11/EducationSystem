@@ -35,7 +35,12 @@ namespace EducationSystem.Controllers
         }
 
 
-        // GET: Subjects/Create
+        /// <summary>
+        /// Инициирование добавления нового предмета
+        /// </summary>
+        /// <param name="numClass"> Номер класса. </param>
+        /// <param name="numTask"> Номера заданий. </param>
+        /// <returns> ActionResult. </returns>
         public ActionResult Create(int numClass)
         {
             return View();
