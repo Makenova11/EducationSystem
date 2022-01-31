@@ -90,6 +90,7 @@
     <NavigationProperty Name="VariantSolution" Relationship="Self.Вариант___Решение" FromRole="Solution" ToRole="VariantSolution" />
     <NavigationProperty Name="Task" Relationship="Self.Задание___Решение" FromRole="Solution" ToRole="Task" />
     <NavigationProperty Name="SolutionCriterionScore" Relationship="Self.Комментарии_к_решению___Решение" FromRole="Solution" ToRole="SolutionCriterionScore" />
+    <NavigationProperty Name="SolutionImages" Relationship="EducationSystemDBModel.FK_SolutionImages_Solution" FromRole="Solution" ToRole="SolutionImages" />
   </EntityType>
   <EntityType Name="SolutionCriterionScore">
     <Key>
@@ -142,7 +143,7 @@
     </Key>
     <Property Name="TaskCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TaskImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-    <Property Name="Year" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
     <Property Name="CriterionFile" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
     <Property Name="CriterionFileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="EventCode" Type="Int32" Nullable="false" />
@@ -150,6 +151,7 @@
     <NavigationProperty Name="Event" Relationship="Self.Задание___Мероприятие" FromRole="Task" ToRole="Event" />
     <NavigationProperty Name="Solution" Relationship="Self.Задание___Решение" FromRole="Task" ToRole="Solution" />
     <NavigationProperty Name="SubjectTask" Relationship="Self.Номер_задания___Задание" FromRole="Task" ToRole="SubjectTask" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Variant">
     <Key>
@@ -483,5 +485,32 @@
       <End Role="Variant" EntitySet="Variant" />
       <End Role="VariantSolution" EntitySet="VariantSolution" />
     </AssociationSet>
+    <EntitySet Name="SolutionImages" EntityType="EducationSystemDBModel.SolutionImages" />
+    <AssociationSet Name="FK_SolutionImages_Solution" Association="EducationSystemDBModel.FK_SolutionImages_Solution">
+      <End Role="Solution" EntitySet="Solution" />
+      <End Role="SolutionImages" EntitySet="SolutionImages" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="SolutionImages">
+    <Key>
+      <PropertyRef Name="ImageCode" />
+    </Key>
+    <Property Name="ImageCode" Type="Int64" Nullable="false" />
+    <Property Name="SolutionCode" Type="Int64" Nullable="false" />
+    <Property Name="SolutionImage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="SolutionImageNumber" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Solution" Relationship="EducationSystemDBModel.FK_SolutionImages_Solution" FromRole="SolutionImages" ToRole="Solution" />
+  </EntityType>
+  <Association Name="FK_SolutionImages_Solution">
+    <End Type="EducationSystemDBModel.Solution" Role="Solution" Multiplicity="1" />
+    <End Type="EducationSystemDBModel.SolutionImages" Role="SolutionImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Solution">
+        <PropertyRef Name="SolutionCode" />
+      </Principal>
+      <Dependent Role="SolutionImages">
+        <PropertyRef Name="SolutionCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

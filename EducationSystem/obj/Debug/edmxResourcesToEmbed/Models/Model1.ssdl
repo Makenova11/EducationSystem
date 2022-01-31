@@ -83,6 +83,15 @@
     <Property Name="SolutionCode" Type="bigint" Nullable="false" />
     <Property Name="CriterionCode" Type="bigint" Nullable="false" />
   </EntityType>
+  <EntityType Name="SolutionImages">
+    <Key>
+      <PropertyRef Name="ImageCode" />
+    </Key>
+    <Property Name="ImageCode" Type="bigint" Nullable="false" />
+    <Property Name="SolutionCode" Type="bigint" Nullable="false" />
+    <Property Name="SolutionImage" Type="varbinary(max)" Nullable="false" />
+    <Property Name="SolutionImageNumber" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Subject">
     <Key>
       <PropertyRef Name="SubjectCode" />
@@ -114,12 +123,13 @@
       <PropertyRef Name="TaskCode" />
     </Key>
     <Property Name="TaskCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TaskImage" Type="image" Nullable="false" />
-    <Property Name="Year" Type="date" Nullable="false" />
-    <Property Name="CriterionFile" Type="image" Nullable="false" />
+    <Property Name="TaskImage" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="CriterionFile" Type="varbinary(max)" Nullable="false" />
     <Property Name="CriterionFileName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="EventCode" Type="int" Nullable="false" />
     <Property Name="SubjectTaskCode" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="Variant">
     <Key>
@@ -139,6 +149,18 @@
     <Property Name="VariantCode" Type="bigint" Nullable="false" />
     <Property Name="ExamCode" Type="bigint" Nullable="false" />
   </EntityType>
+  <Association Name="FK_SolutionImages_Solution">
+    <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+    <End Role="SolutionImages" Type="Self.SolutionImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Solution">
+        <PropertyRef Name="SolutionCode" />
+      </Principal>
+      <Dependent Role="SolutionImages">
+        <PropertyRef Name="SolutionCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="Вариант - Балл">
     <End Role="VariantSolution" Type="Self.VariantSolution" Multiplicity="1" />
     <End Role="GraduateAnswer" Type="Self.GraduateAnswer" Multiplicity="*" />
@@ -369,12 +391,17 @@
     <EntitySet Name="GraduateAnswer" EntityType="Self.GraduateAnswer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Solution" EntityType="Self.Solution" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolutionCriterionScore" EntityType="Self.SolutionCriterionScore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SolutionImages" EntityType="Self.SolutionImages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubjectTask" EntityType="Self.SubjectTask" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Variant" EntityType="Self.Variant" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VariantSolution" EntityType="Self.VariantSolution" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_SolutionImages_Solution" Association="Self.FK_SolutionImages_Solution">
+      <End Role="Solution" EntitySet="Solution" />
+      <End Role="SolutionImages" EntitySet="SolutionImages" />
+    </AssociationSet>
     <AssociationSet Name="Вариант - Балл" Association="Self.Вариант - Балл">
       <End Role="VariantSolution" EntitySet="VariantSolution" />
       <End Role="GraduateAnswer" EntitySet="GraduateAnswer" />

@@ -85,10 +85,10 @@ C:\Users\maken\source\repos\EducationSystem\EducationSystem\bin\ru\System.Web.Ra
 C:\Users\maken\source\repos\EducationSystem\EducationSystem\bin\ru\System.Web.WebPages.resources.dll
 C:\Users\maken\source\repos\EducationSystem\EducationSystem\bin\ru\System.Web.WebPages.Deployment.resources.dll
 C:\Users\maken\source\repos\EducationSystem\EducationSystem\bin\ru\System.Web.WebPages.Razor.resources.dll
-C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csproj.CoreCompileInputs.cache
-C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.dll
-C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.pdb
+C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csproj.AssemblyReference.cache
 C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.Properties.Resources.resources
 C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csproj.GenerateResource.cache
-C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csproj.AssemblyReference.cache
+C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csproj.CoreCompileInputs.cache
 C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.csproj.CopyComplete
+C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.dll
+C:\Users\maken\source\repos\EducationSystem\EducationSystem\obj\Debug\EducationSystem.pdb

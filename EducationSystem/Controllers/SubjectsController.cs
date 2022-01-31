@@ -30,30 +30,10 @@ namespace EducationSystem.Controllers
         public async Task<ActionResult> Index(int numClass)
         {
             var subjects = await db.Subject.Where(c => c.Class == numClass).ToListAsync();
+            ViewBag.classNum = subjects.Select(c => c.Class).FirstOrDefault();
             return View(subjects);
         }
 
-        [HttpGet]
-        public SubjectTask[] GetTasks(int subjCode)
-        {
-            var result = db.SubjectTask.Where(c => c.SubjectCode == subjCode).ToArray();
-            return result;
-        }
-        //// GET: Subjects/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    //Subject subject = db.Subject.Find(id);
-        //    Subject subject = db.Subject.Find(id);
-        //    if (subject == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(subject);
-        //}
 
         // GET: Subjects/Create
         public ActionResult Create()

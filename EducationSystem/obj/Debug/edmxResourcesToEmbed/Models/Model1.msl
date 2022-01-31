@@ -123,6 +123,7 @@
     <EntitySetMapping Name="Task">
       <EntityTypeMapping TypeName="EducationSystemDBModel.Task">
         <MappingFragment StoreEntitySet="Task">
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="TaskCode" ColumnName="TaskCode" />
           <ScalarProperty Name="TaskImage" ColumnName="TaskImage" />
           <ScalarProperty Name="Year" ColumnName="Year" />
@@ -149,6 +150,16 @@
           <ScalarProperty Name="SolutionCode" ColumnName="SolutionCode" />
           <ScalarProperty Name="VariantCode" ColumnName="VariantCode" />
           <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SolutionImages">
+      <EntityTypeMapping TypeName="EducationSystemDBModel.SolutionImages">
+        <MappingFragment StoreEntitySet="SolutionImages">
+          <ScalarProperty Name="SolutionImageNumber" ColumnName="SolutionImageNumber" />
+          <ScalarProperty Name="SolutionImage" ColumnName="SolutionImage" />
+          <ScalarProperty Name="SolutionCode" ColumnName="SolutionCode" />
+          <ScalarProperty Name="ImageCode" ColumnName="ImageCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

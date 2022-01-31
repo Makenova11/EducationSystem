@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище EducationSystemDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище EducationSystemDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Criterion">
           <Key>
             <PropertyRef Name="CriterionCode" />
@@ -88,6 +88,15 @@
           <Property Name="SolutionCode" Type="bigint" Nullable="false" />
           <Property Name="CriterionCode" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="SolutionImages">
+          <Key>
+            <PropertyRef Name="ImageCode" />
+          </Key>
+          <Property Name="ImageCode" Type="bigint" Nullable="false" />
+          <Property Name="SolutionCode" Type="bigint" Nullable="false" />
+          <Property Name="SolutionImage" Type="varbinary(max)" Nullable="false" />
+          <Property Name="SolutionImageNumber" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="SubjectCode" />
@@ -119,12 +128,13 @@
             <PropertyRef Name="TaskCode" />
           </Key>
           <Property Name="TaskCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TaskImage" Type="image" Nullable="false" />
-          <Property Name="Year" Type="date" Nullable="false" />
-          <Property Name="CriterionFile" Type="image" Nullable="false" />
+          <Property Name="TaskImage" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="CriterionFile" Type="varbinary(max)" Nullable="false" />
           <Property Name="CriterionFileName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EventCode" Type="int" Nullable="false" />
           <Property Name="SubjectTaskCode" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Variant">
           <Key>
@@ -144,6 +154,18 @@
           <Property Name="VariantCode" Type="bigint" Nullable="false" />
           <Property Name="ExamCode" Type="bigint" Nullable="false" />
         </EntityType>
+        <Association Name="FK_SolutionImages_Solution">
+          <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
+          <End Role="SolutionImages" Type="Self.SolutionImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solution">
+              <PropertyRef Name="SolutionCode" />
+            </Principal>
+            <Dependent Role="SolutionImages">
+              <PropertyRef Name="SolutionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Вариант - Балл">
           <End Role="VariantSolution" Type="Self.VariantSolution" Multiplicity="1" />
           <End Role="GraduateAnswer" Type="Self.GraduateAnswer" Multiplicity="*" />
@@ -374,12 +396,17 @@
           <EntitySet Name="GraduateAnswer" EntityType="Self.GraduateAnswer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solution" EntityType="Self.Solution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolutionCriterionScore" EntityType="Self.SolutionCriterionScore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolutionImages" EntityType="Self.SolutionImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectTask" EntityType="Self.SubjectTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Variant" EntityType="Self.Variant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VariantSolution" EntityType="Self.VariantSolution" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SolutionImages_Solution" Association="Self.FK_SolutionImages_Solution">
+            <End Role="Solution" EntitySet="Solution" />
+            <End Role="SolutionImages" EntitySet="SolutionImages" />
+          </AssociationSet>
           <AssociationSet Name="Вариант - Балл" Association="Self.Вариант - Балл">
             <End Role="VariantSolution" EntitySet="VariantSolution" />
             <End Role="GraduateAnswer" EntitySet="GraduateAnswer" />
@@ -453,8 +480,7 @@
             <End Role="Variant" EntitySet="Variant" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EducationSystemDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -548,6 +574,7 @@
           <NavigationProperty Name="VariantSolution" Relationship="Self.Вариант___Решение" FromRole="Solution" ToRole="VariantSolution" />
           <NavigationProperty Name="Task" Relationship="Self.Задание___Решение" FromRole="Solution" ToRole="Task" />
           <NavigationProperty Name="SolutionCriterionScore" Relationship="Self.Комментарии_к_решению___Решение" FromRole="Solution" ToRole="SolutionCriterionScore" />
+          <NavigationProperty Name="SolutionImages" Relationship="EducationSystemDBModel.FK_SolutionImages_Solution" FromRole="Solution" ToRole="SolutionImages" />
         </EntityType>
         <EntityType Name="SolutionCriterionScore">
           <Key>
@@ -600,7 +627,7 @@
           </Key>
           <Property Name="TaskCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TaskImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="Year" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
           <Property Name="CriterionFile" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="CriterionFileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EventCode" Type="Int32" Nullable="false" />
@@ -608,6 +635,7 @@
           <NavigationProperty Name="Event" Relationship="Self.Задание___Мероприятие" FromRole="Task" ToRole="Event" />
           <NavigationProperty Name="Solution" Relationship="Self.Задание___Решение" FromRole="Task" ToRole="Solution" />
           <NavigationProperty Name="SubjectTask" Relationship="Self.Номер_задания___Задание" FromRole="Task" ToRole="SubjectTask" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Variant">
           <Key>
@@ -941,7 +969,34 @@
             <End Role="Variant" EntitySet="Variant" />
             <End Role="VariantSolution" EntitySet="VariantSolution" />
           </AssociationSet>
+          <EntitySet Name="SolutionImages" EntityType="EducationSystemDBModel.SolutionImages" />
+          <AssociationSet Name="FK_SolutionImages_Solution" Association="EducationSystemDBModel.FK_SolutionImages_Solution">
+            <End Role="Solution" EntitySet="Solution" />
+            <End Role="SolutionImages" EntitySet="SolutionImages" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="SolutionImages">
+          <Key>
+            <PropertyRef Name="ImageCode" />
+          </Key>
+          <Property Name="ImageCode" Type="Int64" Nullable="false" />
+          <Property Name="SolutionCode" Type="Int64" Nullable="false" />
+          <Property Name="SolutionImage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="SolutionImageNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Solution" Relationship="EducationSystemDBModel.FK_SolutionImages_Solution" FromRole="SolutionImages" ToRole="Solution" />
+        </EntityType>
+        <Association Name="FK_SolutionImages_Solution">
+          <End Type="EducationSystemDBModel.Solution" Role="Solution" Multiplicity="1" />
+          <End Type="EducationSystemDBModel.SolutionImages" Role="SolutionImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solution">
+              <PropertyRef Name="SolutionCode" />
+            </Principal>
+            <Dependent Role="SolutionImages">
+              <PropertyRef Name="SolutionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1070,6 +1125,7 @@
           <EntitySetMapping Name="Task">
             <EntityTypeMapping TypeName="EducationSystemDBModel.Task">
               <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TaskCode" ColumnName="TaskCode" />
                 <ScalarProperty Name="TaskImage" ColumnName="TaskImage" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
@@ -1096,6 +1152,16 @@
                 <ScalarProperty Name="SolutionCode" ColumnName="SolutionCode" />
                 <ScalarProperty Name="VariantCode" ColumnName="VariantCode" />
                 <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SolutionImages">
+            <EntityTypeMapping TypeName="EducationSystemDBModel.SolutionImages">
+              <MappingFragment StoreEntitySet="SolutionImages">
+                <ScalarProperty Name="SolutionImageNumber" ColumnName="SolutionImageNumber" />
+                <ScalarProperty Name="SolutionImage" ColumnName="SolutionImage" />
+                <ScalarProperty Name="SolutionCode" ColumnName="SolutionCode" />
+                <ScalarProperty Name="ImageCode" ColumnName="ImageCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

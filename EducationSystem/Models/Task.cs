@@ -22,11 +22,12 @@ namespace EducationSystem.Models
     
         public long TaskCode { get; set; }
         public byte[] TaskImage { get; set; }
-        public System.DateTime Year { get; set; }
+        public int Year { get; set; }
         public byte[] CriterionFile { get; set; }
         public string CriterionFileName { get; set; }
         public int EventCode { get; set; }
         public int SubjectTaskCode { get; set; }
+        public string Name { get; set; }
     
         public virtual Event Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

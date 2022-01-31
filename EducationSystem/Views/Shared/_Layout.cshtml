@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Education system</title>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
@@ -83,8 +83,8 @@
             margin-left: auto;
             font-size: 22pt;
             display: flex;
-            width: 500px;
-            height: 600px;
+            width: 450px;
+            height: 550px;
             align-items: flex-end;
             justify-content: space-around;
             padding-bottom: 60px;
@@ -161,12 +161,11 @@
             transition: 0.1s ease;
         }
 
-
         .accordion {
             display: flex;
             justify-content: space-around;
-            margin-top: 100px;
-        /* относительное позиционирование */
+            margin-top: 10px;
+            /* относительное позиционирование */
             padding: 0;
             overflow: hidden;
         }
@@ -214,6 +213,10 @@
             padding: 0;
             margin: 0;
             margin: 0 0 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: baseline;
         }
 
         /* Определяем и формируем отдельный элемент списка
@@ -227,8 +230,11 @@
             border-radius: 10px;
         }
         .accordion li:not(:last-child) {
-            margin: 0 0 10px 0;
+            margin-bottom: 10px;
         }
+        /*.accordion .accordion-item {
+            margin-right: 12px;
+        }*/
         .msg ul {
             margin: 0;
         }
@@ -301,12 +307,111 @@
         div.msg, ul li i:before, ul li i:after {
             transition: all 0.5s ease-in-out;
         }
+        .container-main-list {
+            padding: 0;
+        }
+        .title-for-all-subject {
+            margin-left: 15px;
+        }
+
+
+        .add-question {
+            margin-top: 10px;
+        }
+        .question-number {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+        .question-number-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            border-bottom: 1px solid grey;
+            align-items: center;
+        }
+        .question-number-item {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: #77FAAD;
+            text-align: center;
+            line-height: 40px;
+            margin-bottom: 10px;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+        .button-question {
+            padding: 5px 10px;
+            border-radius: 7px;
+            cursor: pointer;
+            background-color: aquamarine;
+        }
+        .figure-question {
+            margin-bottom: 20px;
+        }
+        .btn-show-all {
+            margin-bottom: 20px;
+        }
+        .buttons-for-slide {
+            margin-top: 20px;
+        }
+        .question-prev {
+            margin-right: 50px;
+        }
+        .listquery li:nth-child(n+6) {
+            display: none;
+        }
+        .showother {
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            padding: 10px;
+            background: #fc0;
+        }
+
+        @@media (min-width: 2100px) {
+            .container {
+                width: 1500px;
+            }
+            .header-login_img {
+                width: 60px;
+                height: 60px;
+            }
+            .header-link-main {
+                font-size: 35px;
+            }
+            .header-login_link {
+                font-size: 25px;
+            }
+            .main-hero-content {
+                margin-top: 110px;
+            }
+            .header {
+                height: 120px;
+            }
+            .main-hero-text {
+                width: 570px;
+                font-size: 50px;
+                line-height: 1.2
+            }
+            .main-choice {
+                width: 700px;
+                height: 800px;
+            }
+            .linkStrAccor {
+                width: 350px;
+                font-size: 40px;
+            }
+        }
     </style>
 </head>
 <body class="body">
     <header class="header">
         <div class="container header-container">
-            <a href="#" class="header-link-main linkStr">Главная</a>
+            <a>@Html.ActionLink("Главная","Index","Home", null,new{@class="header-link-main linkStr"})</a>
 
             <div class="header-login">
                 <img src="../../Source/img/loginImage.svg" class="header-login_img" alt="login" width="50px">
@@ -317,33 +422,27 @@
     </header>
 
     <main class="main">
-        <div class="container main-container">
-            <!--<h1 class="main-heading"></h1>-->
-            <div class="main-hero-content">
-                <div class="main-hero-text-fornormal">
-                    <p class="main-hero-text">Система поддержки обучения и сертификации экспертов массовых процедур оценки качества образования</p>
-                </div>
-
-                <div class="main-choice">
-                    @Html.ActionLink("9 класс", "Index", "Subjects", new
-                    {
-                        numClass = 9
-                    }, new { @class = "main-choice_link linkStr linkStrAccor linkStrAccor1" })
-
-                    @Html.ActionLink("11 класс", "Index", "Subjects", new
-                    {
-                        numClass = 11
-                    }, new { @class = "main-choice_link linkStr linkStrAccor linkStrAccor2" })
-                </div>
-            </div>
+        <div class="container body-content">
+            @RenderBody()
         </div>
     </main>
 
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        jQuery(document).ready(function($){
+            if ($('ul.listquery').find('li').length > 5){
+                $('#showother').click(function(){
+                    $('ul.listquery li:nth-child(n+6)').slideToggle('');
+                    $(this).toggleClass('opnd_g');
+                    if($(this).hasClass('opnd_g')){
+                        $(this).html('Скрыть');}
+                    else {$(this).html('Смотреть все');}
+                });
+            } else { $('#showother').hide();}
+        });
+    </script>
 </body>
 </html>

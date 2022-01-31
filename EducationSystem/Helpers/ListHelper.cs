@@ -13,13 +13,13 @@ namespace EducationSystem.Helpers
     public static class ListHelper
     {
         /// <summary>
-        /// Создаёт список заданий предмета.
+        /// Создаёт список заданий предмета со ссылками на задания.
         /// </summary>
         /// <param name="html"> Экземпляр страницы.</param>
         /// <param name="subjCode"> Код предмета, по которому формируется список. </param>
         /// <param name="htmlAttributes"> Атрибуты. </param>
         /// <returns> MvcHtmlString </returns>
-        public static MvcHtmlString CreateList(/*this HtmlHelper html,*/ int subjCode, object htmlAttributes = null)
+        public static MvcHtmlString CreateList( int subjCode, object htmlAttributes = null)
         {
             EducationSystemDB db = new EducationSystemDB();
             SubjectTask[] items = db.SubjectTask.Where(c => c.SubjectCode == subjCode).ToArray();
@@ -27,8 +27,11 @@ namespace EducationSystem.Helpers
             foreach (var item in items)
             {
                 TagBuilder li = new TagBuilder("li");
-                li.SetInnerText($"Задание {item.Number}");
-                //ul.AddCssClass("list-inside");
+                TagBuilder a = new TagBuilder("a");
+                a.AddCssClass("link");// в теге <a> делаем ссылку на задания
+                a.MergeAttribute("href", $"/Task/Index?subjTaskCode={item.SubjectTaskCode}");
+                a.SetInnerText($"Задание {item.Number}");
+                li.InnerHtml += a.ToString();
                 ul.InnerHtml += li.ToString();
             }
             ul.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));

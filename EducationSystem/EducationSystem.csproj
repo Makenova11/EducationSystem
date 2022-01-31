@@ -128,9 +128,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CriterionController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\ExpertsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SolutionController.cs" />
+    <Compile Include="Controllers\SolutionCriterionScoresController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -175,6 +180,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SolutionCriterionScore.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SolutionImages.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Subject.cs">
@@ -268,9 +276,15 @@
     <Content Include="Views\Subjects\Edit.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Criterion\Index.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Solution\Create.cshtml" />
+    <Content Include="Views\Solution\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Subjects\IndividualSubject\" />
+    <Folder Include="Views\SolutionCriterionScores\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\fonts\glyphicons-halflings-regular.woff2" />

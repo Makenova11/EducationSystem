@@ -40,5 +40,6 @@ namespace EducationSystem.Models
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<Variant> Variant { get; set; }
         public virtual DbSet<VariantSolution> VariantSolution { get; set; }
+        public virtual DbSet<SolutionImages> SolutionImages { get; set; }
     }
 }

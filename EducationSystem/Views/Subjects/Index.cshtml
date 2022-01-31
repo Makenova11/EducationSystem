@@ -1,28 +1,28 @@
-﻿@using EducationSystem.Controllers
-@using EducationSystem.Helpers
+﻿@using EducationSystem.Helpers
 @model IEnumerable<EducationSystem.Models.Subject>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>11 класс</h2>
 
-@*<p>
+<p>
         @Html.ActionLink("Create New", "Create")
-    </p>*@
+    </p>
 
-<div class="container">
+<div class="container container-main-list">
+    <h2 class="title-for-all-subject">@ViewBag.classNum класс</h2>
+
     <div class="accordion">
         <ul class="accordion-list">
             @foreach (var item in Model)
             {
-                <li>
+                <li class="accordion-item">
                     <input type="checkbox" checked>
                     <i></i>
                     <h2 class="title_block">@Html.DisplayFor(modelItem => item.Name)</h2>
                     <div class="msg">
-                       @ListHelper.CreateList(item.SubjectCode,null)
+                        @ListHelper.CreateList(item.SubjectCode, null)
                     </div>
                 </li>
             }

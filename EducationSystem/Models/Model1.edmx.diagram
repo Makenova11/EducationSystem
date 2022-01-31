@@ -38,6 +38,8 @@
         <AssociationConnector Association="EducationSystemDBModel.Предмет___Номер_задания" ManuallyRouted="false" />
         <AssociationConnector Association="EducationSystemDBModel.Номер_задания___Задание" ManuallyRouted="false" />
         <AssociationConnector Association="EducationSystemDBModel.Номер_варианта___Вариант" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.SolutionImages" Width="1.5" PointX="9.875" PointY="15.875" />
+        <AssociationConnector Association="EducationSystemDBModel.FK_SolutionImages_Solution" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -19,6 +19,7 @@ namespace EducationSystem.Models
         {
             this.VariantSolution = new HashSet<VariantSolution>();
             this.SolutionCriterionScore = new HashSet<SolutionCriterionScore>();
+            this.SolutionImages = new HashSet<SolutionImages>();
         }
     
         public long SolutionCode { get; set; }
@@ -30,5 +31,7 @@ namespace EducationSystem.Models
         public virtual Task Task { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolutionCriterionScore> SolutionCriterionScore { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SolutionImages> SolutionImages { get; set; }
     }
 }
