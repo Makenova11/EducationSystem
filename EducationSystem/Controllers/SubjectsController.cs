@@ -36,7 +36,7 @@ namespace EducationSystem.Controllers
 
 
         // GET: Subjects/Create
-        public ActionResult Create()
+        public ActionResult Create(int numClass)
         {
             return View();
         }
@@ -46,13 +46,14 @@ namespace EducationSystem.Controllers
         // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SubjectCode,Name,Class")] Subject subject)
+        public ActionResult Create([Bind(Include = "SubjectCode,Name")] Subject subject, int numClass)
         {
             if (ModelState.IsValid)
             {
+                subject.Class = numClass;
                 db.Subject.Add(subject);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { numClass = numClass});
             }
 
             return View(subject);

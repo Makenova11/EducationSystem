@@ -7,7 +7,10 @@
 
 
 <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Добавить предмет", "Create", new
+   {
+       numClass = ViewBag.classNum
+   })
     </p>
 
 <div class="container container-main-list">
