@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Education system</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    @*<script type="text/javascript" src="~/Views/Shared/jquery-3.3.1.min.js"></script>*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
@@ -28,7 +29,7 @@
             font-size: 14pt;
         }
         .container {
-            width: 1000px;
+            width: 1100px;
         }
         .header-link-main {
             left: auto;
@@ -163,14 +164,17 @@
 
         .accordion {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
             margin-top: 10px;
             /* относительное позиционирование */
             padding: 0;
             overflow: hidden;
         }
         .accordion li {
-            width: 300px;
+            width: 270px;
+        }
+        .accordion-item {
+            margin-right: 70px;
         }
         /* заголовки панелей аккордеона */
         .accordion h2 {
@@ -230,7 +234,7 @@
             border-radius: 10px;
         }
         .accordion li:not(:last-child) {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         /*.accordion .accordion-item {
             margin-right: 12px;
@@ -312,6 +316,13 @@
         }
         .title-for-all-subject {
             margin-left: 15px;
+        }
+        .pen-icon {
+            display: block;
+            padding: 0;
+            position: absolute;
+            right: -55px;
+            top: 0;
         }
 
 
@@ -406,6 +417,13 @@
                 font-size: 40px;
             }
         }
+
+        .button-tasks {
+            margin-left: 10px;
+        }
+        .rem {
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body class="body">
@@ -442,6 +460,19 @@
                     else {$(this).html('Смотреть все');}
                 });
             } else { $('#showother').hide();}
+        });
+
+        $(function () {
+            $('#add').click
+                (function () {
+                    var val = $('.input-form-tasks').val();
+                    var elem = $('<li></li>').text(val);
+                    $(elem).append('<button class="rem btn btn-default">-</button>');
+                    $('#mylist').append(elem);
+                    $('.rem').click(function () {
+                        $(this).parent().remove();
+                    });
+                });
         });
     </script>
 </body>

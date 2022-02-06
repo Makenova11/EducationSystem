@@ -41,8 +41,10 @@ namespace EducationSystem.Controllers
         /// <param name="numClass"> Номер класса. </param>
         /// <param name="numTask"> Номера заданий. </param>
         /// <returns> ActionResult. </returns>
-        public ActionResult Create(int numClass)
+        public async Task<ActionResult> Create(int numClass)
         {
+            var subjects = await db.Subject.Where(c => c.Class == numClass).ToListAsync();
+            ViewBag.classNum = subjects.Select(c => c.Class).FirstOrDefault();
             return View();
         }
 
@@ -51,13 +53,13 @@ namespace EducationSystem.Controllers
         // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SubjectCode,Name")] Subject subject, int numClass)
+        public async Task<ActionResult> Create([Bind(Include = "SubjectCode,Name")] Subject subject, int numClass)
         {
             if (ModelState.IsValid)
             {
                 subject.Class = numClass;
                 db.Subject.Add(subject);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index", new { numClass = numClass});
             }
 
@@ -65,13 +67,13 @@ namespace EducationSystem.Controllers
         }
 
         // GET: Subjects/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? SubjectCode)
         {
-            if (id == null)
+            if (SubjectCode == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Subject subject = db.Subject.Find(id);
+            Subject subject = db.Subject.Find(SubjectCode);
             if (subject == null)
             {
                 return HttpNotFound();

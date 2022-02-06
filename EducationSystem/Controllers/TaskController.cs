@@ -40,6 +40,7 @@ namespace EducationSystem.Controllers
             ViewBag.arrayNumber = nums;//Массив с нумерацией имеющихся заданий
             ViewBag.criterionFile = db.Task.Where(c => c.SubjectTaskCode == subjTaskCode).Select(c => c.CriterionFile)
                 .FirstOrDefault();
+            ViewBag.subjTaskCode = subjTaskCode;
             return View(result);
         }
 
@@ -48,10 +49,17 @@ namespace EducationSystem.Controllers
         /// </summary>
         /// <returns> ActionResult. </returns>
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int SubjectTaskCode)
         {
             ViewBag.EventCode = new SelectList(db.Event, "EventCode", "EventName");
-            ViewBag.SubjectTaskCode = new SelectList(db.SubjectTask, "SubjectTaskCode", "SubjectTaskCode");
+            ViewBag.numClass = (from item in db.SubjectTask
+                               where item.SubjectTaskCode == SubjectTaskCode
+                               select item.Subject.Class).FirstOrDefault();
+            ViewBag.nameSubj = (from item in db.SubjectTask
+                                where item.SubjectTaskCode == SubjectTaskCode
+                                select item.Subject.Name).FirstOrDefault();
+            ViewBag.numTask = db.SubjectTask.Where(x => x.SubjectTaskCode == SubjectTaskCode).Select(c => c.Number).FirstOrDefault();
+            ViewBag.subjTaskCode = SubjectTaskCode;
             return View();
         }
         /// <summary>
@@ -62,8 +70,8 @@ namespace EducationSystem.Controllers
         /// <param name="CriterionFileImage"> Изображение критерия задания. </param>
         /// <returns> ActionResult. </returns>
         [HttpPost]
-        public ActionResult Create([Bind(Include = "TaskCode,Year,CriterionFileName,EventCode,SubjectTaskCode")] Task task,
-            HttpPostedFileBase TaskImage, HttpPostedFileBase CriterionFileImage)
+        public ActionResult Create([Bind(Include = "TaskCode,Year,EventCode")] Task task,
+            HttpPostedFileBase TaskImage, HttpPostedFileBase CriterionFileImage, int SubjectTaskCode)
         {
             if (ModelState.IsValid)
             {
@@ -78,16 +86,17 @@ namespace EducationSystem.Controllers
                 {
                     fileData = binaryReader.ReadBytes(CriterionFileImage.ContentLength);
                 }
-
+                task.CriterionFileName = CriterionFileImage.FileName;
+                task.Name = TaskImage.FileName;
+                task.SubjectTaskCode = SubjectTaskCode;
                 task.TaskImage = imageData;
                 task.CriterionFile = fileData;
                 db.Task.Add(task);
                 db.SaveChanges();
                 return RedirectToAction("Index", new { subjTaskCode = subjTaskCodeIndex});
             }
-
+            ViewBag.subjTaskCode = SubjectTaskCode;
             ViewBag.EventCode = new SelectList(db.Event, "EventCode", "EventName", task.EventCode);
-            ViewBag.SubjectTaskCode = new SelectList(db.SubjectTask, "SubjectTaskCode", "SubjectTaskCode", task.SubjectTaskCode);
             return View(task);
         }
     }

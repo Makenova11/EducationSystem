@@ -7,7 +7,7 @@
 <div class="container">
     <div class="question-number">
         <p class="add-question">
-            @Html.ActionLink("Добавить задание", "Create")
+            @Html.ActionLink("Добавить задание", "Create", new { SubjectTaskCode = ViewBag.subjTaskCode })
         </p>
         <ul class="question-number-list listquery">
             @foreach (var item in ViewBag.arrayNumber)
