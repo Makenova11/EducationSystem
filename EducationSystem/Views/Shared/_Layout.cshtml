@@ -424,7 +424,11 @@
         .rem {
             margin-left: 10px;
         }
-    </style>
+        .listSubjects {
+            display: flex;
+            flex-direction: column;
+        }
+        </style>
 </head>
 <body class="body">
     <header class="header">
@@ -462,18 +466,18 @@
             } else { $('#showother').hide();}
         });
 
-        $(function () {
-            $('#add').click
-                (function () {
-                    var val = $('.input-form-tasks').val();
-                    var elem = $('<li></li>').text(val);
-                    $(elem).append('<button class="rem btn btn-default">-</button>');
-                    $('#mylist').append(elem);
-                    $('.rem').click(function () {
-                        $(this).parent().remove();
-                    });
-                });
-        });
+        //$(function () {
+        //    $('#add').click
+        //    (function () {
+        //        var val = $('.input-form-tasks').val();
+        //        var elem = $('<li></li>').text(val);
+        //        $(elem).append('<button class="rem btn btn-default">-</button>');
+        //        $('#mylist').append(elem);
+        //        $('.rem').click(function () {
+        //            $(this).parent().remove();
+        //        });
+        //    });
+        //});
     </script>
 </body>
 </html>

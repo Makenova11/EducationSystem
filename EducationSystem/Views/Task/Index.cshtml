@@ -1,9 +1,10 @@
-﻿@model IEnumerable<EducationSystem.Models.Task>
+﻿@using EducationSystem.Helpers
+@model IEnumerable<EducationSystem.Models.Task>
 
 @{
     ViewBag.Title = "Index";
 }
-
+<h2\>Предмет @ViewBag.nameSubj Задание @ViewBag.numTask Класс @ViewBag.numClass</h2\>
 <div class="container">
     <div class="question-number">
         <p class="add-question">
@@ -12,7 +13,7 @@
         <ul class="question-number-list listquery">
             @foreach (var item in ViewBag.arrayNumber)
             {
-                <li class="question-number-item">@item</li>
+            <li class="question-number-item"> @ListHelper.CreateLink(@item, ViewBag.subjTaskCode)</li>
             }
         </ul>
 

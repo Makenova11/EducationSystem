@@ -4,3 +4,6 @@
     ViewBag.Title = "Index";
 }
 
+<p class="add-question">
+    @Html.ActionLink("Добавить решение", "Create", new { TaskCode = ViewBag.taskCode })
+</p>

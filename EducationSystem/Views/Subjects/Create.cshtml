@@ -12,15 +12,29 @@
 
     <div class="form-horizontal">
         <hr />
-        @Html.ValidationSummary(true, "Наименование", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "Предмет", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, "Наименование", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, "Предмет", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, "Номер задания", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" >
+                    <div class="listSubjects" id="mylist">
+                        <input name="numTask[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="number" placeholder="1" />
+                        @*<button id="addNum" class="button-tasks btn btn-default col-md">+</button>*@
+                    
+                    </div>
+                    @*<ol id="mylist"></ol>*@
+                <a id="addNum" class="addNum btn btn-default">+</a>
+                </div>
+                
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -31,19 +45,51 @@
     </div>
 }
 
-<div class="form-horizontal">
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, "Наименование", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="">
-                <input class="input-form-tasks form-control col-md-2" type="text" placeholder="Добавить задание" />
-                <button id="add" class="button-tasks btn btn-default col-md">+</button>
-            </div>
-            <ol id="mylist"></ol>
-        </div>
-    </div>
-</div>
+
 
 <div>
-    @Html.ActionLink("Назад", "Index", new { numClass = ViewBag.classNum })
+    @Html.ActionLink("Назад", "Index", new { numClass = ViewBag.classNum },new { @class = "btn btn-default" })
 </div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addNum').click(function () {
+                    i++;
+
+                var elem = $("<input name='numTask[" + i + "]' " +
+                    "class='d-block input-form-tasks form-control col-md-2 mb-2' " +
+                    "type='number' placeholder='numTask[" + i + "]'/>");
+                
+                $('#mylist').append(elem);
+            });
+        });
+    </script>
+}
+
+
+
+
+
+@*<script>
+    $(function () {
+        var i = 0;
+        $('.addNum').click(function () {
+            i++;
+            let publicDiv = $("<div></div>");
+
+            var elem = $("<input name='numTask[" + i + "]' " +
+                "class='d-block input-form-tasks form-control col-md-2 mb-2' " +
+                "type='number' placeholder='numTask[" + i + "]'/>");
+            let ololo = $("<button class='rem btn btn-default'>-</button>");    
+            $(publicDiv).append(elem);
+            $(publicDiv).append(ololo);
+            //$('#mylist').append(elem);
+            $('.rem').click(function() {
+                $(this).parent().remove();
+            });
+            $('#mylist').append(publicDiv);
+        });
+    });
+</script>*@

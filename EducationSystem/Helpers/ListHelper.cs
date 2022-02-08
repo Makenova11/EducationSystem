@@ -14,6 +14,7 @@ namespace EducationSystem.Helpers
     {
         /// <summary>
         /// Создаёт список заданий предмета со ссылками на задания.
+        /// Subject.
         /// </summary>
         /// <param name="html"> Экземпляр страницы.</param>
         /// <param name="subjCode"> Код предмета, по которому формируется список. </param>
@@ -33,10 +34,26 @@ namespace EducationSystem.Helpers
                 a.SetInnerText($"Задание {item.Number}");
                 li.InnerHtml += a.ToString();
                 ul.InnerHtml += li.ToString();
+                db.Dispose();
             }
             ul.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
 
             return MvcHtmlString.Create(ul.ToString());
+        }
+
+        public static MvcHtmlString CreateLink(int arrayNumber,int subjTaskCode)
+        {
+            EducationSystemDB db = new EducationSystemDB();
+            var TaskList = from item in db.Task
+                where item.SubjectTaskCode == subjTaskCode
+                orderby item.TaskCode descending
+                select item;
+            var TaskCode = (TaskList.ToList())[--arrayNumber].SubjectTaskCode;
+            TagBuilder a = new TagBuilder("a");
+            a.AddCssClass("link");// в теге <a> делаем ссылку на задания
+            a.MergeAttribute("href", $"/Solution/Index?TaskCode={TaskCode}");
+            a.SetInnerText($"{++arrayNumber}");
+            return MvcHtmlString.Create(a.ToString());
         }
     }
 }

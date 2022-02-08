@@ -34,19 +34,25 @@ namespace EducationSystem.Controllers
                 nums[i] = i + 1;
             }
             ViewBag.arrayNumber = nums;//Массив с нумерацией имеющихся решений выбранного задания
-            //ViewBag.criterionFile = db.Task.Where(c => c.SubjectTaskCode == subjTaskCode).Select(c => c.CriterionFile)
-            //    .FirstOrDefault();
+            ViewBag.taskCode = TaskCode;
             return View(result); ;
         }
-        public ActionResult Create()
+        public ActionResult Create(int TaskCode)
         {
-            ViewBag.TaskCode = new SelectList(db.Task, "TaskCode", "CriterionFileName");
+            ViewBag.taskCode = TaskCode;
+            //ViewBag.nameSubj = (from item in db.SubjectTask
+            //    where item.SubjectTaskCode == SubjectTaskCode
+            //    select item.Subject.Name).FirstOrDefault();
+            //ViewBag.numTask = db.SubjectTask.Where(x => x.SubjectTaskCode == SubjectTaskCode)
+            //    .Select(c => c.Number).FirstOrDefault();
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SolutionCode,TaskCode")] Solution solution)
+        public ActionResult Create([Bind(Include = "SolutionCode,TaskCode")] Solution solution,
+            HttpPostedFileBase SolutionImage)
         {
             if (ModelState.IsValid)
             {
