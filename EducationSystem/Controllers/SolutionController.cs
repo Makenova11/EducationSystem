@@ -41,28 +41,7 @@ namespace EducationSystem.Controllers
         public ActionResult Create(int TaskCode)
         {
             ViewBag.taskCode = TaskCode;
-            ////ViewBag.numClass = db.Solution.Join(db.Task,
-            ////    item => item.TaskCode,
-            ////    meta => meta.TaskCode)
-            //var d = from item in db.Solution
-            //                   join meta in db.Task on item.TaskCode equals meta.TaskCode
-            //                   join subjTask in db.SubjectTask on meta.SubjectTaskCode equals subjTask.SubjectTaskCode
-            //                   join sub in db.Subject on subjTask.SubjectCode equals sub.SubjectCode
-            //                   where meta.TaskCode == TaskCode
-            //                   select sub.Class;
-
-            //var в = from item in db.Solution
-            //    join meta in db.Task on item.TaskCode equals meta.TaskCode
-            //    join subjTask in db.SubjectTask on meta.SubjectTaskCode equals subjTask.SubjectTaskCode
-            //    where meta.TaskCode == TaskCode
-            //    select subjTask.Number;
-
-            //ViewBag.nameSubj = from item in db.Solution
-            //    join meta in db.Task on item.TaskCode equals meta.TaskCode
-            //    join subjTask in db.SubjectTask on meta.SubjectTaskCode equals subjTask.SubjectTaskCode
-            //    join sub in db.Subject on subjTask.SubjectCode equals sub.SubjectCode
-            //    where meta.TaskCode == TaskCode
-            //    select sub.Name;
+            
 
             return View();
         }
