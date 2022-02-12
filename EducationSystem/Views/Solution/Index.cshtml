@@ -4,7 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>@ViewBag.description </h2>
+<h2> Задание</h2>
+@if (Model.Any()) {
+    <figure class="figure-question">
+        @Html.Raw("<img style='width:600px; height:250px;' src=\"data:image/jpeg;base64,"
+                  + Convert.ToBase64String(ViewBag.TaskImage) + "\" />")
+    </figure>
+}
 
 <div class="container">
     <div class="question-number">
@@ -14,19 +20,10 @@
         <ul class="question-number-list listquery">
             @foreach (var item in ViewBag.solutionNumber)
             {
-                <li class="question-number-item"> </li>
+                <li class="question-number-item"> @item</li>
             }
         </ul>
-
+       
         <button id="showother" class="button-question btn-show-all">Показать все</button>
-
-        @if (Model.Any()) {
-            <figure class="figure-question">
-                @Html.Raw("<img style='width:600px; height:350px;' src=\"data:image/jpeg;base64,"
-                          + Convert.ToBase64String(ViewBag.criterionFile) + "\" />")
-            </figure>
-        }
-
-
     </div>
 </div>

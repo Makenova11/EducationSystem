@@ -56,6 +56,7 @@ namespace EducationSystem.Controllers
         public async Task<ActionResult> Create([Bind(Include = "SubjectCode,Name")] Subject subject, int numClass
         , List<int> numTask)
         {
+            numTask.Distinct();
             if (ModelState.IsValid)
             {
                 subject.Class = numClass;

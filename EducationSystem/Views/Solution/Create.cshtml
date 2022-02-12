@@ -4,7 +4,10 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Добавление решения @ViewBag.numClass класс Задание @ViewBag.numTask Предмет: @ViewBag.nameSubj  </h2>
+<h2>
+    Добавление решения в задание @ViewBag.description Класс @ViewBag.Class Задание @ViewBag.Number
+    Предмет @ViewBag.Subject
+</h2>
 
 
 @using (Html.BeginForm("Create", "Solution", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -16,17 +19,18 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-horizontal">
         <div class="form-group">
-            @Html.LabelFor(model => model.SolutionImage, "Номер задания", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SolutionImage, "Решение", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="listSubjects" id="mylist">
-                    <input name="SolutionImageList[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="number" placeholder="1" />
+                    <input name="SolutionImageList[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="file" placeholder="1" />
                 </div>
                 <a id="addSol" class="addSol btn btn-default">+</a>
             </div>
 
         </div>
     </div>
-
+    @Html.HiddenFor(model => model.TaskCode,
+        new { Value = ViewBag.TaskCode })
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Добавить" class="btn btn-default" />
@@ -45,11 +49,9 @@
             var i = 0;
             $('.addSol').click(function () {
                 i++;
-
                 var elem = $("<input name='SolutionImageList[" + i + "]' " +
                     "class='d-block input-form-tasks form-control col-md-2 mb-2' " +
                     "type='file' placeholder='SolutionImageList[" + i + "]'/>");
-                
                 $('#mylist').append(elem);
             });
         });

@@ -40,8 +40,27 @@ namespace EducationSystem.Helpers
 
             return MvcHtmlString.Create(ul.ToString());
         }
-
+        /// <summary>
+        /// Создаёт ссылку для выбора задания в Task.
+        /// </summary>
+        /// <param name="arrayNumber"> Номер задания (очерёдность в списке)</param>
+        /// <param name="subjTaskCode"> Код задания </param>
+        /// <returns> MvcHtmlString. </returns>
         public static MvcHtmlString CreateLink(int arrayNumber,int subjTaskCode)
+        {
+            EducationSystemDB db = new EducationSystemDB();
+            var TaskList = from item in db.Task
+                where item.SubjectTaskCode == subjTaskCode
+                orderby item.TaskCode descending
+                select item;
+            var TaskCode = (TaskList.ToList())[--arrayNumber].SubjectTaskCode;
+            TagBuilder a = new TagBuilder("a");
+            a.AddCssClass("link");// в теге <a> делаем ссылку на задания
+            a.MergeAttribute("href", $"/Solution/Index?TaskCode={TaskCode}");
+            a.SetInnerText($"{++arrayNumber}");
+            return MvcHtmlString.Create(a.ToString());
+        }
+        public static MvcHtmlString CreateSolutionLink(int arrayNumber, int subjTaskCode)
         {
             EducationSystemDB db = new EducationSystemDB();
             var TaskList = from item in db.Task

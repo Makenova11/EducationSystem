@@ -34,15 +34,38 @@ namespace EducationSystem.Controllers
             ViewBag.solutionNumber = nums; //Массив с нумерацией имеющихся решений выбранного задания
             ViewBag.taskCode = TaskCode;
             ViewBag.description = db.Task.Where(x => x.TaskCode == TaskCode).Select(c => c.Name).FirstOrDefault();
+            ViewBag.TaskImage = db.Task.Where(c => c.TaskCode == TaskCode).Select(c => c.TaskImage).FirstOrDefault();
             return View(result);
 
         }
 
         public ActionResult Create(int TaskCode)
         {
-            ViewBag.taskCode = TaskCode;
-            
-
+            ViewBag.TaskCode = TaskCode;
+            ViewBag.description = db.Task.Where(x => x.TaskCode == TaskCode).Select(c => c.Name).FirstOrDefault();
+            ViewBag.Number = db.Task.Join(db.SubjectTask,
+                    task => task.SubjectTaskCode,
+                    subTask => subTask.SubjectTaskCode,
+                    (task, subTask) => new { SubjectCode = subTask.SubjectCode, Number = subTask.Number })
+                .Select(c => c.Number).FirstOrDefault();
+            ViewBag.Class= db.Task.Join(db.SubjectTask,
+                    task => task.SubjectTaskCode,
+                    subTask => subTask.SubjectTaskCode,
+                    (task, subTask) => new { SubjectCode = subTask.SubjectCode, Number = subTask.Number })
+                .Join(db.Subject,
+                    subTask2 => subTask2.SubjectCode,
+                    sub => sub.SubjectCode,
+                    (subTask2, sub) => new { Name = sub.Name, Class = sub.Class, Number = subTask2.Number })
+                .Select(c => c.Class).FirstOrDefault();
+            ViewBag.Subject = db.Task.Join(db.SubjectTask,
+                    task => task.SubjectTaskCode,
+                    subTask => subTask.SubjectTaskCode,
+                    (task, subTask) => new { SubjectCode = subTask.SubjectCode, Number = subTask.Number })
+                .Join(db.Subject,
+                    subTask2 => subTask2.SubjectCode,
+                    sub => sub.SubjectCode,
+                    (subTask2, sub) => new { Name = sub.Name, Class = sub.Class, Number = subTask2.Number })
+                .Select(c => c.Name).FirstOrDefault();
             return View();
         }
 
@@ -53,6 +76,7 @@ namespace EducationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                SolutionImageList.RemoveAll(c => c == null);
                 byte[] imageData = null;
                 using (var binaryReader = new BinaryReader(SolutionImageList[0].InputStream))
                 {
@@ -80,14 +104,20 @@ namespace EducationSystem.Controllers
                         SolutionImage = imageData,
                         SolutionImageNumber = number
                     });
+                    db.SaveChanges();
                 }
 
-                db.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
 
             ViewBag.TaskCode = new SelectList(db.Task, "TaskCode", "CriterionFileName", solution.TaskCode);
             return View(solution);
         }
+
+        //public ActionResult TestSolution()
+        //{
+
+        //}
     }
 }
