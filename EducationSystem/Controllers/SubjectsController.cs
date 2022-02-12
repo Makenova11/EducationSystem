@@ -1,28 +1,25 @@
-﻿using EducationSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using EducationSystem.Models;
 
 namespace EducationSystem.Controllers
 {
     /// <summary>
-    /// Предметы.
+    ///     Предметы.
     /// </summary>
     public class SubjectsController : Controller
     {
         /// <summary>
-        /// База данных.
+        ///     База данных.
         /// </summary>
-        private EducationSystemDB db = new EducationSystemDB();
+        private readonly EducationSystemDB db = new EducationSystemDB();
 
         /// <summary>
-        /// Список предметов, отфильтрованный по классу.
+        ///     Список предметов, отфильтрованный по классу.
         /// </summary>
         /// <param name="numClass"> Класс. </param>
         /// <returns> Task<ActionResult> </returns>
@@ -36,7 +33,7 @@ namespace EducationSystem.Controllers
 
 
         /// <summary>
-        /// Инициирование добавления нового предмета
+        ///     Инициирование добавления нового предмета
         /// </summary>
         /// <param name="numClass"> Номер класса. </param>
         /// <param name="numTask"> Номера заданий. </param>
@@ -48,13 +45,17 @@ namespace EducationSystem.Controllers
             return View();
         }
 
-        // POST: Subjects/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Добавление Subject и его SubjectTask-ов
+        /// </summary>
+        /// <param name="subject"></param>
+        /// <param name="numClass"></param>
+        /// <param name="numTask"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "SubjectCode,Name")] Subject subject, int numClass
-        , List<int> numTask)
+            , List<int> numTask)
         {
             numTask.Distinct();
             if (ModelState.IsValid)
@@ -63,81 +64,103 @@ namespace EducationSystem.Controllers
                 subject.Class = numClass;
                 db.Subject.Add(subject);
                 await db.SaveChangesAsync();
-                var subjCode = await db.Subject.Where(x => x.SubjectCode == subject.SubjectCode).Select(c => c.SubjectCode)
+                var subjCode = await db.Subject.Where(x => x.SubjectCode == subject.SubjectCode)
+                    .Select(c => c.SubjectCode)
                     .FirstOrDefaultAsync();
                 //Этап добавления SubjectTask по созданному Subject
                 foreach (var item in numTask)
-                {
-                    if (item > 0)//todo добавить проверку на уникальные значения
-                    {
-                        db.SubjectTask.Add(new SubjectTask()
+                    if (item > 0) //todo добавить проверку на уникальные значения
+                        db.SubjectTask.Add(new SubjectTask
                         {
                             Number = item,
                             SubjectCode = subjCode
                         });
-                    }
-                    
-                }
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", new { numClass = numClass});
+                return RedirectToAction("Index", new { numClass });
             }
 
             return View(subject);
         }
 
-        // GET: Subjects/Edit/5
+        /// <summary>
+        ///     Редактирование SubjectTask.
+        ///     Добавление Criterion.
+        /// </summary>
+        /// <param name="SubjectCode"></param>
+        /// <returns></returns>
         public ActionResult Edit(int? SubjectCode)
         {
-            if (SubjectCode == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Subject subject = db.Subject.Find(SubjectCode);
-            ViewBag.SubTaskList = db.SubjectTask.Where(x => x.SubjectCode == SubjectCode).Select(x =>x.Number).ToList();
-            if (subject == null)
-            {
-                return HttpNotFound();
-            }
+            if (SubjectCode == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var subject = db.Subject.Find(SubjectCode);
+            ViewBag.SubTaskList =
+                db.SubjectTask.Where(x => x.SubjectCode == SubjectCode).Select(x => x.Number).ToList();
+            if (subject == null) return HttpNotFound();
             return View(subject);
         }
 
-        // POST: Subjects/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        ///     Редактирование SubjectTask.
+        ///     Добавление Criterion.
+        /// </summary>
+        /// <param name="subject"></param>
+        /// <param name="numTask"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SubjectCode,Name,Class")] Subject subject, List<int> numTask)
+        public ActionResult Edit([Bind(Include = "SubjectCode,Name,Class")] Subject subject, List<int> numTask
+            , string criterionName,int maxScore)
         {
             if (ModelState.IsValid)
             {
+                //Изменяем значения Subject
                 db.Entry(subject).State = EntityState.Modified;
+                db.SaveChanges();
+                //Вводим проверку изменил ли пользователь значения или нет
+                var subjectTaskList = db.SubjectTask.Where(x => x.SubjectCode == subject.SubjectCode)
+                    .Select(c => c.Number).ToList();
+                var isModified = subjectTaskList.SequenceEqual(numTask);
+                //Изменяем значения SubjectTask
+                if(!isModified)
+                foreach (var item in numTask)
+                {
+                    db.Entry(new SubjectTask()
+                    {
+                        SubjectCode = subject.SubjectCode,
+                        Number = item
+                    }).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                //Изменяем/Добавляем Criterion
+                db.Entry(new Criterion()
+                {
+                    SubjectTaskCode = db.SubjectTask.Where(x => x.SubjectCode == subject.SubjectCode)
+                        .Select(c => c.SubjectTaskCode).FirstOrDefault(),
+                    Name = criterionName,
+                    MaxScore = maxScore
+                }).State = EntityState.Modified; ;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(subject);
         }
 
         // GET: Subjects/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Subject subject = db.Subject.Find(id);
-            if (subject == null)
-            {
-                return HttpNotFound();
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var subject = db.Subject.Find(id);
+            if (subject == null) return HttpNotFound();
             return View(subject);
         }
 
         // POST: Subjects/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Subject subject = db.Subject.Find(id);
+            var subject = db.Subject.Find(id);
             db.Subject.Remove(subject);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -145,10 +168,7 @@ namespace EducationSystem.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            if (disposing) db.Dispose();
             base.Dispose(disposing);
         }
     }

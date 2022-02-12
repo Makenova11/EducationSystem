@@ -9,52 +9,51 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.SubjectCode)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name,"Предмет", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.SubjectCode)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Class,"Класс", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, "Предмет", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
-        
-        <div class="form-group">
-            <label class = "control-label col-md-2" for="tasksSub">Задания</label>
-            <ul id="tasksSub" class="list-group col-md-10" style="list-style: none; padding-left: 15px;">
+    </div>
 
-                @foreach (var item in ViewBag.SubTaskList)
-                {
-                    <li class="mb-4" style="margin-bottom: 10px;">
-                        <input name='@item' class='input-form-tasks form-control list-group-item'
-                               type='number' value='@item'/>
-                    </li>
-                }
-            </ul>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Class, "Класс", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Class, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Class, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Сохранить" class="btn btn-default" />
-                @*@Html.ActionLink("Удалить", "Delete", new
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="numTask">Задания</label>
+        <ul id="numTask" class="list-group col-md-10" style="list-style: none; padding-left: 15px;">
+
+            @foreach (var item in ViewBag.SubTaskList)
+            {
+                <li class="mb-4" style="margin-bottom: 10px;">
+                    <input name='numTask' class='input-form-tasks form-control list-group-item'
+                           type='number' value='@item' />
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Сохранить" class="btn btn-default" />
+            @*@Html.ActionLink("Удалить", "Delete", new
                 {
                     id = ViewBag.classNum
                 },new{@class = "btn btn-default" })*@
-            </div>
-           
         </div>
+
     </div>
+</div>
 }
 
 <div>

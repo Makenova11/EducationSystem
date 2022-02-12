@@ -7,13 +7,10 @@
 
 
 <div class="container-subj-photo-task">
-
     <figure class="figure-question figure-photo-task">
         @Html.Raw("<img ' class='main-photo-task' src=\"data:image/jpeg;base64,"
                   + Convert.ToBase64String(ViewBag.FirstImage) + "\" />")
     </figure>
-    
-  
 
     <ul class="list-subj-mini-photo-task">
         @foreach (var item in ViewBag.Images)
@@ -27,30 +24,7 @@
 </div>
 
 <script type="text/javascript">
-    let figure = document.querySelector('.figure-photo-task');
-    let list = document.querySelector('.list-subj-mini-photo-task');
-    let mainPhoto = document.querySelector('.main-photo-task');
-    const arrList = Array.from(list.children);
 
-    list.onclick = function(event) {
-        const target = event.target;
-        if (target.tagName == 'IMG') {
-            if (target.id == 111) {
-                mainPhoto.setAttribute("src", "https://ae04.alicdn.com/kf/S0b64851dc03644ac8d42f06fa3b5ce03D/DEFENDER-X7-64269.jpeg");
-            } else if (target.id == 112) {
-                mainPhoto.setAttribute("src", "https://ae04.alicdn.com/kf/H98f2f971410a4567856757fa34822fb3B/DEFENDER-X7-64269.png");
-            } else if (target.id == 113) {
-                mainPhoto.setAttribute("src", "https://ae04.alicdn.com/kf/Hbd83e12fa18b40ef95b9c025e6d72864I/DEFENDER-X7-64269.png");
-            } else if (target.id == 114) {
-                mainPhoto.setAttribute("src", "https://ae04.alicdn.com/kf/Hc7b8ac8620174906a5d08a234ed59951O/DEFENDER-X7-64269.png");
-            } else if (target.id == 115) {
-                mainPhoto.setAttribute("src", "https://ae04.alicdn.com/kf/Hd635417fb10b492fa1840a208a631d41z/DEFENDER-X7-64269.png");
-            } else if (target.id == 116) {
-                mainPhoto.setAttribute("src", "https://ae04.alicdn.com/kf/Hcb60c905d8074a2bae0430378b120b2b2/DEFENDER-X7-64269.png");
-            }
-            //target.style.outline = '2px red solid'
-        }
-    };
     $(document).ready(function() { // Ждём загрузки страницы
         $(".photo-task").click(function() {
             const img = $(this);

@@ -14,29 +14,29 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.SolutionImage, "Решение", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="listSubjects" id="mylist">
-                    <input name="SolutionImageList[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="file" placeholder="1" />
+        <hr/>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SolutionImage, "Решение", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="listSubjects" id="mylist">
+                        <input name="SolutionImageList[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="file" placeholder="1"/>
+                    </div>
+                    <a id="addSol" class="addSol btn btn-default">+</a>
                 </div>
-                <a id="addSol" class="addSol btn btn-default">+</a>
-            </div>
 
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.TaskCode,
+            new { Value = ViewBag.TaskCode })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Добавить" class="btn btn-default"/>
+            </div>
         </div>
     </div>
-    @Html.HiddenFor(model => model.TaskCode,
-        new { Value = ViewBag.TaskCode })
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Добавить" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>
@@ -45,13 +45,12 @@
 
 @section Scripts {
     <script>
-        $(function () {
+        $(function() {
             var i = 0;
-            $('.addSol').click(function () {
+            $('.addSol').click(function() {
                 i++;
-                var elem = $("<input name='SolutionImageList[" + i + "]' " +
-                    "class='d-block input-form-tasks form-control col-md-2 mb-2' " +
-                    "type='file' placeholder='SolutionImageList[" + i + "]'/>");
+                const elem = $(`<input name='SolutionImageList[${i
+                    }]' class='d-block input-form-tasks form-control col-md-2 mb-2' type='file' placeholder='SolutionImageList[${i}]'/>`);
                 $('#mylist').append(elem);
             });
         });

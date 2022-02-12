@@ -21,7 +21,7 @@
         <ul class="question-number-list listquery">
             @foreach (var item in ViewBag.solutionNumber)
             {
-                <li class="question-number-item"> @ListHelper.CreateSolutionLink(item, ViewBag.taskCode)</li>
+                <li class="question-number-item"> @ListHelper.CreateSolutionLink(item, ViewBag.taskCode, new {@class="link-quad-task"})</li>
             }
         </ul>
        

@@ -23,13 +23,14 @@
             display: flex;
             align-items: center;
         }
+        
+        .container {
+            width: 1300px;
+        }
         .header-container {
             display: flex;
             align-items: center;
             font-size: 14pt;
-        }
-        .container {
-            width: 1100px;
         }
         .header-link-main {
             left: auto;
@@ -162,10 +163,27 @@
             transition: 0.1s ease;
         }
 
+        .insert-btn {
+            margin-top: 20px;
+        }
+
+        .li-subj-task {
+            position: relative;
+        }
+        .link-subj-task::after {
+            position: absolute;
+            content: "";
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+
         .accordion {
             display: flex;
             justify-content: flex-start;
             margin-top: 10px;
+            margin-bottom: 20px;
             /* относительное позиционирование */
             padding: 0;
             overflow: hidden;
@@ -174,7 +192,7 @@
             width: 270px;
         }
         .accordion-item {
-            margin-right: 70px;
+            margin-right: 93px;
         }
         /* заголовки панелей аккордеона */
         .accordion h2 {
@@ -321,8 +339,69 @@
             display: block;
             padding: 0;
             position: absolute;
-            right: -55px;
+            right: -45px;
             top: 0;
+            line-height: 0;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+        }
+        .plus-icon {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-weight: 900;
+            margin: 0;
+            font-size: 30px;
+            font-family: roboto;
+            display: block;
+            padding: 0;
+            position: absolute;
+            right: -92px;
+            top: 0;
+            line-height: 40px;
+            text-decoration: none;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+            border-radius: 14px;
+            color: #828282;
+        }
+        .plus-icon:hover {
+            text-decoration: none;
+        }
+        .plus-icon:active {
+            text-decoration: none;
+        }
+        .plus-icon:focus {
+            text-decoration: none;
+        }
+
+        .info-plus-icon-disable {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-weight: 900;
+            margin: 0;
+            margin-left: 20px;
+            font-size: 30px;
+            font-family: roboto;
+            display: block;
+            padding: 0;
+            line-height: 40px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+            border-radius: 14px;
+            color: #828282;
+        }
+        .info-pen-icon-disable {
+            margin-left: 20px;
+        }
+        .pen-info, .plus-info {
+            display: flex;
+            flex-direction: row;
+            font-size: 18px;
+            line-height: 40px;
+        }
+
+        .pen-label, .plus-label {
+            margin: 0;
         }
 
 
@@ -344,6 +423,7 @@
             align-items: center;
         }
         .question-number-item {
+            position: relative;
             width: 40px;
             height: 40px;
             border-radius: 5px;
@@ -353,6 +433,14 @@
             margin-bottom: 10px;
             margin-right: 5px;
             margin-left: 5px;
+        }
+        .link-quad-task::after {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
         .button-question {
             padding: 5px 10px;
@@ -384,39 +472,38 @@
         }
 
         .container-subj-photo-task {
-            max-width: 450px;
+            width: 800px;
+            margin-top: 40px;
         }
         .figure-photo-task {
             margin: 0;
-            max-height: 450px;
-            max-width: 450px;
+            max-width: 800px;
         }
 
         .list-subj-mini-photo-task {
+            margin-top: 20px; 
             list-style: none;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 0;
         }
         .item-subj-mini-photo-task {
-            height: 50px;
+            height: 70px;
             cursor: pointer;
             box-shadow: inset 0 0 0 1px #ccc;
         }
 
         .main-photo-task {
-            width: 450px;
+            max-width: 800px;
         }
 
         .item-subj-mini-photo-task:not(:last-child) {
-            margin-right: 10px;
+            margin-right: 15px;
         }
         .photo-task {
-            width: 50px;
-            height: 50px;
+            width: 70px;
+            height: 70px;
         }
-
-
 
         body {
             margin:0;
@@ -459,7 +546,7 @@
 
         @@media (min-width: 2100px) {
             .container {
-                width: 1500px;
+                width: 1700px;
             }
             .header-login_img {
                 width: 60px;
