@@ -87,7 +87,7 @@
     <Key>
       <PropertyRef Name="ImageCode" />
     </Key>
-    <Property Name="ImageCode" Type="bigint" Nullable="false" />
+    <Property Name="ImageCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SolutionCode" Type="bigint" Nullable="false" />
     <Property Name="SolutionImage" Type="varbinary(max)" Nullable="false" />
     <Property Name="SolutionImageNumber" Type="int" Nullable="false" />

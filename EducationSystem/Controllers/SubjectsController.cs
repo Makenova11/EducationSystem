@@ -59,11 +59,13 @@ namespace EducationSystem.Controllers
             numTask.Distinct();
             if (ModelState.IsValid)
             {
+                //Этап добавления Subject
                 subject.Class = numClass;
                 db.Subject.Add(subject);
                 await db.SaveChangesAsync();
                 var subjCode = await db.Subject.Where(x => x.SubjectCode == subject.SubjectCode).Select(c => c.SubjectCode)
                     .FirstOrDefaultAsync();
+                //Этап добавления SubjectTask по созданному Subject
                 foreach (var item in numTask)
                 {
                     if (item > 0)//todo добавить проверку на уникальные значения

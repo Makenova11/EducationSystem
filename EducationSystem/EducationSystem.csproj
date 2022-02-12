@@ -283,6 +283,7 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Solution\Create.cshtml" />
     <Content Include="Views\Solution\Index.cshtml" />
+    <Content Include="Views\Solution\SolutionTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\SolutionCriterionScores\" />
