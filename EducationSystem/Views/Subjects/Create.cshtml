@@ -24,13 +24,10 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, "Номер задания", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10" >
-                    <div class="listSubjects" id="mylist">
-                        <input name="numTask[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="number" placeholder="1" />
-                        @*<button id="addNum" class="button-tasks btn btn-default col-md">+</button>*@
-                    
+                    <div class="listSolution" id="mylist">
+                        <input name="numTask[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="file" placeholder="1" />
                     </div>
-                    @*<ol id="mylist"></ol>*@
-                <a id="addNum" class="addNum btn btn-default">+</a>
+                    <a id="addNum" class="addNum btn btn-default">+</a>
                 </div>
                 
             </div>

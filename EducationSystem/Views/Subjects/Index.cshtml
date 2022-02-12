@@ -25,7 +25,7 @@
                     <i></i>
                     <h2 class="title_block">@Html.DisplayFor(modelItem => item.Name)</h2>
                     <div class="msg">
-                        @ListHelper.CreateList(item.SubjectCode, null)
+                        @ListHelper.CreateSubjectList(item.SubjectCode, null)
                     </div>
                     <a href="@Url.Action("Edit", "Subjects", new {SubjectCode = item.SubjectCode})" class="pen-icon">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

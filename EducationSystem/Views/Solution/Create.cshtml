@@ -4,55 +4,54 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Добавление решения @ViewBag.numClass класс Предмет: @ViewBag.nameSubj  </h2>
+<h2>Добавление решения @ViewBag.numClass класс Задание @ViewBag.numTask Предмет: @ViewBag.nameSubj  </h2>
 
 
 @using (Html.BeginForm("Create", "Solution", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-horizontal">
-        @*<hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.TaskImage, "Файл задания", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="editor-field">
-                <input type="file" name="TaskImage" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Year, "Год использования", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SolutionImage, "Номер задания", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                <div class="listSubjects" id="mylist">
+                    <input name="SolutionImageList[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="number" placeholder="1" />
+                </div>
+                <a id="addSol" class="addSol btn btn-default">+</a>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CriterionFile, "Файл критерия", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="editor-field">
-                <input type="file" name="CriterionFileImage" />
-            </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventCode, "Мероприятие", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("EventCode", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EventCode, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Добавить" class="btn btn-default" />
         </div>
-        @Html.HiddenFor(model => model.SubjectTaskCode,
-            new { Value = ViewBag.subjTaskCode })
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Добавить" class="btn btn-default" />
-            </div>
-        </div>
-    </div>*@
+    </div>
+</div>
 }
 
 <div>
-    @Html.ActionLink("Назад", "Index", "Task", new { ViewBag.TaskCode })
+    @Html.ActionLink("Назад", "Index", "Solution", new { ViewBag.TaskCode })
 </div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addSol').click(function () {
+                i++;
+
+                var elem = $("<input name='SolutionImageList[" + i + "]' " +
+                    "class='d-block input-form-tasks form-control col-md-2 mb-2' " +
+                    "type='file' placeholder='SolutionImageList[" + i + "]'/>");
+                
+                $('#mylist').append(elem);
+            });
+        });
+    </script>
+}

@@ -20,7 +20,7 @@ namespace EducationSystem.Helpers
         /// <param name="subjCode"> Код предмета, по которому формируется список. </param>
         /// <param name="htmlAttributes"> Атрибуты. </param>
         /// <returns> MvcHtmlString </returns>
-        public static MvcHtmlString CreateList( int subjCode, object htmlAttributes = null)
+        public static MvcHtmlString CreateSubjectList( int subjCode, object htmlAttributes = null)
         {
             EducationSystemDB db = new EducationSystemDB();
             SubjectTask[] items = db.SubjectTask.Where(c => c.SubjectCode == subjCode).ToArray();
