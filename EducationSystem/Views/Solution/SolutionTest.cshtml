@@ -5,43 +5,181 @@
 }
 
 
+<section class="section-solution-test">
+    <div class="container-subj-photo-task">
+        <figure class="figure-question figure-photo-task">
+            @Html.Raw("<img ' class='main-photo-task' src=\"data:image/jpeg;base64,"
+                      + Convert.ToBase64String(ViewBag.FirstImage) + "\" />")
+        </figure>
 
-<div class="container-subj-photo-task">
-    <figure class="figure-question figure-photo-task">
-        @Html.Raw("<img ' class='main-photo-task' src=\"data:image/jpeg;base64,"
-                  + Convert.ToBase64String(ViewBag.FirstImage) + "\" />")
-    </figure>
+        <ul class="list-subj-mini-photo-task">
+            @foreach (var item in ViewBag.Images)
+            {
+                <li class="item-subj-mini-photo-task">
+                    @Html.Raw("<img class='photo-task' loading='eager' src=\"data:image/jpeg;base64,"
+                              + Convert.ToBase64String(item) + "\" />")
+                </li>
+            }
+        </ul>
+    </div>
+    
+    <div class="section-solution-test_check-panel">
+        <ul class="check-panel_list list-group">
+            <li class="check-panel_item list-group-item">
+                <div class="section-solution-test_check-panel-choice">
+                    <label class="section-solution-test_label-select" for="check-panel-select-1">Критерий №1</label>
 
-    <ul class="list-subj-mini-photo-task">
-        @foreach (var item in ViewBag.Images)
-        {
-            <li class="item-subj-mini-photo-task">
-                @Html.Raw("<img class='photo-task' loading='eager' src=\"data:image/jpeg;base64,"
-                          + Convert.ToBase64String(item) + "\" />")
+                    <select id="check-panel-select-1" class="section-solution-test_select-points" required>
+                        <option selected="selected">Баллы</option>
+                        <option value="0">0 баллов</option>
+                        <option value="1">1 балл</option>
+                        <option value="2">2 балла</option>
+                        <option value="3">3 балла</option>
+                    </select>
+
+                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
+                </div>
             </li>
-        }
-    </ul>
-</div>
+            <li class="check-panel_item list-group-item">
+                <div class="section-solution-test_check-panel-choice">
+                    <label class="section-solution-test_label-select" for="check-panel-select-2">Критерий №2</label>
+
+                    <select id="check-panel-select-2" class="section-solution-test_select-points" required>
+                        <option selected="selected">Баллы</option>
+                        <option value="0">0 баллов</option>
+                        <option value="1">1 балл</option>
+                        <option value="2">2 балла</option>
+                        <option value="3">3 балла</option>
+                    </select>
+
+                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
+                </div>
+            </li>
+            <li class="check-panel_item list-group-item">
+                <div class="section-solution-test_check-panel-choice">
+                    <label class="section-solution-test_label-select" for="check-panel-select-3">Критерий №3</label>
+
+                    <select id="check-panel-select-3" class="section-solution-test_select-points" required>
+                        <option selected="selected">Баллы</option>
+                        <option value="0">0 баллов</option>
+                        <option value="1">1 балл</option>
+                        <option value="2">2 балла</option>
+                        <option value="3">3 балла</option>
+                    </select>
+
+                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
+                </div>
+            </li>
+            <li class="check-panel_item list-group-item">
+                <div class="section-solution-test_check-panel-choice">
+                    <label class="section-solution-test_label-select" for="check-panel-select-4">Критерий №4</label>
+
+                    <select id="check-panel-select-4" class="section-solution-test_select-points" required>
+                        <option selected="selected">Баллы</option>
+                        <option value="0">0 баллов</option>
+                        <option value="1">1 балл</option>
+                        <option value="2">2 балла</option>
+                        <option value="3">3 балла</option>
+                    </select>
+
+                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
+                </div>
+            </li>
+            <li class="check-panel_item list-group-item">
+                <div class="section-solution-test_check-panel-choice">
+                    <label class="section-solution-test_label-select" for="check-panel-select-5">Критерий №5</label>
+
+                    <select id="check-panel-select-5" class="section-solution-test_select-points" required>
+                        <option selected="selected">Баллы</option>
+                        <option value="0">0 баллов</option>
+                        <option value="1">1 балл</option>
+                        <option value="2">2 балла</option>
+                        <option value="3">3 балла</option>
+                    </select>
+
+                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
+                </div>
+            </li>
+        </ul>
+        <button class="section-solution-test_btn-send btn btn-success">Отправить</button>
+    </div>
+</section>
 
 <script type="text/javascript">
 
-    $(document).ready(function() { // Ждём загрузки страницы
+    $(document).ready(function () {                 // Ждём загрузки страницы
+        let selects = $("select");
+        $(".section-solution-test_btn-send").click(function () {
+            
+            let options = $('select');
+
+            let values = $.map(options ,function(option) {
+                return option.value;
+            });
+            console.log(values);
+            $("select").each(function() {
+                if ($(this).val() == 1) {
+                    $(".section-solution-test_check-panel-choice").has(this).append('<?xml version="1.0" ?>' +
+                        '<svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                        '<path d="M16.5163 8.93451L11.0597 14.7023L8.0959 11.8984" stroke="green" stroke-width="2"/>' +
+                        '<path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="green" stroke-width="2"/>' +
+                        '</svg>');
+                    $(".check-panel_item").has(this).append('<p class="section-solution-p">Есть несколько недочётов</p>');
+                } else if ($(this).val() == 2) {
+                    $(".section-solution-test_check-panel-choice").has(this).append('<?xml version="1.0" ?>' +
+                        '<svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                        '<path d="M16.5163 8.93451L11.0597 14.7023L8.0959 11.8984" stroke="green" stroke-width="2"/>' +
+                        '<path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="green" stroke-width="2"/>' +
+                        '</svg>');
+                    $(".check-panel_item").has(this).append('<p class="section-solution-p">Есть недочёт</p>');
+                } else if ($(this).val() == 3) {
+                    $(".section-solution-test_check-panel-choice").has(this).append('<?xml version="1.0" ?>' +
+                        '<svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                        '<path d="M16.5163 8.93451L11.0597 14.7023L8.0959 11.8984" stroke="green" stroke-width="2"/>' +
+                        '<path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="green" stroke-width="2"/>' +
+                        '</svg>');
+                    $(".check-panel_item").has(this).append('<p class="section-solution-p">Всё верно</p>');
+                } else if ($(this).val() == 0) {
+                    $(".section-solution-test_check-panel-choice").has(this).append('<?xml version="1.0" ?>' +
+                        '<svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                        '<path d="M7.95206 16.048L16.0769 7.92297" stroke="red" stroke-width="2"/>' +
+                        '<path d="M16.0914 16.0336L7.90884 7.85101" stroke="red" stroke-width="2"/>' +
+                        '<path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="red" stroke-width="2"/>' +
+                        '</svg>');
+                    $(".check-panel_item").has(this).append('<p class="section-solution-p">Всё неверно</p>');
+                }
+            });
+            
+        });
+
         $(".photo-task").click(function() {
             const img = $(this);
             const src = img.attr('src');
-            const photo = document.querySelector(".main-photo-task");
             $(".main-photo-task").attr('src', src);
         });
 
-        $(".main-photo-task").click(function() { // Событие клика на маленькое изображение
-            const img = $(this); // Получаем изображение, на которое кликнули
-            const src = img.attr('src'); // Достаем из этого изображения путь до картинки
+        $(".section-solution-test_btn").click(function () {
+            const src = $(".photo-task").attr('src'); // Достаем из этого изображения путь до картинки
             $("body").append(`<div class='popup'><div class='popup_bg'></div><img src=${src} class='popup_img' /></div>`);
-            $(".popup").fadeIn(500); // Медленно выводим изображение
-            $(".popup_bg").click(function() { // Событие клика на затемненный фон
-                $(".popup").fadeOut(500); // Медленно убираем всплывающее окно
-                setTimeout(function() { // Выставляем таймер
-                        $(".popup").remove(); // Удаляем разметку всплывающего окна
+            $(".popup").fadeIn(300);                // Медленно выводим изображение
+            $(".popup_bg").click(function () {      // Событие клика на затемненный фон
+                $(".popup").fadeOut(300);           // Медленно убираем всплывающее окно
+                setTimeout(function () {            // Выставляем таймер
+                    $(".popup").remove();           // Удаляем разметку всплывающего окна
+                },
+                    300);
+            });
+        });
+
+        $(".main-photo-task").click(function() {            // Событие клика на маленькое изображение
+            const img = $(this);                            // Получаем изображение, на которое кликнули
+            const src = img.attr('src');                    // Достаем из этого изображения путь до картинки
+            $("body").append(`<div class='popup'><div class='popup_bg'></div><img src=${src} class='popup_img' /></div>`);
+            $(".popup").fadeIn(500);                        // Медленно выводим изображение
+            $(".popup_bg").click(function() {               // Событие клика на затемненный фон
+                $(".popup").fadeOut(500);                   // Медленно убираем всплывающее окно
+                setTimeout(function() {                     // Выставляем таймер
+                        $(".popup").remove();               // Удаляем разметку всплывающего окна
                     },
                     500);
             });

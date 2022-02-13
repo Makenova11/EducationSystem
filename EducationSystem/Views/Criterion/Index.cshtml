@@ -1,1 +1,74 @@
-﻿
+﻿@model IEnumerable<EducationSystem.Models.Criterion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Критерии</h3>
+<form method="post">
+    <h4>
+        Класс:
+    </h4>
+    @using (Html.BeginForm("Index"))
+    {
+        <p>
+            <select class="form-control" name="numClass">
+
+                <option value=0> Все </option>
+                <option value=9> 9 класс </option>
+                <option value=11> 11 класс </option>
+
+            </select>
+            <input type="submit" value="Поиск" class="btn btn-default"/>
+        </p>
+    }
+</form>
+<table class="table">
+    <tr>
+        <th>
+            Класс
+        </th>
+        <th>
+            Предмет
+        </th>
+        <th>
+            Номер задания
+        </th>
+        <th>
+            Максимальное значение
+        </th>
+        <th>
+            Наименование критерия
+        </th>
+        <th>
+            Отобразить критерий
+        </th>
+    </tr>
+    @foreach (var item in ViewBag.result)
+    {
+        @item;
+    }
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectTask.Subject.Class)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectTask.Subject.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectTask.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                -
+            </td>
+        </tr>
+    }*@
+</table>

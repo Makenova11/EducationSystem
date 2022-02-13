@@ -64,29 +64,22 @@ namespace EducationSystem.Helpers
             a.AddCssClass("link"); // в теге <a> делаем ссылку на задание(task).
             a.MergeAttribute("href", $"/Solution/Index?TaskCode={TaskCode}");
             a.SetInnerText($"{++arrayNumber}");
+            db.Dispose();
             return MvcHtmlString.Create(a.ToString());
         }
 
-        /// <summary>
-        ///     Создаёт ссылку для SolutionTest, переход на обучение.
-        /// </summary>
-        /// <param name="arrayNumber"> Номер задания (очерёдность в списке).</param>
-        /// <param name="TaskCode"> Код задания.</param>
-        /// <returns></returns>
-        public static MvcHtmlString GetSubTaskCode(int numSubTask)
+        public static MvcHtmlString CreateSolutionLink(int arrayNumber, int TaskCode, object htmlAttributes = null)
         {
             var db = new EducationSystemDB();
-            var items = db.SubjectTask.Where(c => c.SubjectCode == subjectCode).ToArray();
-            ////Ищем нужный нам SolutionCode.
-            //var SolutionCodeList = db.Solution.Where(x => x.TaskCode == TaskCode).ToList();
-            //var solutionCode = SolutionCodeList[--arrayNumber].SolutionCode;
-            //TagBuilder a = new TagBuilder("a");
-            //a.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
-            //a.AddCssClass("link"); // в теге <a> делаем ссылку на задание(solution)
-            //a.MergeAttribute("href", $"/Solution/SolutionTest?SolutionCode={solutionCode}");
-            //a.SetInnerText($"{++arrayNumber}");
-            //return MvcHtmlString.Create(a.ToString());
+            //Ищем нужный нам SolutionCode.
+            var SolutionCodeList = db.Solution.Where(x => x.TaskCode == TaskCode).ToList();
+            var solutionCode = SolutionCodeList[--arrayNumber].SolutionCode;
+            TagBuilder a = new TagBuilder("a");
+            a.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            a.AddCssClass("link"); // в теге <a> делаем ссылку на задание(solution)
+            a.MergeAttribute("href", $"/Solution/SolutionTest?SolutionCode={solutionCode}");
+            a.SetInnerText($"{++arrayNumber}");
+            return MvcHtmlString.Create(a.ToString());
         }
-
     }
 }
