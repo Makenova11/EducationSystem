@@ -21,13 +21,13 @@
             </div>
         </div>
         <div class="form-horizontal">
-            <div class="form-group">
+            <div class="form-group listSolutionGroup">
                 @Html.LabelFor(model => model.Name, "Номер задания", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10" >
+                <div class="col-md-10 listSolutionGroupInput" >
                     <div class="listSolution" id="mylist">
-                        <input name="numTask[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="number" placeholder="1" />
+                        <input name="numTask[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="number" placeholder="0" />
                     </div>
-                    <a id="addNum" class="addNum btn btn-default">+</a>
+                    <a id="addNum" class="addNum btn btn-default">+1</a>
                 </div>
                 
             </div>
@@ -51,13 +51,13 @@
 @section Scripts {
     <script>
         $(function () {
-            var i = 0;
+            let i = 0;
             $('.addNum').click(function () {
-                    i++;
+                i++;
 
-                var elem = $("<input name='numTask[" + i + "]' " +
+                let elem = $("<input name='numTask[" + i + "]' " +
                     "class='d-block input-form-tasks form-control col-md-2 mb-2' " +
-                    "type='number' placeholder='numTask[" + i + "]'/>");
+                    "type='number' placeholder='" + i + "'/>");
                 
                 $('#mylist').append(elem);
             });

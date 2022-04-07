@@ -108,7 +108,7 @@ namespace EducationSystem.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SubjectCode,Name,Class")] Subject subject, List<int> numTask
-            , string criterionName,int maxScore)
+            , string criterionName)
         {
             if (ModelState.IsValid)
             {
@@ -130,15 +130,15 @@ namespace EducationSystem.Controllers
                     }).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                //Изменяем/Добавляем Criterion
-                db.Entry(new Criterion()
-                {
-                    SubjectTaskCode = db.SubjectTask.Where(x => x.SubjectCode == subject.SubjectCode)
-                        .Select(c => c.SubjectTaskCode).FirstOrDefault(),
-                    Name = criterionName,
-                    MaxScore = maxScore
-                }).State = EntityState.Modified; ;
-                db.SaveChanges();
+                ////Изменяем/Добавляем Criterion
+                //db.Entry(new Criterion()
+                //{
+                //    SubjectTaskCode = db.SubjectTask.Where(x => x.SubjectCode == subject.SubjectCode)
+                //        .Select(c => c.SubjectTaskCode).FirstOrDefault(),
+                //    Name = criterionName,
+                //    MaxScore = maxScore
+                //}).State = EntityState.Modified; ;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 

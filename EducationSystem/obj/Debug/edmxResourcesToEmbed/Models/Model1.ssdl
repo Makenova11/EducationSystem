@@ -5,6 +5,7 @@
       <PropertyRef Name="CriterionCode" />
     </Key>
     <Property Name="CriterionCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="MaxScore" Type="int" Nullable="false" />
     <Property Name="SubjectTaskCode" Type="int" Nullable="false" />
@@ -29,11 +30,15 @@
       <PropertyRef Name="ExpertCode" />
     </Key>
     <Property Name="ExpertCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleCode" Type="int" Nullable="false" />
     <Property Name="SecondName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Patronymic" Type="varchar" MaxLength="50" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="150" />
+    <Property Name="Salt" Type="int" />
   </EntityType>
   <EntityType Name="ExpertSubject">
     <Key>
@@ -63,6 +68,13 @@
     <Property Name="GraduateCode" Type="bigint" Nullable="false" />
     <Property Name="VariantTaskCode" Type="bigint" Nullable="false" />
     <Property Name="CriterionCode" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="RoleCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Solution">
     <Key>
@@ -149,6 +161,18 @@
     <Property Name="VariantCode" Type="bigint" Nullable="false" />
     <Property Name="ExamCode" Type="bigint" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Expert_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Expert" Type="Self.Expert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleCode" />
+      </Principal>
+      <Dependent Role="Expert">
+        <PropertyRef Name="RoleCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SolutionImages_Solution">
     <End Role="Solution" Type="Self.Solution" Multiplicity="1" />
     <End Role="SolutionImages" Type="Self.SolutionImages" Multiplicity="*" />
@@ -389,6 +413,7 @@
     <EntitySet Name="ExpertSubject" EntityType="Self.ExpertSubject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Graduate" EntityType="Self.Graduate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GraduateAnswer" EntityType="Self.GraduateAnswer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Solution" EntityType="Self.Solution" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolutionCriterionScore" EntityType="Self.SolutionCriterionScore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolutionImages" EntityType="Self.SolutionImages" Schema="dbo" store:Type="Tables" />
@@ -398,6 +423,10 @@
     <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Variant" EntityType="Self.Variant" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VariantSolution" EntityType="Self.VariantSolution" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Expert_Role" Association="Self.FK_Expert_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Expert" EntitySet="Expert" />
+    </AssociationSet>
     <AssociationSet Name="FK_SolutionImages_Solution" Association="Self.FK_SolutionImages_Solution">
       <End Role="Solution" EntitySet="Solution" />
       <End Role="SolutionImages" EntitySet="SolutionImages" />

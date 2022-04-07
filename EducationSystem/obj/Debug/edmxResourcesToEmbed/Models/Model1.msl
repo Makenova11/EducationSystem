@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Criterion">
       <EntityTypeMapping TypeName="EducationSystemDBModel.Criterion">
         <MappingFragment StoreEntitySet="Criterion">
+          <ScalarProperty Name="Number" ColumnName="Number" />
           <ScalarProperty Name="CriterionCode" ColumnName="CriterionCode" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="MaxScore" ColumnName="MaxScore" />
@@ -31,6 +32,10 @@
     <EntitySetMapping Name="Expert">
       <EntityTypeMapping TypeName="EducationSystemDBModel.Expert">
         <MappingFragment StoreEntitySet="Expert">
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
           <ScalarProperty Name="ExpertCode" ColumnName="ExpertCode" />
           <ScalarProperty Name="SecondName" ColumnName="SecondName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -160,6 +165,14 @@
           <ScalarProperty Name="SolutionImage" ColumnName="SolutionImage" />
           <ScalarProperty Name="SolutionCode" ColumnName="SolutionCode" />
           <ScalarProperty Name="ImageCode" ColumnName="ImageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="EducationSystemDBModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

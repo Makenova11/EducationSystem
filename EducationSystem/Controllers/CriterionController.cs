@@ -24,83 +24,69 @@ namespace EducationSystem.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            int numClass = 0;
-            var result = numClass != 0
-               ? await db.Criterion
-                   .Join(db.SubjectTask,
-                       crit => crit.SubjectTaskCode,
-                       subTask => subTask.SubjectTaskCode,
-                       (crit, subTask) => new
-                       {
-                           crit.Name,
-                           crit.MaxScore,
-                           subTask.Number,
-                           subTask.SubjectCode,
-                           subTask.SubjectTaskCode
-                       })
-                   .Join(db.Subject, subTask2 => subTask2.SubjectCode,
-                       sub => sub.SubjectCode,
-                       (subTask2, sub) => new
-                       {
-                           Criterion = subTask2.Name,
-                           subTask2.MaxScore,
-                           subTask2.Number,
-                           sub.Class,
-                           SubjectName = sub.Name,
-                           subTask2.SubjectTaskCode
-                       })
-                   .Join(db.Task,
-                       subTask3 => subTask3.SubjectTaskCode,
-                       task => task.SubjectTaskCode,
-                       (subTask3, task) => new
-                       {
-                           subTask3.Class,
-                           subTask3.Criterion,
-                           subTask3.MaxScore,
-                           subTask3.Number,
-                           task.CriterionFile,
-                           subTask3.SubjectName,
-                           task.Year
-                       })
-                   .Where(x => x.Class == numClass).ToListAsync()
-               : await db.Criterion
-                   .Join(db.SubjectTask,
-                       crit => crit.SubjectTaskCode,
-                       subTask => subTask.SubjectTaskCode,
-                       (crit, subTask) => new
-                       {
-                           crit.Name,
-                           crit.MaxScore,
-                           subTask.Number,
-                           subTask.SubjectCode,
-                           subTask.SubjectTaskCode
-                       })
-                   .Join(db.Subject, subTask2 => subTask2.SubjectCode,
-                       sub => sub.SubjectCode,
-                       (subTask2, sub) => new
-                       {
-                           Criterion = subTask2.Name,
-                           subTask2.MaxScore,
-                           subTask2.Number,
-                           sub.Class,
-                           SubjectName = sub.Name,
-                           subTask2.SubjectTaskCode
-                       })
-                   .Join(db.Task,
-                       subTask3 => subTask3.SubjectTaskCode,
-                       task => task.SubjectTaskCode,
-                       (subTask3, task) => new
-                       {
-                           subTask3.Class,
-                           subTask3.Criterion,
-                           subTask3.MaxScore,
-                           subTask3.Number,
-                           task.CriterionFile,
-                           subTask3.SubjectName,
-                           task.Year
-                       })
-                  .ToListAsync();
-            ViewBag.result = result;
+            //int numClass = 0;
+            //var result = numClass != 0
+            //   ? await db.Criterion
+            //       .Join(db.SubjectTask,
+            //           crit => crit.SubjectTaskCode,
+            //           subTask => subTask.SubjectTaskCode,
+            //           (crit, subTask) => new
+            //           {
+            //               crit.Name,
+            //               crit.MaxScore,
+            //               subTask.Number,
+            //               subTask.SubjectCode,
+            //               subTask.SubjectTaskCode
+            //           })
+            //       .Join(db.Subject, subTask2 => subTask2.SubjectCode,
+            //           sub => sub.SubjectCode,
+            //           (subTask2, sub) => new
+            //           {
+            //               Criterion = subTask2.Name,
+            //               subTask2.MaxScore,
+            //               subTask2.Number,
+            //               sub.Class,
+            //               SubjectName = sub.Name,
+            //               subTask2.SubjectTaskCode
+            //           })
+            //       .Join(db.Task,
+            //           subTask3 => subTask3.SubjectTaskCode,
+            //           task => task.SubjectTaskCode,
+            //           (subTask3, task) => new
+            //           {
+            //               subTask3.Class,
+            //               subTask3.Criterion,
+            //               subTask3.MaxScore,
+            //               subTask3.Number,
+            //               task.CriterionFile,
+            //               subTask3.SubjectName,
+            //               task.Year
+            //           })
+            //       .Where(x => x.Class == numClass).ToListAsync()
+            //   : await db.Criterion
+            //       .Join(db.SubjectTask,
+            //           crit => crit.SubjectTaskCode,
+            //           subTask => subTask.SubjectTaskCode,
+            //           (crit, subTask) => new
+            //           {
+            //               crit.Name,
+            //               crit.MaxScore,
+            //               subTask.Number,
+            //               subTask.SubjectCode,
+            //               subTask.SubjectTaskCode
+            //           })
+            //       .Join(db.Subject, subTask2 => subTask2.SubjectCode,
+            //           sub => sub.SubjectCode,
+            //           (subTask2, sub) => new
+            //           {
+            //               Criterion = subTask2.Name,
+            //               subTask2.MaxScore,
+            //               subTask2.Number,
+            //               sub.Class,
+            //               SubjectName = sub.Name,
+            //               subTask2.SubjectTaskCode
+            //           })
+            //       .ToListAsync();
             return View();
         }
 
@@ -174,7 +160,7 @@ namespace EducationSystem.Controllers
                             subTask3.SubjectName
                         })
                    .ToListAsync();
-            ViewBag.result = result;
+            //ViewBag.result = result;
             return View(ViewBag.result);
         }
 

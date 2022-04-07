@@ -26,8 +26,13 @@ namespace EducationSystem.Models
         public string Patronymic { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public Nullable<int> Salt { get; set; }
+        public int RoleCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExpertSubject> ExpertSubject { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

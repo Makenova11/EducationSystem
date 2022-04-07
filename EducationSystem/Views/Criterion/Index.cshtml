@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EducationSystem.Models.Criterion>
+﻿@model IEnumerable<EducationSystem.ViewModels.CriterionData>
 
 @{
     ViewBag.Title = "Index";
@@ -44,9 +44,9 @@
             Отобразить критерий
         </th>
     </tr>
-    @foreach (var item in ViewBag.result)
+    @foreach (MyClass item in ViewBag.result)
     {
-        @item;
+        @item.;
     }
     @*@foreach (var item in Model)
     {

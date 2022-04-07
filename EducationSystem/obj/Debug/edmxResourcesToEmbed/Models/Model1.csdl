@@ -11,6 +11,7 @@
     <NavigationProperty Name="GraduateAnswer" Relationship="Self.Критерий___Балл" FromRole="Criterion" ToRole="GraduateAnswer" />
     <NavigationProperty Name="SolutionCriterionScore" Relationship="Self.Критерий___Комментарии_к_решению" FromRole="Criterion" ToRole="SolutionCriterionScore" />
     <NavigationProperty Name="SubjectTask" Relationship="Self.Номер_задания___Критерий" FromRole="Criterion" ToRole="SubjectTask" />
+    <Property Name="Number" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Event">
     <Key>
@@ -41,6 +42,11 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="ExpertSubject" Relationship="Self.Специализация___Эксперт" FromRole="Expert" ToRole="ExpertSubject" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Salt" Type="Int32" />
+    <Property Name="RoleCode" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="EducationSystemDBModel.FK_Expert_Role" FromRole="Expert" ToRole="Role" />
   </EntityType>
   <EntityType Name="ExpertSubject">
     <Key>
@@ -490,6 +496,11 @@
       <End Role="Solution" EntitySet="Solution" />
       <End Role="SolutionImages" EntitySet="SolutionImages" />
     </AssociationSet>
+    <EntitySet Name="Role" EntityType="EducationSystemDBModel.Role" />
+    <AssociationSet Name="FK_Expert_Role" Association="EducationSystemDBModel.FK_Expert_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Expert" EntitySet="Expert" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="SolutionImages">
     <Key>
@@ -510,6 +521,26 @@
       </Principal>
       <Dependent Role="SolutionImages">
         <PropertyRef Name="SolutionCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="RoleCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Expert" Relationship="EducationSystemDBModel.FK_Expert_Role" FromRole="Role" ToRole="Expert" />
+  </EntityType>
+  <Association Name="FK_Expert_Role">
+    <End Type="EducationSystemDBModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="EducationSystemDBModel.Expert" Role="Expert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleCode" />
+      </Principal>
+      <Dependent Role="Expert">
+        <PropertyRef Name="RoleCode" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -25,6 +25,7 @@ namespace EducationSystem.Models
         public string Name { get; set; }
         public int MaxScore { get; set; }
         public int SubjectTaskCode { get; set; }
+        public int Number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GraduateAnswer> GraduateAnswer { get; set; }

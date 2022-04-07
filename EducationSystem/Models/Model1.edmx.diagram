@@ -40,6 +40,8 @@
         <AssociationConnector Association="EducationSystemDBModel.Номер_варианта___Вариант" ManuallyRouted="false" />
         <EntityTypeShape EntityType="EducationSystemDBModel.SolutionImages" Width="1.5" PointX="17" PointY="13.75" />
         <AssociationConnector Association="EducationSystemDBModel.FK_SolutionImages_Solution" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Role" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="EducationSystemDBModel.FK_Expert_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
