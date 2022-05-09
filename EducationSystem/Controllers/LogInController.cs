@@ -1,8 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using EducationSystem.Helpers;
 using EducationSystem.Models;
 using EducationSystem.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EducationSystem.Controllers
 {
@@ -33,32 +39,38 @@ namespace EducationSystem.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult LogIn(LogInVM model)
         {
             if (ModelState.IsValid)
             {
-                var user = db.Expert.Where(x => x.Login == model.Login).FirstOrDefault();
-
-                if (user != null)
+                using (EducationSystemDB context = new EducationSystemDB())
                 {
-                    var hash = FormsAuthentication.HashPasswordForStoringInConfigFile($"{model.Password}{user.Salt}",
-                        "SHA1").ToLower();
-                    if (user.Password == hash)
+                    var user = context.Expert.FirstOrDefault(x => x.Login == model.Login);
+                    
+                    if (user != null)
                     {
-                        FormsAuthentication.SetAuthCookie(model.Login, true);
-                        if (User.Identity.IsAuthenticated)
+                        var hash = FormsAuthentication.HashPasswordForStoringInConfigFile($"{model.Password}{user.Salt}",
+                            "SHA1").ToLower();
+                        if (user.Password == hash)
                         {
-                            var r = "da";
-                            var f = User.Identity.Name;
-                        }
-                        return RedirectToAction("Index", "Home");
-                    }
+                            var role = context.Role.Where(x => x.RoleCode == user.RoleCode).FirstOrDefault().Name;
 
-                    ModelState.AddModelError("", "Неправильный логин или пароль");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Неправильный логин или пароль");
+                            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket
+                                (1, user.Login, DateTime.Now, DateTime.Now.AddDays(1), false, role);
+
+                            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                            HttpContext.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
+
+                            return RedirectToAction("Index", "Home");
+                        }
+
+                        ModelState.AddModelError("", "Неправильный логин или пароль");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Неправильный логин или пароль");
+                    }
                 }
             }
 

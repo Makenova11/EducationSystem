@@ -1,21 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EducationSystem.ViewModels
 {
     public class SubjectVM
     {
-        public SubjectVM()
-        {
-            Examination = new HashSet<ExaminationVM>();
-            ExpertSubject = new HashSet<ExpertSubjectVM>();
-            SubjectTask = new HashSet<SubjectTaskVM>();
-        }
-
         public int SubjectCode { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Наименование не может быть больше 50 символов")]
         public string Name { get; set; }
+
         public int Class { get; set; }
-        public virtual ICollection<ExaminationVM> Examination { get; set; }
-        public virtual ICollection<ExpertSubjectVM> ExpertSubject { get; set; }
-        public virtual ICollection<SubjectTaskVM> SubjectTask { get; set; }
     }
 }

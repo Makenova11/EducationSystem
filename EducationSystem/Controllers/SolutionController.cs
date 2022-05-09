@@ -80,10 +80,11 @@ namespace EducationSystem.Controllers
                 {
                     imageData = binaryReader.ReadBytes(SolutionImageList[0].ContentLength);
                 }
+
                 // Этап добавления Solution
                 solution.SolutionImage = imageData;
                 SolutionImageList.RemoveAt(0);
-                db.Solution.Add(solution); 
+                db.Solution.Add(solution);
                 db.SaveChanges();
                 var solutionCode = db.Solution.Where(x => x.SolutionCode == solution.SolutionCode)
                     .Select(c => c.SolutionCode).FirstOrDefault();

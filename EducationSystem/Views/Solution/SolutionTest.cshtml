@@ -7,7 +7,7 @@
 
 <section class="section-solution-test">
     <div class="container-subj-photo-task">
-        <figure  class="figure-question figure-photo-task">
+        <figure class="figure-question figure-photo-task">
             <div id="figure-img-task">
                 @Html.Raw("<img 'id='zoom_01' class='main-photo-task' src=\"data:image/jpeg;base64,"
                           + Convert.ToBase64String(ViewBag.FirstImage) + "\" />")
@@ -24,7 +24,7 @@
             }
         </ul>
     </div>
-    
+
     <div class="section-solution-test_check-panel">
         <ul class="check-panel_list list-group">
             <li class="check-panel_item list-group-item">
@@ -39,7 +39,6 @@
                         <option value="3">3 балла</option>
                     </select>
 
-                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
                 </div>
             </li>
             <li class="check-panel_item list-group-item">
@@ -54,7 +53,6 @@
                         <option value="3">3 балла</option>
                     </select>
 
-                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
                 </div>
             </li>
             <li class="check-panel_item list-group-item">
@@ -69,7 +67,6 @@
                         <option value="3">3 балла</option>
                     </select>
 
-                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
                 </div>
             </li>
             <li class="check-panel_item list-group-item">
@@ -84,7 +81,6 @@
                         <option value="3">3 балла</option>
                     </select>
 
-                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
                 </div>
             </li>
             <li class="check-panel_item list-group-item">
@@ -99,10 +95,11 @@
                         <option value="3">3 балла</option>
                     </select>
 
-                    <button class="section-solution-test_btn btn btn-info">Показать критерий</button>
+                    @*<button class="section-solution-test_btn btn btn-info">Показать критерий</button>*@
                 </div>
             </li>
         </ul>
+        <button class="section-solution-test_btn-send btn btn-success">Скачать критерий</button>
         <button class="section-solution-test_btn-send btn btn-success">Отправить</button>
     </div>
 </section>
@@ -110,15 +107,16 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {                 // Ждём загрузки страницы
-        let selects = $("select");
-        $(".section-solution-test_btn-send").click(function () {
+    $(document).ready(function() { // Ждём загрузки страницы
+        const selects = $("select");
+        $(".section-solution-test_btn-send").click(function() {
 
-            let options = $('select');
+            const options = $('select');
 
-            let values = $.map(options ,function(option) {
-                return option.value;
-            });
+            const values = $.map(options,
+                function(option) {
+                    return option.value;
+                });
             console.log(values);
             $("select").each(function() {
                 if ($(this).val() == 1) {
@@ -161,35 +159,35 @@
             $(".main-photo-task").attr('src', src);
         });
 
-        $(".section-solution-test_btn").click(function () {
+        $(".section-solution-test_btn").click(function() {
             const src = $(".photo-task").attr('src'); // Достаем из этого изображения путь до картинки
             $("body").append(`<div class='popup'><div class='popup_bg'></div><img src=${src} class='popup_img' /></div>`);
-            $(".popup").fadeIn(300);                // Медленно выводим изображение
-            $(".popup_bg").click(function () {      // Событие клика на затемненный фон
-                $(".popup").fadeOut(300);           // Медленно убираем всплывающее окно
-                setTimeout(function () {            // Выставляем таймер
-                        $(".popup").remove();           // Удаляем разметку всплывающего окна
+            $(".popup").fadeIn(300); // Медленно выводим изображение
+            $(".popup_bg").click(function() { // Событие клика на затемненный фон
+                $(".popup").fadeOut(300); // Медленно убираем всплывающее окно
+                setTimeout(function() { // Выставляем таймер
+                        $(".popup").remove(); // Удаляем разметку всплывающего окна
                     },
                     300);
             });
         });
 
-        $(".main-photo-task").click(function() {            // Событие клика на маленькое изображение
-            const img = $(this);                            // Получаем изображение, на которое кликнули
-            const src = img.attr('src');                    // Достаем из этого изображения путь до картинки
+        $(".main-photo-task").click(function() { // Событие клика на маленькое изображение
+            const img = $(this); // Получаем изображение, на которое кликнули
+            const src = img.attr('src'); // Достаем из этого изображения путь до картинки
             $("body").append(`<div class='popup'><div class='popup_bg'></div><img src=${src} class='popup_img' /></div>`);
-            $(".popup").fadeIn(500);                        // Медленно выводим изображение
-            $(".popup_bg").click(function() {               // Событие клика на затемненный фон
-                $(".popup").fadeOut(500);                   // Медленно убираем всплывающее окно
-                setTimeout(function() {                     // Выставляем таймер
-                        $(".popup").remove();               // Удаляем разметку всплывающего окна
+            $(".popup").fadeIn(500); // Медленно выводим изображение
+            $(".popup_bg").click(function() { // Событие клика на затемненный фон
+                $(".popup").fadeOut(500); // Медленно убираем всплывающее окно
+                setTimeout(function() { // Выставляем таймер
+                        $(".popup").remove(); // Удаляем разметку всплывающего окна
                     },
                     500);
             });
         });
 
         $(".popup_img").click(function() {
-            $(".popup_img").style("transform", "scale(1.5)")
+            $(".popup_img").style("transform", "scale(2)");
         });
     });
 

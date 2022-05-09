@@ -159,7 +159,7 @@ namespace EducationSystem.Controllers
                             task.CriterionFile,
                             subTask3.SubjectName
                         })
-                   .ToListAsync();
+                    .ToListAsync();
             //ViewBag.result = result;
             return View(ViewBag.result);
         }

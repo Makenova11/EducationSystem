@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI;
 using EducationSystem.Models;
 
 namespace EducationSystem.Helpers
@@ -20,7 +19,6 @@ namespace EducationSystem.Helpers
         /// <returns> MvcHtmlString </returns>
         public static MvcHtmlString CreateSubjectList(int subjCode, object htmlAttributes = null)
         {
-          
             var db = new EducationSystemDB();
             var items = db.SubjectTask.Where(c => c.SubjectCode == subjCode).ToArray();
             var ul = new TagBuilder("ul");
@@ -38,7 +36,6 @@ namespace EducationSystem.Helpers
                 li.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
             }
 
-            
 
             return MvcHtmlString.Create(ul.ToString());
         }
@@ -74,7 +71,7 @@ namespace EducationSystem.Helpers
             //Ищем нужный нам SolutionCode.
             var SolutionCodeList = db.Solution.Where(x => x.TaskCode == TaskCode).ToList();
             var solutionCode = SolutionCodeList[--arrayNumber].SolutionCode;
-            TagBuilder a = new TagBuilder("a");
+            var a = new TagBuilder("a");
             a.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
             a.AddCssClass("link"); // в теге <a> делаем ссылку на задание(solution)
             a.MergeAttribute("href", $"/Solution/SolutionTest?SolutionCode={solutionCode}");

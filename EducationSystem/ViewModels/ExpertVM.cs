@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EducationSystem.ViewModels
 {
-    public class ExpertVM
+    public class ExpertVM : IdentityUser
     {
         public ExpertVM()
         {
@@ -15,6 +16,14 @@ namespace EducationSystem.ViewModels
         public string Patronymic { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+
         public virtual ICollection<ExpertSubjectVM> ExpertSubject { get; set; }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

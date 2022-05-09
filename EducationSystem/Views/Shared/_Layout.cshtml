@@ -1,405 +1,419 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Education system</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    @*<script type="text/javascript" src="~/Views/Shared/jquery-3.3.1.min.js"></script>*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
+
         .body {
             margin: 0 auto;
             padding: 0;
         }
+
         .header {
-            height: 100px;
+            align-items: center;
             background-color: #77FAAD;
             display: flex;
-            align-items: center;
+            height: 100px;
         }
 
-        .container {
-            width: 1300px;
-        }
+        .container { width: 1300px; }
+
         .header-container {
-            display: flex;
             align-items: center;
+            display: flex;
             font-size: 14pt;
         }
+
         .header-link-main {
+            border: 1px solid black;
+            border-radius: 7px;
+            font-size: 18pt;
             left: auto;
-            font-size: 18pt;
-            border: 1px solid black;
-            border-radius: 7px;
             padding: 5px 15px;
         }
+
         .header-link-main:hover, .header-link-criteria:hover {
+            background-color: #43f78e;
+            border-color: black;
+            color: black;
             text-decoration: none;
-            color:black;
-            border-color:black;
-            background-color:lightgray;
         }
+
+        .header-link-main:active, .header-link-criteria:active {
+            background-color: rgba(67, 247, 142, 0.5)
+        }
+
         .header-link-criteria {
-            font-size: 18pt;
             border: 1px solid black;
             border-radius: 7px;
-            padding: 5px 15px;
+            font-size: 18pt;
             margin-left: 15px;
+            padding: 5px 15px;
         }
+
         .header-login {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            flex-direction: row;
             margin-left: auto;
         }
+
+        .login-out {
+            color: #4f4f4f
+        }
+
         .linkStr {
             color: black;
             text-decoration: none;
         }
-        .linkStr:hover {
-            text-decoration: none;
-        }
-        .linkStr:link {
-            text-decoration: none;
-        }
+
+        .linkStr:hover { text-decoration: none; }
+
+        .linkStr:link { text-decoration: none; }
 
 
-        .main {
-            display: flex;
-        }
+        .main { display: flex; }
+
         .main-hero-content {
-            margin-top: 50px;
             display: flex;
+            margin-top: 50px;
         }
+
         .main-hero-text {
             border: 1px solid black;
             border-radius: 10px;
             font-size: 25px;
-            padding: 15px 25px;
-            width: 370px;
-            margin: 0;
-            text-align: center;
             line-height: 40px;
+            margin: 0;
+            padding: 15px 25px;
+            text-align: center;
+            width: 370px;
         }
+
         .main-choice {
-            display: flex;
-            margin-left: auto;
-            font-size: 22pt;
-            display: flex;
-            width: 450px;
-            height: 550px;
             align-items: flex-end;
+            display: flex;
+            display: flex;
+            font-size: 22pt;
+            height: 550px;
             justify-content: space-around;
+            margin-left: auto;
             padding-bottom: 60px;
             position: relative;
+            width: 450px;
         }
+
         .linkStrAccor {
-            display: block;
             background-color: white;
-            width: 250px;
+            display: block;
             text-align: center;
+            width: 250px;
         }
+
         .linkStrAccor1::before {
-            content: " ";
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 50%;
-            bottom: 0;
             background: url(../../Source/img/lecture-in-college1.jpg) no-repeat;
             background-size: cover;
-            z-index: -5;
-        }
-        .linkStrAccor1::after {
+            bottom: 0;
             content: " ";
+            left: 0;
             position: absolute;
             right: 50%;
             top: 0;
-            left: 0;
+            z-index: -5;
+        }
+
+        .linkStrAccor1::after {
             bottom: 0;
+            content: " ";
+            left: 0;
+            position: absolute;
+            right: 50%;
+            top: 0;
             @* background: rgba(0,0,0,.25); *@
         }
+
         .linkStrAccor1:hover:before {
+            background-image: url(../../Source/img/lecture-in-college2.jpg);
+            background-size: cover;
+            bottom: 0;
             content: " ";
+            left: 0;
             position: absolute;
             right: 30%;
             top: 0;
-            left: 0;
-            bottom: 0;
-            background-image: url(../../Source/img/lecture-in-college2.jpg);
-            background-size: cover;
-            z-index: -4;
             transition: 0.1s ease;
+            z-index: -4;
         }
+
         .linkStrAccor2::before {
-            content: " ";
-            position: absolute;
-            left: 50%;
-            top: 0;
-            right: 0;
-            bottom: 0;
             background: url(../../Source/img/classroom-in-an-exam1.jpg) no-repeat;
             background-size: cover;
+            bottom: 0;
+            content: " ";
+            left: 50%;
+            position: absolute;
+            right: 0;
+            top: 0;
             z-index: -5;
         }
+
         .linkStrAccor2::after {
+            bottom: 0;
             content: " ";
+            left: 50%;
             position: absolute;
             right: 0;
             top: 0;
-            left: 50%;
-            bottom: 0;
             @* background: rgba(0,0,0,.25); *@
         }
+
         .linkStrAccor2:hover:before {
-            content: " ";
-            position: absolute;
-            right: 0;
-            top: 0;
-            left: 30%;
-            bottom: 0;
             background-image: url(../../Source/img/classroom-in-an-exam2.jpg);
             background-size: cover;
-            z-index: -4;
-            transition: 0.1s ease;
-        }
-
-        .insert-btn {
-            margin-top: 20px;
-        }
-
-        .li-subj-task {
-            position: relative;
-        }
-        .link-subj-task::after {
-            position: absolute;
-            content: "";
-            top: 0;
             bottom: 0;
+            content: " ";
+            left: 30%;
+            position: absolute;
             right: 0;
+            top: 0;
+            transition: 0.1s ease;
+            z-index: -4;
+        }
+
+        .insert-btn { margin-top: 20px; }
+
+        .li-subj-task { position: relative; }
+
+        .link-subj-task::after {
+            bottom: 0;
+            content: "";
             left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
         }
 
         .accordion {
             display: flex;
             justify-content: flex-start;
-            margin-top: 10px;
             margin-bottom: 20px;
+            margin-top: 10px;
+            overflow: hidden;
             /* относительное позиционирование */
             padding: 0;
-            overflow: hidden;
         }
-        .accordion li {
-            width: 270px;
-        }
-        .accordion-item {
-            margin-right: 93px;
-        }
+
+        .accordion li { width: 270px; }
+
+        .accordion-item { margin-right: 93px; }
+
         /* заголовки панелей аккордеона */
+
         .accordion h2 {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            border: 1px solid #828282;
+            border-radius: 10px;
+            box-sizing: border-box;
+            color: #4F4F4F;
+            cursor: pointer;
+            display: block;
             font-size: 18px;
             font-weight: 400;
             letter-spacing: 1px;
-            display: block;
             margin: 0;
             padding: 10px 40px;
-            cursor: pointer;
-            color: #4F4F4F;
-            border: 1px solid #828282;
-            border-radius: 10px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
         }
 
         /* Формируем блоки с содержанием */
+
         .msg {
-            position: relative;
-            overflow: hidden;
             opacity: 1;
+            overflow: hidden;
+            position: relative;
             transform: translate(0, 0);
         }
 
         /* оформляем параграфы */
+
         .msg li {
             color: rgba(48, 69, 92, 0.8);
             font-size: 16px;
-            line-height: 2.5;
             letter-spacing: 1px;
+            line-height: 2.5;
             padding: 10px 20px;
             text-align: center;
         }
 
         /* Формируем неупорядоченный список */
+
         .accordion ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            margin: 0 0 10px 0;
+            align-items: baseline;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
-            align-items: baseline;
+            list-style: none;
+            margin: 0;
+            margin: 0 0 10px 0;
+            padding: 0;
         }
 
         /* Определяем и формируем отдельный элемент списка
         * в который поместим скрытый флажек,
         * заголовок панелей и блок с содержанием
         */
+
         .accordion ul li {
-            position: relative;
-            padding: 0;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            padding: 0;
+            position: relative;
         }
-        .accordion li:not(:last-child) {
-            margin-bottom: 20px;
-        }
+
+        .accordion li:not(:last-child) { margin-bottom: 20px; }
+
         /*.accordion .accordion-item {
             margin-right: 12px;
         }*/
-        .msg ul {
-            margin: 0;
-        }
+
+        .msg ul { margin: 0; }
+
         /* устанавливаем время ожидания перед воспроизведением анимации
         * на основе нумерации в дереве элементов
         */
-        .accordion ul li:nth-of-type(1) {
-            animation-delay: 0.5s;
-        }
-        .accordion ul li:nth-of-type(2) {
-            animation-delay: 0.75s;
-        }
-        .accordion ul li:nth-of-type(3) {
-            animation-delay: 1s;
-        }
-        .accordion ul li:last-of-type {
-            padding-bottom: 0;
-        }
+
+        .accordion ul li:nth-of-type(1) { animation-delay: 0.5s; }
+
+        .accordion ul li:nth-of-type(2) { animation-delay: 0.75s; }
+
+        .accordion ul li:nth-of-type(3) { animation-delay: 1s; }
+
+        .accordion ul li:last-of-type { padding-bottom: 0; }
 
         /* Сформируем  указатель переключения состояния аккордеона */
+
         .accordion ul li i {
-            position: absolute;
-            transform: translate(-6px, 0);
-            margin-top: 16px;
             /* расположим указатель на панели заголовка справа */
             left: 25px;
+            margin-top: 16px;
+            position: absolute;
+            transform: translate(-6px, 0);
         }
 
         /* "Рисуем " сам указатель */
+
         .accordion ul li i:before, .accordion ul li i:after {
-            content: "";
-            position: absolute;
             background-color: #A1A1A1;
-            width: 3px;
+            content: "";
             height: 9px;
-        }
-        /* Добавляем элемент трансформации указателя при переключении */
-        .accordion ul li i:before {
-            transform: translate(-2px, 0) rotate(45deg);
-        }
-        .accordion ul li i:after {
-            transform: translate(2px, 0) rotate(-45deg);
+            position: absolute;
+            width: 3px;
         }
 
+        /* Добавляем элемент трансформации указателя при переключении */
+
+        .accordion ul li i:before { transform: translate(-2px, 0) rotate(45deg); }
+
+        .accordion ul li i:after { transform: translate(2px, 0) rotate(-45deg); }
+
         /* Делаем чекбокс скрытым*/
+
         .accordion ul li input[type=checkbox] {
-            position: absolute;
             cursor: pointer;
-            width: 100%;
             height: 100%;
             margin: 0;
-            padding: 0;
             opacity: 0;
+            padding: 0;
+            position: absolute;
+            width: 100%;
         }
+
         /* Когда у флажка установлен checked блок с содержанием скрыт */
+
         .accordion ul li input[type=checkbox]:checked ~ div.msg {
             margin-top: 0;
             max-height: 0;
             opacity: 0;
             transform: translate(0, 50%);
         }
+
         /* А указатель показывает вниз */
-        .accordion ul li input[type=checkbox]:checked ~ i:before {
-            transform: translate(2px, 0) rotate(45deg);
-        }
-        .accordion ul li input[type=checkbox]:checked ~ i:after {
-            transform: translate(-2px, 0) rotate(-45deg);
-        }
+
+        .accordion ul li input[type=checkbox]:checked ~ i:before { transform: translate(2px, 0) rotate(45deg); }
+
+        .accordion ul li input[type=checkbox]:checked ~ i:after { transform: translate(-2px, 0) rotate(-45deg); }
+
         /*  Устанавливаем эффект перехода между двумя состояниями указателя */
-        div.msg, ul li i:before, ul li i:after {
-            transition: all 0.5s ease-in-out;
-        }
-        .container-main-list {
-            padding: 0;
-        }
-        .title-for-all-subject {
-            margin-left: 15px;
-        }
+
+        div.msg, ul li i:before, ul li i:after { transition: all 0.5s ease-in-out; }
+
+        .container-main-list { padding: 0; }
+
+        .title-for-all-subject { margin-left: 15px; }
+
         .pen-icon {
+            border-radius: 10px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
             display: block;
+            line-height: 0;
             padding: 0;
             position: absolute;
             right: -45px;
             top: 0;
-            line-height: 0;
-            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
-            border-radius: 10px;
         }
+
         .plus-icon {
-            width: 40px;
-            height: 40px;
-            text-align: center;
-            font-weight: 900;
-            margin: 0;
-            font-size: 30px;
-            font-family: roboto;
+            border-radius: 14px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+            color: #828282;
             display: block;
+            font-family: roboto;
+            font-size: 30px;
+            font-weight: 900;
+            height: 40px;
+            line-height: 40px;
+            margin: 0;
             padding: 0;
             position: absolute;
             right: -92px;
+            text-align: center;
+            text-decoration: none;
             top: 0;
-            line-height: 40px;
-            text-decoration: none;
-            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
-            border-radius: 14px;
-            color: #828282;
-        }
-        .plus-icon:hover {
-            text-decoration: none;
-        }
-        .plus-icon:active {
-            text-decoration: none;
-        }
-        .plus-icon:focus {
-            text-decoration: none;
+            width: 40px;
         }
 
+        .plus-icon:hover { text-decoration: none; }
+
+        .plus-icon:active { text-decoration: none; }
+
+        .plus-icon:focus { text-decoration: none; }
+
         .info-plus-icon-disable {
-            width: 40px;
-            height: 40px;
-            text-align: center;
+            border-radius: 14px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+            color: #828282;
+            display: block;
+            font-family: roboto;
+            font-size: 30px;
             font-weight: 900;
+            height: 40px;
+            line-height: 40px;
             margin: 0;
             margin-left: 20px;
-            font-size: 30px;
-            font-family: roboto;
-            display: block;
             padding: 0;
-            line-height: 40px;
-            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
-            border-radius: 14px;
-            color: #828282;
+            text-align: center;
+            width: 40px;
         }
-        .info-pen-icon-disable {
-            margin-left: 20px;
-        }
+
+        .info-pen-icon-disable { margin-left: 20px; }
+
         .pen-info, .plus-info {
             display: flex;
             flex-direction: row;
@@ -407,185 +421,186 @@
             line-height: 40px;
         }
 
-        .pen-label, .plus-label {
-            margin: 0;
-        }
+        .pen-label, .plus-label { margin: 0; }
 
 
-        .add-question {
-            margin-top: 10px;
-        }
+        .add-question { margin-top: 10px; }
+
         .question-number {
+            align-items: center;
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
-            align-items: center;
         }
+
         .question-number-list {
-            list-style: none;
+            align-items: center;
+            border-bottom: 1px solid grey;
             display: flex;
             flex-wrap: wrap;
+            list-style: none;
             padding: 0;
-            border-bottom: 1px solid grey;
-            align-items: center;
         }
+
         .question-number-item {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
             background-color: #77FAAD;
-            text-align: center;
+            border-radius: 5px;
+            height: 40px;
             line-height: 40px;
             margin-bottom: 10px;
-            margin-right: 5px;
             margin-left: 5px;
+            margin-right: 5px;
+            position: relative;
+            text-align: center;
+            width: 40px;
         }
+
         .link-quad-task::after {
-            position: absolute;
-            content: "";
-            top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
+            content: "";
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
         }
+
         .button-question {
-            padding: 5px 10px;
+            background-color: aquamarine;
             border-radius: 7px;
             cursor: pointer;
-            background-color: aquamarine;
+            padding: 5px 10px;
         }
-        .figure-question {
-            margin-bottom: 20px;
-        }
-        .btn-show-all {
-            margin-bottom: 20px;
-        }
-        .buttons-for-slide {
-            margin-top: 20px;
-        }
-        .question-prev {
-            margin-right: 50px;
-        }
-        .listquery li:nth-child(n+6) {
-            display: none;
-        }
+
+        .figure-question { margin-bottom: 20px; }
+
+        .btn-show-all { margin-bottom: 20px; }
+
+        .buttons-for-slide { margin-top: 20px; }
+
+        .question-prev { margin-right: 50px; }
+
+        .listquery li:nth-child(n + 6) { display: none; }
+
         .showother {
+            background: #fc0;
             cursor: pointer;
             display: inline-block;
-            text-align: center;
             padding: 10px;
-            background: #fc0;
+            text-align: center;
         }
 
         .container-subj-photo-task {
-            width: 600px;
             margin-right: 150px;
+            width: 600px;
         }
+
         .figure-photo-task {
-            margin: 0;
-            max-width: 600px;
-            height: 400px;
+            align-items: center;
             border: 1px solid #77faad;
             display: flex;
+            height: 400px;
             justify-content: center;
-            align-items: center;
+            margin: 0;
+            max-width: 600px;
         }
 
         .list-subj-mini-photo-task {
-            margin-top: 20px;
-            list-style: none;
             display: flex;
             justify-content: flex-start;
+            list-style: none;
+            margin-top: 20px;
             padding: 0;
         }
+
         .item-subj-mini-photo-task {
-            height: 70px;
-            cursor: pointer;
             box-shadow: inset 0 0 0 1px #ccc;
+            cursor: pointer;
+            height: 70px;
         }
 
         .main-photo-task {
-            max-width: 380px;
             max-height: 380px;
+            max-width: 380px;
         }
 
-        .item-subj-mini-photo-task:not(:last-child) {
-            margin-right: 15px;
-        }
+        .item-subj-mini-photo-task:not(:last-child) { margin-right: 15px; }
+
         .photo-task {
-            width: 70px;
             height: 70px;
+            width: 70px;
         }
 
-        body {
-            margin:0;
-        }
+        body { margin: 0; }
 
         .image {
-            margin:30px;
-            float:left;
-            cursor:pointer;
-            max-height:100px;
+            cursor: pointer;
+            float: left;
+            margin: 30px;
+            max-height: 100px;
         }
 
         .popup {
+            display: none;
+            height: 100%;
+            left: 0;
             position: absolute;
-            height:100%;
-            width:100%;
-            top:0;
-            left:0;
-            display:none;
-            text-align:center;
+            text-align: center;
+            top: 0;
+            width: 100%;
         }
 
         .popup_bg {
-            background:rgba(0,0,0,0.4);
-            position:absolute;
-            z-index:1;
-            height:100%;
-            width:100%;
+            background: rgba(0, 0, 0, 0.4);
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            z-index: 1;
         }
 
 
         .popup_img {
+            margin: 0 auto;
+            margin: 1% 0 0 0;
+            max-height: 100%;
+            max-width: 100%;
             position: relative;
-            margin:0 auto;
-            z-index:2;
-            max-height:100%;
-            max-width:100%;
-            margin:1% 0 0 0;
+            z-index: 2;
         }
 
         /*section-solution-test*/
+
         .section-solution-test {
-            padding-top: 40px;
             display: flex;
             justify-content: space-between;
+            padding-top: 40px;
         }
-        .section-solution-test_check-panel {
-            margin-left: 20px;
-        }
+
+        .section-solution-test_check-panel { margin-left: 20px; }
+
         .section-solution-test_label-select {
-            margin: 0;
             cursor: pointer;
             line-height: 32px;
+            margin: 0;
         }
+
         .section-solution-test_select-points {
-            margin-left: 15px;
-            margin-right: 15px;
             cursor: pointer;
             height: 32px;
+            margin-left: 15px;
+            margin-right: 15px;
         }
+
         .section-solution-test_check-panel-choice {
-            display: flex;
             align-items: center;
+            display: flex;
         }
+
         .section-solution-test_btn {
             background-color: #77faad;
-            color: #4f4f4f;
             border: #77faad;
+            color: #4f4f4f;
         }
+
         .section-solution-p {
             margin: 0;
             padding: 10px;
@@ -597,120 +612,128 @@
             flex-direction: column;
             margin-bottom: 5px;
         }
-        .input-form-tasks {
-            margin-bottom: 5px;
-        }
-        .listSolutionGroupInput {
-            margin-bottom: 20px;
-        }
+
+        .input-form-tasks { margin-bottom: 5px; }
+
+        .listSolutionGroupInput { margin-bottom: 20px; }
 
         @@media (min-width: 1700px) {
-            .container {
-                width: 1500px;
-            }
+            .container { width: 1500px; }
+
             .header-login_img {
-                width: 50px;
                 height: 50px;
-            }
-            .header-link-main, .header-link-criteria {
-                font-size: 28px;
-            }
-            .header-login_link {
-                font-size: 25px;
-            }
-            .main-hero-content {
-                margin-top: 110px;
-            }
-            .header {
-                height: 120px;
-            }
-            .main-hero-text {
-                width: 560px;
-                font-size: 35px;
-                line-height: 1.2
-            }
-            .main-choice {
-                width: 500px;
-                height: 600px;
-            }
-            .linkStrAccor {
-                width: 350px;
-                font-size: 40px;
+                width: 50px;
             }
 
-            .container-subj-photo-task {
-                width: 800px;
+            .header-link-main, .header-link-criteria { font-size: 28px; }
+
+            .header-login_link { font-size: 25px; }
+
+            .main-hero-content { margin-top: 110px; }
+
+            .header { height: 120px; }
+
+            .main-hero-text {
+                font-size: 35px;
+                line-height: 1.2;
+                width: 560px;
             }
+
+            .main-choice {
+                height: 600px;
+                width: 500px;
+            }
+
+            .linkStrAccor {
+                font-size: 40px;
+                width: 350px;
+            }
+
+            .container-subj-photo-task { width: 800px; }
+
             .figure-photo-task {
-                margin: 0;
-                max-width: 800px;
-                min-height: 600px;
+                align-items: center;
                 border: 1px solid #77faad;
                 display: flex;
                 justify-content: center;
-                align-items: center;
+                margin: 0;
+                max-width: 800px;
+                min-height: 600px;
             }
+
             .main-photo-task {
-                max-width: 580px;
                 max-height: 580px;
+                max-width: 580px;
             }
         }
 
-        .button-tasks {
-            margin-left: 10px;
-        }
-        .rem {
-            margin-left: 10px;
-        }
+        .button-tasks { margin-left: 10px; }
+
+        .rem { margin-left: 10px; }
+
         .listSubjects {
             display: flex;
             flex-direction: column;
         }
+
+        .fz-18 {
+            font-size: 18pt;
+        }
     </style>
 </head>
 <body class="body">
-    <header class="header">
-        <div class="container header-container">
-            <a>@Html.ActionLink("Главная", "Index", "Home", null, new { @class = "header-link-main linkStr" })</a>
-            <div class="header-login">
+<header class="header">
+    <div class="container header-container">
+        @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "header-link-main linkStr" })
+        <div class="header-login">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="header-login_link linkStr" style="margin-right: 10px;">@User.Identity.Name</a>
+            }
+            <div style="display: flex; flex-direction: column; align-items: center">
                 <img src="../../Source/img/loginImage.svg" class="header-login_img" alt="login" width="50px">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("Выход", "LogOut", "LogIn") </li>
-                    <li class="navbar-text">@User.Identity.Name</li>
-                        
+                    @Html.ActionLink("Выйти", "LogOut", "LogIn", new object(),
+                        new { @class = "linkStr fz-18" })
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Вход", "LogIn", "LogIn") </li>
+                    @Html.ActionLink("Войти", "LogIn", "LogIn", new object(),
+                        new { @class = "linkStr fz-18" })
                 }
-                <a href="#" class="header-login_link linkStr">Войти</a>
+                @*<a href="#" class="header-login_link linkStr">Войти</a>*@
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <main class="main">
-        <div class="container body-content">
-            @RenderBody()
-        </div>
-    </main>
+<main class="main">
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+</main>
 
-    
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", false)
 <script>
 
-    jQuery(document).ready(function($){
-        if ($('ul.listquery').find('li').length > 5){
-            $('#showother').click(function(){
+    jQuery(document).ready(function($) {
+        if ($('ul.listquery').find('li').length > 5) {
+            $('#showother').click(function() {
                 $('ul.listquery li:nth-child(n+6)').slideToggle('');
                 $(this).toggleClass('opnd_g');
-                if($(this).hasClass('opnd_g')){
-                    $(this).html('Скрыть');}
-                else {$(this).html('Смотреть все');}
+                if ($(this).hasClass('opnd_g')) {
+                    $(this).html('Скрыть');
+                } else {
+                    $(this).html('Смотреть все');
+                }
             });
-        } else { $('#showother').hide();}
+        } else {
+            $('#showother').hide();
+        }
     });
 </script>
 </body>

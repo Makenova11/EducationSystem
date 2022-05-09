@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using EducationSystem.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -26,7 +23,7 @@ namespace EducationSystem.Helpers
 
             // создаем пользователей
             var admin = new ApplicationUser { Email = "somemail@mail.ru", UserName = "somemail@mail.ru" };
-            string password = "ad46D_ewr3";
+            var password = "ad46D_ewr3";
             var result = userManager.Create(admin, password);
 
             // если создание пользователя прошло успешно
@@ -40,6 +37,4 @@ namespace EducationSystem.Helpers
             base.Seed(context);
         }
     }
-
-
 }

@@ -6,7 +6,7 @@ namespace EducationSystem.ViewModels
     {
         public TaskVM()
         {
-            Solution = new HashSet<SolutionVM>();
+            //Solution = new HashSet<SolutionVM>();
         }
 
         public long TaskCode { get; set; }
@@ -18,8 +18,8 @@ namespace EducationSystem.ViewModels
         public int SubjectTaskCode { get; set; }
         public string Name { get; set; }
 
-        public virtual EventVM Event { get; set; }
-        public virtual ICollection<SolutionVM> Solution { get; set; }
-        public virtual SubjectTaskVM SubjectTask { get; set; }
+        //public virtual EventVM Event { get; set; }
+        //public virtual ICollection<SolutionVM> Solution { get; set; }
+        //public virtual SubjectTaskVM SubjectTask { get; set; }
     }
 }

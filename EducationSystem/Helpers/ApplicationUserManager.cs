@@ -9,13 +9,15 @@ namespace EducationSystem.Helpers
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
-             : base(store)
+            : base(store)
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
+            IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager =
+                new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Настройка логики проверки имен пользователей
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -30,7 +32,7 @@ namespace EducationSystem.Helpers
                 RequireNonLetterOrDigit = true,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = true
             };
 
             // Настройка параметров блокировки по умолчанию
@@ -40,22 +42,21 @@ namespace EducationSystem.Helpers
 
             // Регистрация поставщиков двухфакторной проверки подлинности. Для получения кода проверки пользователя в данном приложении используется телефон и сообщения электронной почты
             // Здесь можно указать собственный поставщик и подключить его.
-            manager.RegisterTwoFactorProvider("Код, полученный по телефону", new PhoneNumberTokenProvider<ApplicationUser>
-            {
-                MessageFormat = "Ваш код безопасности: {0}"
-            });
+            manager.RegisterTwoFactorProvider("Код, полученный по телефону",
+                new PhoneNumberTokenProvider<ApplicationUser>
+                {
+                    MessageFormat = "Ваш код безопасности: {0}"
+                });
             manager.RegisterTwoFactorProvider("Код из сообщения", new EmailTokenProvider<ApplicationUser>
             {
                 Subject = "Код безопасности",
                 BodyFormat = "Ваш код безопасности: {0}"
             });
-            
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
-            {
                 manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
-            }
             return manager;
         }
     }

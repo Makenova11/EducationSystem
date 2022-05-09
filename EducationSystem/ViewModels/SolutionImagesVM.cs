@@ -7,6 +7,6 @@
         public byte[] SolutionImage { get; set; }
         public int SolutionImageNumber { get; set; }
 
-        public virtual SolutionVM Solution { get; set; }
+        //public virtual SolutionVM Solution { get; set; }
     }
 }

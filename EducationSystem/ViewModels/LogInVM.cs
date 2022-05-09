@@ -3,19 +3,19 @@
 namespace EducationSystem.ViewModels
 {
     /// <summary>
-    /// ViewModel Авторизации в системе.
+    ///     ViewModel Авторизации в системе.
     /// </summary>
     public class LogInVM
     {
         /// <summary>
-        /// Логин.
+        ///     Логин.
         /// </summary>
         [Required]
         [StringLength(50, ErrorMessage = "Логин не может быть больше 50 символов")]
         public string Login { get; set; }
-        
+
         /// <summary>
-        /// Пароль.
+        ///     Пароль.
         /// </summary>
         [Required]
         [DataType(DataType.Password)]

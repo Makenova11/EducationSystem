@@ -1,65 +1,67 @@
-﻿@model EducationSystem.Models.Subject
-
+﻿@model EducationSystem.ViewModels.SubjectVM
 @{
     ViewBag.Title = "Create";
 }
 
-<h3>Добавление предмета @ViewBag.classNum класс</h3>
+<h3>Добавление предмета @Model.Class класс</h3>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "Предмет", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, "Предмет", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <hr/>
+
         <div class="form-horizontal">
-            <div class="form-group listSolutionGroup">
-                @Html.LabelFor(model => model.Name, "Номер задания", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10 listSolutionGroupInput" >
-                    <div class="listSolution" id="mylist">
-                        <input name="numTask[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="number" placeholder="0" />
-                    </div>
-                    <a id="addNum" class="addNum btn btn-default">+1</a>
+            <hr/>
+            @Html.ValidationSummary(true, "Предмет", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, "Предмет", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
-                
             </div>
-        </div>
+            <div class="form-horizontal">
+                <div class="form-group listSolutionGroup">
+                    @Html.LabelFor(model => model.Name, "Номер задания", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10 listSolutionGroupInput">
+                        <div class="listSolution" id="mylist">
+                            <input name="numTask[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="number" placeholder="0"/>
+                        </div>
+                        <a id="addNum" class="addNum btn btn-default">+1</a>
+                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Добавить" class="btn btn-default" />
+                </div>
             </div>
-        </div>
+            @Html.HiddenFor(model => model.Class, new { Model.Class })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Добавить" class="btn btn-default"/>
+                </div>
+            </div>
 
+        </div>
     </div>
 }
 
-
-
 <div>
-    @Html.ActionLink("Назад", "Index", new { numClass = ViewBag.classNum },new { @class = "btn btn-default" })
+    @Html.ActionLink("Назад", "Index", new { numClass = ViewBag.classNum }, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {
     <script>
-        $(function () {
+        $(function() {
             let i = 0;
-            $('.addNum').click(function () {
+            let n = i + 1;
+            $('.addNum').click(function() {
                 i++;
 
-                let elem = $("<input name='numTask[" + i + "]' " +
-                    "class='d-block input-form-tasks form-control col-md-2 mb-2' " +
-                    "type='number' placeholder='" + i + "'/>");
-                
+                const elem = $(`<input name='numTask[${i}]' class='d-block input-form-tasks form-control col-md-2 mb-2' type='number' placeholder='${n
+                    }'/>`);
+
                 $('#mylist').append(elem);
+                n++;
             });
         });
     </script>

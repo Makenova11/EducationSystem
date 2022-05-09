@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using EducationSystem.Models;
+using EducationSystem.ViewModels;
 
 namespace EducationSystem.Controllers
 {
@@ -40,46 +41,59 @@ namespace EducationSystem.Controllers
         /// <returns> ActionResult. </returns>
         public async Task<ActionResult> Create(int numClass, List<int> numTask)
         {
-            var subjects = await db.Subject.Where(c => c.Class == numClass).ToListAsync();
-            ViewBag.classNum = subjects.Select(c => c.Class).FirstOrDefault();
-            return View();
+            return View(new SubjectVM
+            {
+                Class = numClass,
+                Name = ""
+            });
         }
 
         /// <summary>
-        /// Добавление Subject и его SubjectTask-ов
+        ///     Добавление Subject и его SubjectTask-ов
         /// </summary>
-        /// <param name="subject"></param>
-        /// <param name="numClass"></param>
-        /// <param name="numTask"></param>
-        /// <returns></returns>
+        /// <param name="subject"> SubjectVM. </param>
+        /// <param name="numTask"> List заданий. </param>
+        /// <returns> Task<ActionResult> </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "SubjectCode,Name")] Subject subject, int numClass
-            , List<int> numTask)
+        public async Task<ActionResult> Create([Bind(Include = "SubjectCode,Name, Class")] SubjectVM subjectVM,
+            List<int> numTask)
         {
-            numTask.Distinct();
-            if (ModelState.IsValid)
+            try
             {
-                //Этап добавления Subject
-                subject.Class = numClass;
-                db.Subject.Add(subject);
-                await db.SaveChangesAsync();
-                var subjCode = await db.Subject.Where(x => x.SubjectCode == subject.SubjectCode)
-                    .Select(c => c.SubjectCode)
-                    .FirstOrDefaultAsync();
-                //Этап добавления SubjectTask по созданному Subject
-                foreach (var item in numTask)
-                    if (item > 0) //todo добавить проверку на уникальные значения
-                        db.SubjectTask.Add(new SubjectTask
-                        {
-                            Number = item,
-                            SubjectCode = subjCode
-                        });
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index", new { numClass });
-            }
+                if (ModelState.IsValid)
+                {
+                    //Add Subject
+                    var subject = new Subject
+                    {
+                        Name = subjectVM.Name,
+                        Class = subjectVM.Class
+                    };
+                    db.Subject.Add(subject);
+                    await db.SaveChangesAsync();
+                    var subjCode = await db.Subject.Where(x => x.SubjectCode == subject.SubjectCode)
+                        .Select(c => c.SubjectCode)
+                        .FirstOrDefaultAsync();
+                    //Этап добавления SubjectTask по созданному Subject
 
-            return View(subject);
+                    numTask.Distinct().ToList().Sort();
+                    foreach (var item in numTask)
+                        if (item > 0)
+                            db.SubjectTask.Add(new SubjectTask
+                            {
+                                Number = item,
+                                SubjectCode = subjCode
+                            });
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index", new { subject.Class });
+                }
+
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("Index", new { subjectVM.Class });
+            }
         }
 
         /// <summary>
@@ -120,16 +134,17 @@ namespace EducationSystem.Controllers
                     .Select(c => c.Number).ToList();
                 var isModified = subjectTaskList.SequenceEqual(numTask);
                 //Изменяем значения SubjectTask
-                if(!isModified)
-                foreach (var item in numTask)
-                {
-                    db.Entry(new SubjectTask()
+                if (!isModified)
+                    foreach (var item in numTask)
                     {
-                        SubjectCode = subject.SubjectCode,
-                        Number = item
-                    }).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
+                        db.Entry(new SubjectTask
+                        {
+                            SubjectCode = subject.SubjectCode,
+                            Number = item
+                        }).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
                 ////Изменяем/Добавляем Criterion
                 //db.Entry(new Criterion()
                 //{

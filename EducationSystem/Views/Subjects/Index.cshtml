@@ -7,10 +7,10 @@
 
 
 <p>
-        @Html.ActionLink("Добавить предмет", "Create", new
-   {
-       numClass = ViewBag.classNum
-   },new{@class = "btn btn-default insert-btn" })
+    @Html.ActionLink("Добавить предмет", "Create", new
+    {
+        numClass = ViewBag.classNum
+    }, new { @class = "btn btn-default insert-btn" })
 </p>
 
 <div class="container container-main-list">
@@ -18,8 +18,8 @@
 
     <div class="accordion">
         <ul class="accordion-list">
-            
-            @for(int i=0;i<Model.Count();i++)   
+
+            @for (var i = 0; i < Model.Count(); i++)
             {
                 foreach (var item in Model)
                 {
@@ -31,7 +31,7 @@
                         <div class="msg">
                             @ListHelper.CreateSubjectList(item.SubjectCode, new { @class = "link-subj-task" })
                         </div>
-                        <a href="@Url.Action("Edit", "Subjects", new { SubjectCode = item.SubjectCode })" class="pen-icon">
+                        <a href="@Url.Action("Edit", "Subjects", new { item.SubjectCode })" class="pen-icon">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect opacity="0.16" x="0.5" y="0.5" width="39" height="39" rx="7.5" stroke="#263238"/>
                                 <path d="M28.71 15.0425C29.1 14.6525 29.1 14.0025 28.71 13.6325L26.37 11.2925C26
@@ -39,29 +39,21 @@
                                   25.2525V29.0025H14.75L25.81 17.9325L22.06 14.1825L11 25.2525Z" fill="#979797"/>
                             </svg>
                         </a>
-                        @*<a href="@Url.Action("Create", "Criterion", new {
-                                     subjectTaskCode=ListHelper.GetSubTaskCode(i,item.SubjectCode)})"
-                           class="plus-icon">+</a>*@
                     </li>
                 }
             }
         </ul>
     </div>
-    
+
     <div class="pen-info">
         <label class="pen-label" for="pen-icon">Редактирование предмета</label>
         <span id="pen-icon" class="info-pen-icon-disable">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect opacity="0.16" x="0.5" y="0.5" width="39" height="39" rx="7.5" stroke="#263238" />
+                <rect opacity="0.16" x="0.5" y="0.5" width="39" height="39" rx="7.5" stroke="#263238"/>
                 <path d="M28.71 15.0425C29.1 14.6525 29.1 14.0025 28.71 13.6325L26.37 11.2925C26
                               10.9025 25.35 10.9025 24.96 11.2925L23.12 13.1225L26.87 16.8725L28.71 15.0425ZM11
-                              25.2525V29.0025H14.75L25.81 17.9325L22.06 14.1825L11 25.2525Z" fill="#979797" />
+                              25.2525V29.0025H14.75L25.81 17.9325L22.06 14.1825L11 25.2525Z" fill="#979797"/>
             </svg>
         </span>
     </div>
-    @*<div class="plus-info">
-        <label class="plus-label" for="info-plus-icon">Добавления критерия</label>
-        <span id="info-plus-icon" href="#" class="info-plus-icon-disable">+</span>
-    </div>*@
 </div>
-

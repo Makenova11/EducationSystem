@@ -28,29 +28,29 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.SecondName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Patronymic)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Phone)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patronymic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
 
-    @*<td>
+            @*<td>
         <p>
             <a class="btn btn-default" @Html.ActionLink("Редактировать", "Edit", new { id = item.ID_работника }) |
                     <a class="btn btn-default" @Html.ActionLink("Удалить", "Delete", new { id = item.ID_работника })
         </p>
     </td>*@
-</tr>
+        </tr>
     }
 </table>

@@ -6,7 +6,8 @@
 }
 
 <h2> Задание</h2>
-@if (Model.Any()) {
+@if (Model.Any())
+{
     <figure class="figure-question">
         @Html.Raw("<img src=\"data:image/jpeg;base64,"
                   + Convert.ToBase64String(ViewBag.TaskImage) + "\" />")
@@ -21,10 +22,10 @@
         <ul class="question-number-list listquery">
             @foreach (var item in ViewBag.solutionNumber)
             {
-                <li class="question-number-item"> @ListHelper.CreateSolutionLink(item, ViewBag.taskCode, new {@class="link-quad-task"})</li>
+                <li class="question-number-item"> @ListHelper.CreateSolutionLink(item, ViewBag.taskCode, new { @class = "link-quad-task" })</li>
             }
         </ul>
-       
+
         <button id="showother" class="button-question btn-show-all">Показать все</button>
     </div>
 </div>

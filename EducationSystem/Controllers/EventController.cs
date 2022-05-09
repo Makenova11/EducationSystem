@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using EducationSystem.Models;
 
@@ -11,7 +6,7 @@ namespace EducationSystem.Controllers
 {
     public class EventController : Controller
     {
-        private EducationSystemDB db = new EducationSystemDB();
+        private readonly EducationSystemDB db = new EducationSystemDB();
 
         // GET: Events
         public ActionResult Index()
@@ -79,11 +74,12 @@ namespace EducationSystem.Controllers
         //}
 
         // POST: Events/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Event.Find(id);
+            var @event = db.Event.Find(id);
             db.Event.Remove(@event);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -91,10 +87,7 @@ namespace EducationSystem.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            if (disposing) db.Dispose();
             base.Dispose(disposing);
         }
     }

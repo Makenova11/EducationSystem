@@ -169,9 +169,9 @@
     </Compile>
     <Compile Include="Helpers\AppDbInitializer.cs" />
     <Compile Include="Helpers\ApplicationDbContext.cs" />
-    <Compile Include="Helpers\ApplicationManager.cs" />
     <Compile Include="Helpers\ApplicationUser.cs" />
     <Compile Include="Helpers\ApplicationUserManager.cs" />
+    <Compile Include="Helpers\AppUser.cs" />
     <Compile Include="Helpers\ListHelper.cs" />
     <Compile Include="Models\Criterion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -272,6 +272,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\LayoutStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="App_Data\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

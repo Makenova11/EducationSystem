@@ -6,7 +6,7 @@ namespace EducationSystem.ViewModels
     {
         public VariantSolutionVM()
         {
-            GraduateAnswer = new HashSet<GraduateAnswerVM>();
+            //GraduateAnswer = new HashSet<GraduateAnswerVM>();
         }
 
         public long VariantTaskCode { get; set; }
@@ -15,8 +15,8 @@ namespace EducationSystem.ViewModels
         public long VariantCode { get; set; }
         public long ExamCode { get; set; }
 
-        public virtual ICollection<GraduateAnswerVM> GraduateAnswer { get; set; }
-        public virtual SolutionVM Solution { get; set; }
-        public virtual VariantVM Variant { get; set; }
+        //public virtual ICollection<GraduateAnswerVM> GraduateAnswer { get; set; }
+        //public virtual SolutionVM Solution { get; set; }
+        //public virtual VariantVM Variant { get; set; }
     }
 }

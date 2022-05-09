@@ -1,21 +1,21 @@
-﻿
-    <!--<h1 class="main-heading"></h1>-->
-    <div class="main-hero-content">
-        <div class="main-hero-text-fornormal">
-            <p class="main-hero-text">Система поддержки обучения и сертификации
-                экспертов массовых процедур оценки качества образования</p>
-        </div>
-
-        <div class="main-choice">
-            @Html.ActionLink("9 класс", "Index", "Subjects", new
-            {
-                numClass = 9
-            }, new { @class = "main-choice_link linkStr linkStrAccor linkStrAccor1" })
-
-            @Html.ActionLink("11 класс", "Index", "Subjects", new
-            {
-                numClass = 11
-            }, new { @class = "main-choice_link linkStr linkStrAccor linkStrAccor2" })
-        </div>
+﻿<!--<h1 class="main-heading"></h1>-->
+<div class="main-hero-content">
+    <div class="main-hero-text-fornormal">
+        <p class="main-hero-text">
+            Система поддержки обучения и сертификации
+            экспертов массовых процедур оценки качества образования
+        </p>
     </div>
 
+    <div class="main-choice">
+        @Html.ActionLink("9 класс", "Index", "Subjects", new
+        {
+            numClass = 9
+        }, new { @class = "main-choice_link linkStr linkStrAccor linkStrAccor1" })
+
+        @Html.ActionLink("11 класс", "Index", "Subjects", new
+        {
+            numClass = 11
+        }, new { @class = "main-choice_link linkStr linkStrAccor linkStrAccor2" })
+    </div>
+</div>

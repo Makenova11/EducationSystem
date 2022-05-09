@@ -9,7 +9,7 @@
         public long SolutionCode { get; set; }
         public long CriterionCode { get; set; }
 
-        public virtual CriterionVM Criterion { get; set; }
-        public virtual SolutionVM Solution { get; set; }
+        //public virtual CriterionVM Criterion { get; set; }
+        //public virtual SolutionVM Solution { get; set; }
     }
 }
