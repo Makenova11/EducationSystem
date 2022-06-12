@@ -1,2 +1,766 @@
-﻿body {
+﻿* {
+    box-sizing: border-box;
+}
+
+.body {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.header {
+    align-items: center;
+    background-color: #77FAAD;
+    display: flex;
+    height: 100px;
+}
+
+.container {
+    width: 1300px;
+}
+
+.header-container {
+    align-items: center;
+    display: flex;
+    font-size: 14pt;
+}
+
+.header-link-main {
+    border: 1px solid black;
+    border-radius: 7px;
+    font-size: 18pt;
+    left: auto;
+    padding: 5px 15px;
+}
+
+.header-link-main:hover, .header-link-criteria:hover {
+    background-color: #43f78e;
+    border-color: black;
+    color: black;
+    text-decoration: none;
+}
+
+.header-link-main:active, .header-link-criteria:active {
+    background-color: rgba(67, 247, 142, 0.5)
+}
+
+.header-link-criteria {
+    border: 1px solid black;
+    border-radius: 7px;
+    font-size: 18pt;
+    margin-left: 15px;
+    padding: 5px 15px;
+}
+
+.header-login {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: auto;
+}
+
+.login-out {
+    color: #4f4f4f
+}
+
+.linkStr {
+    color: black;
+    text-decoration: none;
+}
+
+.linkStr:hover {
+    text-decoration: none;
+}
+
+.linkStr:link {
+    text-decoration: none;
+}
+
+
+.main {
+    display: flex;
+}
+
+.main-hero-content {
+    display: flex;
+    margin-top: 50px;
+}
+
+.main-hero-text {
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 25px;
+    line-height: 40px;
+    margin: 0;
+    padding: 15px 25px;
+    text-align: center;
+    width: 370px;
+}
+
+.main-choice {
+    align-items: flex-end;
+    display: flex;
+    display: flex;
+    font-size: 22pt;
+    height: 550px;
+    justify-content: space-around;
+    margin-left: auto;
+    padding-bottom: 60px;
+    position: relative;
+    width: 450px;
+}
+
+.linkStrAccor {
+    background-color: white;
+    display: block;
+    text-align: center;
+    width: 250px;
+}
+
+.linkStrAccor1::before {
+    background: url(../Views/../Source/img/lecture-in-college1.jpg) no-repeat;
+    background-size: cover;
+    bottom: 0;
+    content: " ";
+    left: 0;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    z-index: -5;
+}
+
+.linkStrAccor1::after {
+    bottom: 0;
+    content: " ";
+    left: 0;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    @* background: rgba(0,0,0,.25);
+    *@
+}
+
+.linkStrAccor1:hover:before {
+    background-image: url(../Views/../Source/img/lecture-in-college2.jpg);
+    background-size: cover;
+    bottom: 0;
+    content: " ";
+    left: 0;
+    position: absolute;
+    right: 30%;
+    top: 0;
+    transition: 0.1s ease;
+    z-index: -4;
+}
+
+.linkStrAccor2::before {
+    background: url(../Views/../Source/img/classroom-in-an-exam1.jpg) no-repeat;
+    background-size: cover;
+    bottom: 0;
+    content: " ";
+    left: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -5;
+}
+
+.linkStrAccor2::after {
+    bottom: 0;
+    content: " ";
+    left: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    @* background: rgba(0,0,0,.25);
+    *@
+}
+
+.linkStrAccor2:hover:before {
+    background-image: url(../Views/../Source/img/classroom-in-an-exam2.jpg);
+    background-size: cover;
+    bottom: 0;
+    content: " ";
+    left: 30%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.1s ease;
+    z-index: -4;
+}
+
+.insert-btn {
+    margin-top: 20px;
+}
+
+.li-subj-task {
+    position: relative;
+}
+
+.link-subj-task::after {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.accordion {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    overflow: hidden;
+    /* относительное позиционирование */
+    padding: 0;
+}
+
+    .accordion li {
+        width: 270px;
+    }
+
+.accordion-item {
+    margin-right: 93px;
+}
+
+/* заголовки панелей аккордеона */
+
+.accordion h2 {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 1px solid #828282;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #4F4F4F;
+    cursor: pointer;
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 10px 40px;
+}
+
+/* Формируем блоки с содержанием */
+
+.msg {
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+    transform: translate(0, 0);
+}
+
+    /* оформляем параграфы */
+
+.msg li {
+    color: rgba(48, 69, 92, 0.8);
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 2.5;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/* Формируем неупорядоченный список */
+
+.accordion ul {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+/* Определяем и формируем отдельный элемент списка
+    * в который поместим скрытый флажек,
+    * заголовок панелей и блок с содержанием
+    */
+
+.accordion ul li {
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 0;
+    position: relative;
+}
+
+.accordion li:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+/*.accordion .accordion-item {
+            margin-right: 12px;
+        }*/
+
+.msg ul {
+    margin: 0;
+}
+
+/* устанавливаем время ожидания перед воспроизведением анимации
+        * на основе нумерации в дереве элементов
+        */
+
+.accordion ul li:nth-of-type(1) {
+    animation-delay: 0.5s;
+}
+
+.accordion ul li:nth-of-type(2) {
+    animation-delay: 0.75s;
+}
+
+.accordion ul li:nth-of-type(3) {
+    animation-delay: 1s;
+}
+
+.accordion ul li:last-of-type {
+    padding-bottom: 0;
+}
+
+/* Сформируем  указатель переключения состояния аккордеона */
+
+.accordion ul li i {
+    /* расположим указатель на панели заголовка справа */
+    left: 25px;
+    margin-top: 16px;
+    position: absolute;
+    transform: translate(-6px, 0);
+}
+
+/* "Рисуем " сам указатель */
+
+.accordion ul li i:before, .accordion ul li i:after {
+    background-color: #A1A1A1;
+    content: "";
+    height: 9px;
+    position: absolute;
+    width: 3px;
+}
+
+/* Добавляем элемент трансформации указателя при переключении */
+
+.accordion ul li i:before {
+    transform: translate(-2px, 0) rotate(45deg);
+}
+
+.accordion ul li i:after {
+    transform: translate(2px, 0) rotate(-45deg);
+}
+
+/* Делаем чекбокс скрытым*/
+
+.accordion ul li input[type=checkbox] {
+    cursor: pointer;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+}
+
+/* Когда у флажка установлен checked блок с содержанием скрыт */
+
+.accordion ul li input[type=checkbox]:checked ~ div.msg {
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+    transform: translate(0, 50%);
+}
+
+/* А указатель показывает вниз */
+
+.accordion ul li input[type=checkbox]:checked ~ i:before {
+    transform: translate(2px, 0) rotate(45deg);
+}
+
+.accordion ul li input[type=checkbox]:checked ~ i:after {
+    transform: translate(-2px, 0) rotate(-45deg);
+}
+
+/*  Устанавливаем эффект перехода между двумя состояниями указателя */
+
+div.msg, ul li i:before, ul li i:after {
+    transition: all 0.5s ease-in-out;
+}
+
+.container-main-list {
+    padding: 0;
+}
+
+.title-for-all-subject {
+    margin-left: 15px;
+}
+
+.pen-icon {
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+    display: block;
+    line-height: 0;
+    padding: 0;
+    position: absolute;
+    right: -45px;
+    top: 0;
+}
+
+.plus-icon {
+    border-radius: 14px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+    color: #828282;
+    display: block;
+    font-family: roboto;
+    font-size: 30px;
+    font-weight: 900;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: -92px;
+    text-align: center;
+    text-decoration: none;
+    top: 0;
+    width: 40px;
+}
+
+.plus-icon:hover {
+    text-decoration: none;
+}
+
+.plus-icon:active {
+    text-decoration: none;
+}
+
+.plus-icon:focus {
+    text-decoration: none;
+}
+
+.info-plus-icon-disable {
+    border-radius: 14px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 1px 12px rgba(0, 0, 0, 0.04);
+    color: #828282;
+    display: block;
+    font-family: roboto;
+    font-size: 30px;
+    font-weight: 900;
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    margin-left: 20px;
+    padding: 0;
+    text-align: center;
+    width: 40px;
+}
+
+.info-pen-icon-disable {
+    margin-left: 20px;
+}
+
+.pen-info, .plus-info {
+    display: flex;
+    flex-direction: row;
+    font-size: 18px;
+    line-height: 40px;
+}
+
+.pen-label, .plus-label {
+    margin: 0;
+}
+
+
+.add-question {
+    margin-top: 10px;
+}
+
+.question-number {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.question-number-list {
+    align-items: center;
+    border-bottom: 1px solid grey;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+
+.question-number-item {
+    background-color: #77FAAD;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+    text-align: center;
+    width: 40px;
+}
+
+.link-quad-task::after {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.button-question {
+    background-color: aquamarine;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.figure-question {
+    margin-bottom: 20px;
+}
+
+.btn-show-all {
+    margin-bottom: 20px;
+}
+
+.buttons-for-slide {
+    margin-top: 20px;
+}
+
+.question-prev {
+    margin-right: 50px;
+}
+
+.listquery li:nth-child(n + 6) {
+    display: none;
+}
+
+.showother {
+    background: #fc0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+}
+
+.container-subj-photo-task {
+    width: 600px;
+}
+
+.figure-photo-task {
+    align-items: center;
+    border: 1px solid #77faad;
+    display: flex;
+    height: 400px;
+    justify-content: center;
+    margin: 0;
+    max-width: 600px;
+}
+
+.list-subj-mini-photo-task {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.item-subj-mini-photo-task {
+    box-shadow: inset 0 0 0 1px #ccc;
+    cursor: pointer;
+    height: 70px;
+}
+
+.main-photo-task {
+    max-height: 380px;
+    max-width: 380px;
+}
+
+.item-subj-mini-photo-task:not(:last-child) {
+    margin-right: 15px;
+}
+
+.photo-task {
+    height: 70px;
+    width: 70px;
+}
+
+body {
+    margin: 0;
+}
+
+.image {
+    cursor: pointer;
+    float: left;
+    margin: 30px;
+    max-height: 100px;
+}
+
+.popup {
+    display: none;
+    height: 140%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+}
+
+.popup_bg {
+    background: rgba(0, 0, 0, 0.4);
+    height: 120%;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+
+.popup_img {
+    margin: 0 auto;
+    margin: 1% 0 0 0;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/*section-solution-test*/
+
+.section-solution-test {
+    padding-top: 40px;
+}
+
+.section-solution-test-taks {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-solution-test_check-panel {
+    margin-left: 20px;
+}
+
+.section-solution-test_label-select {
+    cursor: pointer;
+    line-height: 32px;
+    margin: 0;
+}
+
+.section-solution-test_select-points {
+    cursor: pointer;
+    height: 32px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.section-solution-test_check-panel-choice {
+    align-items: center;
+    display: flex;
+}
+
+.section-solution-test_btn {
+    background-color: #77faad;
+    border: #77faad;
+    color: #4f4f4f;
+}
+
+.section-solution-p {
+    margin: 0;
+    padding: 10px;
+    text-align: right;
+}
+
+.listSolution {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.input-form-tasks {
+    margin-bottom: 5px;
+}
+
+.listSolutionGroupInput {
+    margin-bottom: 20px;
+}
+
+@media (min-width: 1700px) {
+    .container {
+        width: 1500px;
+    }
+
+    .header-login_img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .header-link-main, .header-link-criteria {
+        font-size: 28px;
+    }
+
+    .header-login_link {
+        font-size: 25px;
+    }
+
+    .main-hero-content {
+        margin-top: 110px;
+    }
+
+    .header {
+        height: 120px;
+    }
+
+    .main-hero-text {
+        font-size: 35px;
+        line-height: 1.2;
+        width: 560px;
+    }
+
+    .main-choice {
+        height: 600px;
+        width: 500px;
+    }
+
+    .linkStrAccor {
+        font-size: 40px;
+        width: 350px;
+    }
+
+    .container-subj-photo-task {
+        width: 800px;
+    }
+
+    .figure-photo-task {
+        align-items: center;
+        border: 1px solid #77faad;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        max-width: 800px;
+        min-height: 600px;
+    }
+
+    .main-photo-task {
+        max-height: 580px;
+        max-width: 580px;
+    }
+}
+
+.button-tasks {
+    margin-left: 10px;
+}
+
+.rem {
+    margin-left: 10px;
+}
+
+.listSubjects {
+    display: flex;
+    flex-direction: column;
+}
+
+.fz-18 {
+    font-size: 18pt;
 }

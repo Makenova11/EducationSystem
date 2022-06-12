@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2837b2015ff44c7089fe6625bd4200ef" Name="Diagram1" ZoomLevel="103">
-        <EntityTypeShape EntityType="EducationSystemDBModel.Criterion" Width="1.5" PointX="6.375" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Event" Width="1.5" PointX="10.25" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Examination" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Expert" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.ExpertSubject" Width="1.5" PointX="7.375" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Graduate" Width="1.5" PointX="8.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.GraduateAnswer" Width="1.5" PointX="11.875" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Solution" Width="1.5" PointX="15.375" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.SolutionCriterionScore" Width="1.5" PointX="9.125" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Subject" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.SubjectTask" Width="1.5" PointX="3.875" PointY="9.625" IsExpanded="true" />
+      <Diagram DiagramId="2837b2015ff44c7089fe6625bd4200ef" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="EducationSystemDBModel.Criterion" Width="1.5" PointX="8" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Event" Width="1.5" PointX="11.125" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Examination" Width="1.5" PointX="6.125" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Expert" Width="1.5" PointX="4.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.ExpertSubject" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Graduate" Width="1.5" PointX="12.625" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.GraduateAnswer" Width="1.5" PointX="14.375" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Solution" Width="1.5" PointX="16.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.SolutionCriterionScore" Width="1.5" PointX="9.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Subject" Width="1.5" PointX="4.375" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.SubjectTask" Width="1.5" PointX="6.25" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="EducationSystemDBModel.sysdiagrams" Width="1.5" PointX="22.875" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Task" Width="1.5" PointX="12.875" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Variant" Width="1.5" PointX="5.625" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.VariantSolution" Width="1.5" PointX="13.375" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Task" Width="1.5" PointX="12.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Variant" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.VariantSolution" Width="1.5" PointX="14.25" PointY="3.125" IsExpanded="true" />
         <AssociationConnector Association="EducationSystemDBModel.Критерий___Балл" ManuallyRouted="false" />
         <AssociationConnector Association="EducationSystemDBModel.Критерий___Комментарии_к_решению" ManuallyRouted="false" />
         <AssociationConnector Association="EducationSystemDBModel.Номер_задания___Критерий" ManuallyRouted="false" />
@@ -38,9 +38,9 @@
         <AssociationConnector Association="EducationSystemDBModel.Предмет___Номер_задания" ManuallyRouted="false" />
         <AssociationConnector Association="EducationSystemDBModel.Номер_задания___Задание" ManuallyRouted="false" />
         <AssociationConnector Association="EducationSystemDBModel.Номер_варианта___Вариант" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.SolutionImages" Width="1.5" PointX="15.625" PointY="8.5" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.SolutionImages" Width="1.5" PointX="16.25" PointY="6.375" />
         <AssociationConnector Association="EducationSystemDBModel.FK_SolutionImages_Solution" />
-        <EntityTypeShape EntityType="EducationSystemDBModel.Role" Width="1.5" PointX="3.5" PointY="3.25" />
+        <EntityTypeShape EntityType="EducationSystemDBModel.Role" Width="1.5" PointX="6.75" PointY="3.625" />
         <AssociationConnector Association="EducationSystemDBModel.FK_Expert_Role" />
       </Diagram>
     </edmx:Diagrams>

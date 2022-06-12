@@ -11,7 +11,8 @@ namespace EducationSystem.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Task
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,8 @@ namespace EducationSystem.Models
     
         public long TaskCode { get; set; }
         public byte[] TaskImage { get; set; }
+        [Required]
+        [Range(1700, 3000, ErrorMessage = "Недопустимый год")]
         public int Year { get; set; }
         public byte[] CriterionFile { get; set; }
         public string CriterionFileName { get; set; }

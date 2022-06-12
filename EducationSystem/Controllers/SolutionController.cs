@@ -135,6 +135,10 @@ namespace EducationSystem.Controllers
             //Объединяем все изображения, чтобы получить общий массив решений.
             ViewBag.Images = FirstImage.Union(Images);
 
+
+            //Для второго варианта
+            ViewBag.AllImages = db.Solution.Where(x => x.SolutionCode == SolutionCode).Select(x => x.SolutionImage).ToList();
+
             return View();
         }
     }

@@ -4,28 +4,32 @@
 @{
     ViewBag.Title = "Index";
 }
+<div>
+    <h2> Задание</h2>
+    @if (Model.Any())
+    {
+        <figure class="figure-question">
+            @Html.Raw("<img src=\"data:image/jpeg;base64,"
+                      + Convert.ToBase64String(ViewBag.TaskImage) + "\" />")
+        </figure>
+        @*<div>
+            <embed src="data:application/pdf;base64, @Convert.ToBase64String(ViewBag.TaskImage)" type="application/pdf" width="700px" height="900px" />
+        </div>*@
+    }
 
-<h2> Задание</h2>
-@if (Model.Any())
-{
-    <figure class="figure-question">
-        @Html.Raw("<img src=\"data:image/jpeg;base64,"
-                  + Convert.ToBase64String(ViewBag.TaskImage) + "\" />")
-    </figure>
-}
-
-<div class="container">
     <div class="question-number">
-        <p class="add-question">
-            @Html.ActionLink("Добавить решение", "Create", new { TaskCode = ViewBag.taskCode })
-        </p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p class="add-question">
+                @Html.ActionLink("Добавить решение", "Create", new { TaskCode = ViewBag.taskCode })
+            </p>
+        }
         <ul class="question-number-list listquery">
             @foreach (var item in ViewBag.solutionNumber)
             {
                 <li class="question-number-item"> @ListHelper.CreateSolutionLink(item, ViewBag.taskCode, new { @class = "link-quad-task" })</li>
             }
         </ul>
-
         <button id="showother" class="button-question btn-show-all">Показать все</button>
     </div>
 </div>

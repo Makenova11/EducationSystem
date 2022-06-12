@@ -61,7 +61,7 @@ namespace EducationSystem.Controllers
 
                             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                             HttpContext.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
-
+                            
                             return RedirectToAction("Index", "Home");
                         }
 

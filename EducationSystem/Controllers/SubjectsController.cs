@@ -25,6 +25,7 @@ namespace EducationSystem.Controllers
         /// <param name="numClass"> Класс. </param>
         /// <returns> Task<ActionResult> </returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> Index(int numClass)
         {
             var subjects = await db.Subject.Where(c => c.Class == numClass).ToListAsync();
@@ -39,6 +40,8 @@ namespace EducationSystem.Controllers
         /// <param name="numClass"> Номер класса. </param>
         /// <param name="numTask"> Номера заданий. </param>
         /// <returns> ActionResult. </returns>
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(int numClass, List<int> numTask)
         {
             return View(new SubjectVM
@@ -56,6 +59,7 @@ namespace EducationSystem.Controllers
         /// <returns> Task<ActionResult> </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "SubjectCode,Name, Class")] SubjectVM subjectVM,
             List<int> numTask)
         {
@@ -133,7 +137,7 @@ namespace EducationSystem.Controllers
                 var subjectTaskList = db.SubjectTask.Where(x => x.SubjectCode == subject.SubjectCode)
                     .Select(c => c.Number).ToList();
                 var isModified = subjectTaskList.SequenceEqual(numTask);
-                //Изменяем значения SubjectTask
+                //Изменяем значения SubjectTask 
                 if (!isModified)
                     foreach (var item in numTask)
                     {
