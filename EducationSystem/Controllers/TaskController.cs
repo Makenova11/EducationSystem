@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EducationSystem.Models;
+using EducationSystem.ViewModels;
 
 namespace EducationSystem.Controllers
 {
@@ -16,11 +17,6 @@ namespace EducationSystem.Controllers
         /// </summary>
         private readonly EducationSystemDB db = new EducationSystemDB();
 
-        /// <summary>
-        ///     Индекс SubjectTaskCode.
-        ///     Используется для передачи значения в RedirectToAction после добавления файла.
-        /// </summary>
-        private int subjTaskCodeIndex = 1;
 
         /// <summary>
         ///     Получение общей информации о задании.
@@ -30,7 +26,6 @@ namespace EducationSystem.Controllers
         public ActionResult Index(int subjTaskCode)
         {
             var result = db.Task.Where(c => c.SubjectTaskCode == subjTaskCode).ToList();
-            subjTaskCodeIndex = subjTaskCode;
             var nums = new int[result.Count];
             for (var i = 0; i < result.Count; i++) nums[i] = i + 1;
             ViewBag.arrayNumber = nums; //Массив с нумерацией имеющихся заданий
@@ -53,15 +48,15 @@ namespace EducationSystem.Controllers
         /// </summary>
         /// <returns> ActionResult. </returns>
         [HttpGet]
-        public ActionResult Create(int SubjectTaskCode)
+        public ActionResult Create2(int SubjectTaskCode)
         {
             ViewBag.EventCode = new SelectList(db.Event, "EventCode", "EventName");
             ViewBag.numClass = (from item in db.SubjectTask
-                where item.SubjectTaskCode == SubjectTaskCode
-                select item.Subject.Class).FirstOrDefault();
+                                where item.SubjectTaskCode == SubjectTaskCode
+                                select item.Subject.Class).FirstOrDefault();
             ViewBag.nameSubj = (from item in db.SubjectTask
-                where item.SubjectTaskCode == SubjectTaskCode
-                select item.Subject.Name).FirstOrDefault();
+                                where item.SubjectTaskCode == SubjectTaskCode
+                                select item.Subject.Name).FirstOrDefault();
             ViewBag.numTask = db.SubjectTask.Where(x => x.SubjectTaskCode == SubjectTaskCode).Select(c => c.Number)
                 .FirstOrDefault();
             ViewBag.subjTaskCode = SubjectTaskCode;
@@ -76,31 +71,35 @@ namespace EducationSystem.Controllers
         /// <param name="CriterionFileImage"> Изображение критерия задания. </param>
         /// <returns> ActionResult. </returns>
         [HttpPost]
-        public ActionResult Create([Bind(Include = "TaskCode,Year,EventCode,SubjectTaskCode")] Task task,
-            HttpPostedFileBase TaskImage, HttpPostedFileBase CriterionFileImage)
+        public ActionResult Create2(TaskVM task)
         {
             if (ModelState.IsValid)
             {
                 byte[] imageData = null;
                 byte[] fileData = null;
+                var newTask = new Task();
 
-                using (var binaryReader = new BinaryReader(TaskImage.InputStream))
+                using (var binaryReader = new BinaryReader(task.TaskImage.InputStream))
                 {
-                    imageData = binaryReader.ReadBytes(TaskImage.ContentLength);
+                    imageData = binaryReader.ReadBytes(task.TaskImage.ContentLength);
                 }
 
-                using (var binaryReader = new BinaryReader(CriterionFileImage.InputStream))
+                using (var binaryReader = new BinaryReader(task.CriterionFileImage.InputStream))
                 {
-                    fileData = binaryReader.ReadBytes(CriterionFileImage.ContentLength);
+                    fileData = binaryReader.ReadBytes(task.CriterionFileImage.ContentLength);
                 }
 
-                task.CriterionFileName = CriterionFileImage.FileName;
-                task.Name = TaskImage.FileName;
-                task.TaskImage = imageData;
-                task.CriterionFile = fileData;
-                db.Task.Add(task);
+                newTask.TaskCode = task.TaskCode;
+                newTask.Year = task.Year;
+                newTask.EventCode = task.EventCode;
+                newTask.SubjectTaskCode = task.SubjectTaskCode;
+                newTask.Name = task.TaskImage.FileName;
+                newTask.CriterionFile = fileData;
+                newTask.CriterionFileName = task.CriterionFileImage.FileName;
+                newTask.TaskImage = imageData;
+                db.Task.Add(newTask);
                 db.SaveChanges();
-                return RedirectToAction("Index", new { subjTaskCode = subjTaskCodeIndex });
+                return RedirectToAction("Index", new { subjTaskCode = task.SubjectTaskCode });
             }
 
             ViewBag.EventCode = new SelectList(db.Event, "EventCode", "EventName", task.EventCode);

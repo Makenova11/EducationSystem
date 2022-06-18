@@ -7,15 +7,21 @@
 }
 
 
-@if (User.Identity.IsAuthenticated)
-{
-    <p>
-        @Html.ActionLink("Добавить предмет", "Create", new
-        {
-            numClass = ViewBag.classNum
-        }, new { @class = "btn btn-default insert-btn" })
-    </p>
-}
+@*@if (User.Identity.IsAuthenticated)
+{*@
+<p>
+    @Html.ActionLink("Добавить предмет", "Create", new
+    {
+        numClass = ViewBag.classNum
+    }, new { @class = "btn btn-default insert-btn" })
+</p>
+<p>
+    @Html.ActionLink("Добавить предмет2", "Create2", new
+    {
+        numClass = ViewBag.classNum
+    }, new { @class = "btn btn-default insert-btn" })
+</p>
+@*}*@
 <div class="container container-main-list">
     <h2 class="title-for-all-subject">@ViewBag.classNum класс</h2>
 

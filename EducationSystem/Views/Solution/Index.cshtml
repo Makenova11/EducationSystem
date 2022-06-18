@@ -6,16 +6,15 @@
 }
 <div>
     <h2> Задание</h2>
-    @if (Model.Any())
-    {
-        <figure class="figure-question">
-            @Html.Raw("<img src=\"data:image/jpeg;base64,"
-                      + Convert.ToBase64String(ViewBag.TaskImage) + "\" />")
+
+    <div class="container-subj-photo-task">
+        <figure class="figure-question figure-photo-task">
+            <div id="figure-img-task">
+                @Html.Raw("<img 'id='zoom_01' class='main-photo-task' src=\"data:image/jpeg;base64,"
+                          + Convert.ToBase64String(ViewBag.TaskImage) + "\" />")
+            </div>
         </figure>
-        @*<div>
-            <embed src="data:application/pdf;base64, @Convert.ToBase64String(ViewBag.TaskImage)" type="application/pdf" width="700px" height="900px" />
-        </div>*@
-    }
+    </div>
 
     <div class="question-number">
         @if (User.Identity.IsAuthenticated)
@@ -33,3 +32,33 @@
         <button id="showother" class="button-question btn-show-all">Показать все</button>
     </div>
 </div>
+<script type="text/javascript">
+
+    $(document).ready(function() { // Ждём загрузки страницы
+
+        $(".photo-task").click(function() {
+            const img = $(this);
+            const src = img.attr('src');
+            $(".main-photo-task").attr('src', src);
+        });
+
+        $(".main-photo-task").click(function() { // Событие клика на маленькое изображение
+            const img = $(this); // Получаем изображение, на которое кликнули
+            const src = img.attr('src'); // Достаем из этого изображения путь до картинки
+            $("body").append(`<div class='popup'><div class='popup_bg'></div><img src=${src} class='popup_img' /></div>`);
+            $(".popup").fadeIn(300); // Медленно выводим изображение
+            $(".popup_bg").click(function() { // Событие клика на затемненный фон
+                $(".popup").fadeOut(300); // Медленно убираем всплывающее окно
+                setTimeout(function() { // Выставляем таймер
+                        $(".popup").remove(); // Удаляем разметку всплывающего окна
+                    },
+                    300);
+            });
+        });
+
+        $(".popup_img").click(function() {
+            $(".popup_img").style("transform", "scale(2)");
+        });
+    });
+
+</script>

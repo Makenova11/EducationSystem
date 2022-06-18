@@ -1,21 +1,29 @@
-﻿using System.Collections.Generic;
-
-namespace EducationSystem.ViewModels
+﻿namespace EducationSystem.ViewModels
 {
+    /// <summary>
+    /// ViewModel Criterion
+    /// </summary>
     public class CriterionVM
     {
-        public CriterionVM()
-        {
-            GraduateAnswer = new HashSet<GraduateAnswerVM>();
-            SolutionCriterionScore = new HashSet<SolutionCriterionScoreVM>();
-        }
-
+        /// <summary>
+        /// CriterionCode
+        /// </summary>
         public long CriterionCode { get; set; }
+        /// <summary>
+        /// Наименование критерия (название загружаемого файла)
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Максимальный балл за задание
+        /// </summary>
         public int MaxScore { get; set; }
+        /// <summary>
+        /// Код номер задания
+        /// </summary>
         public int SubjectTaskCode { get; set; }
-        public virtual ICollection<GraduateAnswerVM> GraduateAnswer { get; set; }
-        public virtual ICollection<SolutionCriterionScoreVM> SolutionCriterionScore { get; set; }
-        public virtual SubjectTaskVM SubjectTask { get; set; }
+        /// <summary>
+        /// Номер критерия
+        /// </summary>
+        public int Number { get; set; }
     }
 }

@@ -251,21 +251,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CriterionVM.cs" />
-    <Compile Include="ViewModels\EventVM.cs" />
-    <Compile Include="ViewModels\ExaminationVM.cs" />
-    <Compile Include="ViewModels\ExpertSubjectVM.cs" />
-    <Compile Include="ViewModels\ExpertVM.cs" />
-    <Compile Include="ViewModels\GraduateAnswerVM.cs" />
-    <Compile Include="ViewModels\GraduateVM.cs" />
     <Compile Include="ViewModels\LogInVM.cs" />
-    <Compile Include="ViewModels\SolutionCriterionScoreVM.cs" />
-    <Compile Include="ViewModels\SolutionImagesVM.cs" />
+    <Compile Include="ViewModels\SolutionCriterionCodeScoreVM.cs" />
     <Compile Include="ViewModels\SolutionVM.cs" />
-    <Compile Include="ViewModels\SubjectTaskVM.cs" />
     <Compile Include="ViewModels\SubjectVM.cs" />
     <Compile Include="ViewModels\TaskVM.cs" />
-    <Compile Include="ViewModels\VariantSolutionVM.cs" />
-    <Compile Include="ViewModels\VariantVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -340,6 +330,8 @@
     <Content Include="Views\Solution\SolutionTest.cshtml" />
     <Content Include="Views\Criterion\Create.cshtml" />
     <Content Include="Views\LogIn\LogIn.cshtml" />
+    <Content Include="Views\Task\Create2.cshtml" />
+    <Content Include="Views\Subjects\Create2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\SolutionCriterionScores\" />

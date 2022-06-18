@@ -1,0 +1,166 @@
+﻿@model EducationSystem.ViewModels.SubjectVM
+@{
+    ViewBag.Title = "Create";
+}
+
+<h3>Добавление предмета @Model.Class класс</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-horizontal">
+            <hr/>
+            @Html.ValidationSummary(true, "Предмет", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, "Предмет", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group listSolutionGroup">
+                    @Html.LabelFor(model => model.Name, "Задание", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10 listSolutionGroupInput">
+                        <div class="listSolution" id="mylist">
+                            <div id="0" style="display: flex">
+                                <input name="numTask[0]" class="input-form-tasks form-control mb-2" type="number" placeholder="0" @*style="width: 100px; margin-right: 10px;"*@ />
+                                @*<div id="CriterionTasks0" class="criterion-fields" style="display: flex; flex-direction: column">
+                                    <div id="CriterionFields0" style="display: flex;">
+                                        <input name="NameCriterion" class="input-form-tasks form-control mb-2" type="text" placeholder="Наименование критерия" style="margin-right: 10px;" />
+                                        <input name="NumberCriterion" class="input-form-tasks form-control mb-2" type="number" placeholder="Номер критерия" style="width: 200px; margin-right: 10px;" />
+                                        <input name="MaxScore" class="input-form-tasks form-control mb-2" type="number" placeholder="Максимальный балл" style="width: 250px;" />
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+
+                        @*<a id="addCriterionFields" class="addCriterionFields btn btn-default">Добавить поля критерия</a>
+                        <a id="delCriterionFields" class="delCriterionFields btn btn-default">Удалить поля критерия</a>*@
+                    </div>
+                    
+                    <div class="form-group" style="margin-left: 175px">
+                        <a id="addNum" class="addNum btn btn-default">Добавить задание</a>
+                        <a id="minusNum" class="minusNum btn btn-default">Удалить задание</a>
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.Class, new { Model.Class })
+            
+
+        </div>
+        <div class="form-group" style="margin: 30px">
+            <div style="display: flex">
+                @Html.ActionLink("Назад", "Index", new { numClass = ViewBag.classNum }, new { @class = "btn btn-default" })
+            
+                <input type="submit" value="Сохранить" class="btn btn-default" style="margin-left: 65px"/>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    <script>
+        $(function() {
+            let i = 0;
+            let n = i + 1;
+            let j = 0;
+            let k = j + 1;
+            $('.addNum').click(function() {
+                i++;
+                j++;
+                const elem = $(`
+                    <div id="${i}" style="display: flex">
+                        <input name="numTask[${i}]" class="input-form-tasks form-control mb-2" type="number" placeholder="${n}" />
+                    </div>
+                `);
+
+                $('#mylist').append(elem);
+                n++;
+            });
+
+            $('.minusNum').click(function() {
+                $(`#${i}`).remove();
+                if (n >= 0) {
+                    n--;
+                } else {
+                    n = 0;
+                }
+                if (i >= 0) {
+                    i--;
+                } else {
+                    i = 0;
+                }
+            });
+
+            //$('.addCriterionFields').click(function() {
+            //    j++;
+
+            //    const element = $(`
+            //        <div id="CriterionFields${j}" style="display: flex">
+            //            <input name="NameCriterion" class="input-form-tasks form-control mb-2" type="text" placeholder="Наименование критерия" style="margin-right: 10px;" />
+            //            <input name="NumberCriterion" class="input-form-tasks form-control mb-2" type="number" placeholder="Номер критерия" style="width: 200px; margin-right: 10px;" />
+            //            <input name="MaxScore" class="input-form-tasks form-control mb-2" type="number" placeholder="Максимальный балл" style="width: 250px;" />
+            //        </div>
+            //    `);
+
+            //    $(`#CriterionTasks${i}`).append(element);
+            //    console.log('jjj')
+            //    k++;
+            //});
+
+            //$('.delCriterionFields').click(function() {
+            //    $(`#CriterionFields${j}`).remove();
+            //    if (k >= 0) {
+            //        k--;
+            //    } else {
+            //        k = 0;
+            //    }
+            //    if (j >= 0) {
+            //        j--;
+            //    } else {
+            //        j = 0;
+            //    }
+            //});
+
+            //<div id="CriterionTasks${i}" class="criterion-fields" style="display: flex; flex-direction: column">
+            //    <div id="CriterionFields${j}" style="display: flex;">
+            //        <input name="NameCriterion" class="input-form-tasks form-control mb-2" type="text" placeholder="Наименование критерия" style="margin-right: 10px;" />
+            //        <input name="NumberCriterion" class="input-form-tasks form-control mb-2" type="number" placeholder="Номер критерия" style="width: 200px; margin-right: 10px;" />
+            //        <input name="MaxScore" class="input-form-tasks form-control mb-2" type="number" placeholder="Максимальный балл" style="width: 250px;" />
+            //    </div>
+            //</div>
+        });
+    </script>
+}
+
+
+
+
+
+@*<script>
+    $(function () {
+        var i = 0;
+        $('.addNum').click(function () {
+            i++;
+            let publicDiv = $("<div></div>");
+
+            var elem = $("<input name='numTask[" + i + "]' " +
+                "class='d-block input-form-tasks form-control col-md-2 mb-2' " +
+                "type='number' placeholder='numTask[" + i + "]'/>");
+            let ololo = $("<button class='rem btn btn-default'>-</button>");    
+            $(publicDiv).append(elem);
+            $(publicDiv).append(ololo);
+            //$('#mylist').append(elem);
+            $('.rem').click(function() {
+                $(this).parent().remove();
+            });
+            $('#mylist').append(publicDiv);
+        });
+    });
+</script>*@

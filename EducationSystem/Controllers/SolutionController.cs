@@ -15,12 +15,6 @@ namespace EducationSystem.Controllers
         private readonly EducationSystemDB db = new EducationSystemDB();
 
         /// <summary>
-        ///     Индекс TaskCode.
-        ///     Используется для передачи значения в RedirectToAction после добавления файла.
-        /// </summary>
-        private int TaskCodeIndex = 1;
-
-        /// <summary>
         ///     Представление вариантов решения одной задачи.
         /// </summary>
         /// <param name="TaskCode"> Код задания выбранного предмета. </param>
@@ -28,7 +22,6 @@ namespace EducationSystem.Controllers
         public ActionResult Index(int TaskCode)
         {
             var result = db.Solution.Where(c => c.TaskCode == TaskCode).ToList();
-            TaskCodeIndex = TaskCode;
             var nums = new int[result.Count];
             for (var i = 0; i < result.Count; i++) nums[i] = i + 1;
             ViewBag.solutionNumber = nums; //Массив с нумерацией имеющихся решений выбранного задания
@@ -37,6 +30,7 @@ namespace EducationSystem.Controllers
             return View(result);
         }
 
+        [HttpGet]
         public ActionResult Create(int TaskCode)
         {
             ViewBag.TaskCode = TaskCode;

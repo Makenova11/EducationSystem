@@ -41,8 +41,19 @@ namespace EducationSystem.Controllers
         /// <param name="numTask"> Номера заданий. </param>
         /// <returns> ActionResult. </returns>
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(int numClass, List<int> numTask)
+        {
+            return View(new SubjectVM
+            {
+                Class = numClass,
+                Name = ""
+            });
+        }
+
+        [HttpGet]
+        //[Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Create2(int numClass, List<int> numTask)
         {
             return View(new SubjectVM
             {
@@ -90,6 +101,59 @@ namespace EducationSystem.Controllers
                             });
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index", new { subject.Class });
+                }
+
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("Index", new { subjectVM.Class });
+            }
+        }
+
+        /// <summary>
+        /// Добавление предметов, их заданий и критерия
+        /// </summary>
+        /// <param name="subjectVM"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Create2([Bind(Include = "SubjectCode,Name, Class")] 
+            SubjectVM subjectVM, List<int> numTask)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    
+                    //Add Subject
+                    var subject = new Subject
+                    {
+                        Name = subjectVM.Name,
+                        Class = subjectVM.Class
+                    };
+                    db.Subject.Add(subject); 
+                    db.SaveChanges();
+                    var subjCode = db.Subject.Where(x => x.SubjectCode == subject.SubjectCode)
+                        .Select(c => c.SubjectCode)
+                        .FirstOrDefault();
+
+                    //Этап добавления SubjectTask по созданному Subject
+                    foreach (var data in numTask)
+                    {
+                        var subjectTask = new SubjectTask
+                        {
+                            Number = data,
+                            SubjectCode = subjCode
+                        };
+                        db.SubjectTask.Add(subjectTask);
+                        db.SaveChanges();
+
+                    }
+                    
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index", new { subjectVM.Class });
                 }
 
                 return View();

@@ -55,7 +55,7 @@ namespace EducationSystem.Helpers
                 where item.SubjectTaskCode == subjTaskCode
                 orderby item.TaskCode descending
                 select item;
-            var TaskCode = TaskList.ToList()[--arrayNumber].SubjectTaskCode;
+            var TaskCode = TaskList.ToList()[--arrayNumber].TaskCode;
             var a = new TagBuilder("a");
             a.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
             a.AddCssClass("link"); // в теге <a> делаем ссылку на задание(task).

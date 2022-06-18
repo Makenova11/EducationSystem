@@ -9,7 +9,7 @@
     <h2>Предмет: @ViewBag.nameSubj, Задание: @ViewBag.numTask, Класс: @ViewBag.numClass</h2>
     <div class="question-number">
         <p class="add-question">
-            @Html.ActionLink("Добавить задание", "Create", new { SubjectTaskCode = ViewBag.subjTaskCode }, new { @class = "link-page-task" })
+            @Html.ActionLink("Добавить задание", "Create2", new { SubjectTaskCode = ViewBag.subjTaskCode }, new { @class = "link-page-task" })
         </p>
         <ul class="question-number-list listquery">
             @foreach (var item in ViewBag.arrayNumber)
@@ -22,10 +22,6 @@
 
         @if (Model.Any())
         {
-            @*<figure class="figure-question">
-                @Html.Raw("<img style='width:70px; height:90x;' src=\"data:image/jpeg;base64,"
-                          + Convert.ToBase64String(ViewBag.criterionFile) + "\" />")
-            </figure>*@
             <div class="container-subj-photo-task">
                 <figure class="figure-question figure-photo-task">
                     <div id="figure-img-task">

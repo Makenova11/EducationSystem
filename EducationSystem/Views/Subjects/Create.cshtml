@@ -57,8 +57,10 @@
             $('.addNum').click(function() {
                 i++;
 
-                const elem = $(`<input name='numTask[${i}]' class='d-block input-form-tasks form-control col-md-2 mb-2' type='number' placeholder='${n
-                    }'/>`);
+                const elem = $(`<input name='numTask[${i}]' 
+                            class='d-block input-form-tasks form-control col-md-2 mb-2'
+                            type='number' placeholder='${n}'/>
+                `);
 
                 $('#mylist').append(elem);
                 n++;

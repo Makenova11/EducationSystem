@@ -22,11 +22,11 @@
                 @Html.LabelFor(model => model.SolutionImage, "Решение", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="listSubjects" id="mylist">
-                        <input name="SolutionImageList[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="file" placeholder="1"/>
+                        <input id='SolutionImageList0' name="SolutionImageList[0]" class="d-block input-form-tasks form-control col-md-2 mb-2" type="file" placeholder="1" />
                     </div>
                     <a id="addSol" class="addSol btn btn-default">+</a>
+                    <a id="minusSol" class="minusSol btn btn-default">-</a>
                 </div>
-
             </div>
         </div>
 
@@ -38,10 +38,10 @@
                 @Html.LabelFor(model => model.SolutionImage, "Решение", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <ul class="listSubjects" id="myMark" style="list-style-type: none; padding-left: 0">
-                        <li id="inputElemGroup">
-                            <input name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2" 
-                                   type="number" placeholder="0" style="max-width: 100px; margin-right: 5px;"/>
-                            <select name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2" 
+                        <li id="inputElemGroup0">
+                            <input name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
+                                   type="number" placeholder="0" style="max-width: 100px; margin-right: 5px;" />
+                            <select name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
                                     type="" placeholder="1" style="max-width: 150px; margin-right: 5px;">
                                 <option>Верно</option>
                                 <option>Неверно</option>
@@ -50,6 +50,7 @@
                         </li>
                     </ul>
                     <a id="addMark" class="addSol btn btn-default">+</a>
+                    <a id="minusMark" class="minusMark btn btn-default">-</a>
                 </div>
 
             </div>
@@ -71,19 +72,32 @@
     <script>
         $(function() {
             var i = 0;
+            var k = 0;
             $('#addSol').click(function() {
                 i++;
-                const elem = $(`<input name='SolutionImageList[${i
-                    }]' class='d-block input-form-tasks form-control col-md-2 mb-2' type='file' placeholder='SolutionImageList[${i}]'/>`);
+                const elem = $(`<input id='SolutionImageList${i}' name='SolutionImageList[${i}]'
+                            class='d-block input-form-tasks form-control col-md-2 mb-2'
+                            type='file'/>`);
                 $('#mylist').append(elem);
             });
 
-            $('#addMark').click(function () {
+            $('#minusSol').click(function () {
+                $(`#SolutionImageList${i}`).remove();
+                if (i >= 0) {
+                    i--;
+                } else {
+                    i = 0;
+                }
+                console.log('lol')
+            });
+
+            $('#addMark').click(function() {
+                k++;
                 const inputMarkGroup = $('#inputElemGroup');
                 const elem = $(`
-                    <li id="inputElemGroup">
+                    <li id="inputElemGroup${k}">
                         <input name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
-                               type="number" placeholder="0" style="max-width: 100px; margin-right: 5px;"/>
+                               type="number" placeholder="${k}" style="max-width: 100px; margin-right: 5px;"/>
                         <select name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
                                 type="" placeholder="1" style="max-width: 150px; margin-right: 5px;">
                             <option>Верно</option>
@@ -93,6 +107,16 @@
                     </li>
                 `);
                 $('#myMark').append(elem);
+            });
+
+            $('#minusMark').click(function() {
+
+                $(`#inputElemGroup${k}`).remove();
+                if (k >= 0) {
+                    k--;
+                } else {
+                    k = 0;
+                }
             });
         });
     </script>

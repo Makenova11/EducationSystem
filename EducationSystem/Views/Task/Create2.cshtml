@@ -1,0 +1,63 @@
+﻿@model EducationSystem.ViewModels.TaskVM
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Добавление @ViewBag.numTask задания  @ViewBag.numClass класса, предмет: @ViewBag.nameSubj </h2>
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm("Create2", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr/>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TaskImage, "Файл задания (.jpg, .jpeg)", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="" type="file" name="TaskImage"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, "Год использования", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Year)
+                @Html.ValidationMessageFor(model => model.Year)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CriterionFileImage, "Файл критерия", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="" type="file" name="CriterionFileImage"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventCode, "Мероприятие", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EventCode", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EventCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.SubjectTaskCode,
+            new { Value = ViewBag.subjTaskCode })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Добавить" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index", "Task", new { ViewBag.subjTaskCode }, new { @class = "link-page-task btn btn-default" })
+</div>
