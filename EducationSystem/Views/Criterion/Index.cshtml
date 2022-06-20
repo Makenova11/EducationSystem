@@ -1,28 +1,10 @@
-﻿@model IEnumerable<EducationSystem.ViewModels.CriterionData>
+﻿@model List<EducationSystem.Models.Criterion>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h3>Критерии</h3>
-<form method="post">
-    <h4>
-        Класс:
-    </h4>
-    @using (Html.BeginForm("Index"))
-    {
-        <p>
-            <select class="form-control" name="numClass">
-
-                <option value=0> Все </option>
-                <option value=9> 9 класс </option>
-                <option value=11> 11 класс </option>
-
-            </select>
-            <input type="submit" value="Поиск" class="btn btn-default"/>
-        </p>
-    }
-</form>
 <table class="table">
     <tr>
         <th>
@@ -32,7 +14,7 @@
             Предмет
         </th>
         <th>
-            Номер задания
+            Номер критерия
         </th>
         <th>
             Максимальное значение
@@ -40,16 +22,9 @@
         <th>
             Наименование критерия
         </th>
-        <th>
-            Отобразить критерий
-        </th>
     </tr>
-    @foreach (MyClass item in ViewBag.result)
-    {
-        @item.
-        ;
-    }
-    @*@foreach (var item in Model)
+
+    @foreach (var item in Model)
     {
         <tr>
             <td>
@@ -67,9 +42,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                -
-            </td>
         </tr>
-    }*@
+    }
 </table>
+<div>
+    @Html.ActionLink("Назад", "Index", "Task", new { subjTaskCode = Model[0].SubjectTaskCode }, new { @class = "link-page-task btn btn-default" })
+</div>

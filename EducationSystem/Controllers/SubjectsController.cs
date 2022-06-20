@@ -34,22 +34,6 @@ namespace EducationSystem.Controllers
         }
 
 
-        /// <summary>
-        ///     Инициирование добавления нового предмета
-        /// </summary>
-        /// <param name="numClass"> Номер класса. </param>
-        /// <param name="numTask"> Номера заданий. </param>
-        /// <returns> ActionResult. </returns>
-        [HttpGet]
-        //[Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Create(int numClass, List<int> numTask)
-        {
-            return View(new SubjectVM
-            {
-                Class = numClass,
-                Name = ""
-            });
-        }
 
         [HttpGet]
         //[Authorize(Roles = "Admin")]
@@ -60,55 +44,6 @@ namespace EducationSystem.Controllers
                 Class = numClass,
                 Name = ""
             });
-        }
-
-        /// <summary>
-        ///     Добавление Subject и его SubjectTask-ов
-        /// </summary>
-        /// <param name="subject"> SubjectVM. </param>
-        /// <param name="numTask"> List заданий. </param>
-        /// <returns> Task<ActionResult> </returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> Create([Bind(Include = "SubjectCode,Name, Class")] SubjectVM subjectVM,
-            List<int> numTask)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    //Add Subject
-                    var subject = new Subject
-                    {
-                        Name = subjectVM.Name,
-                        Class = subjectVM.Class
-                    };
-                    db.Subject.Add(subject);
-                    await db.SaveChangesAsync();
-                    var subjCode = await db.Subject.Where(x => x.SubjectCode == subject.SubjectCode)
-                        .Select(c => c.SubjectCode)
-                        .FirstOrDefaultAsync();
-                    //Этап добавления SubjectTask по созданному Subject
-
-                    numTask.Distinct().ToList().Sort();
-                    foreach (var item in numTask)
-                        if (item > 0)
-                            db.SubjectTask.Add(new SubjectTask
-                            {
-                                Number = item,
-                                SubjectCode = subjCode
-                            });
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index", new { subject.Class });
-                }
-
-                return View();
-            }
-            catch
-            {
-                return RedirectToAction("Index", new { subjectVM.Class });
-            }
         }
 
         /// <summary>
@@ -153,14 +88,14 @@ namespace EducationSystem.Controllers
                     }
                     
                     await db.SaveChangesAsync();
-                    return RedirectToAction("Index", new { subjectVM.Class });
+                    return RedirectToAction("Index", new {numClass = subjectVM.Class });
                 }
 
                 return View();
             }
             catch
             {
-                return RedirectToAction("Index", new { subjectVM.Class });
+                return RedirectToAction("Index", new { numClass = subjectVM.Class });
             }
         }
 

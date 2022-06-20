@@ -161,7 +161,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\SolutionController.cs" />
-    <Compile Include="Controllers\SolutionCriterionScoresController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
@@ -316,14 +315,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Experts\Index.cshtml" />
-    <Content Include="Views\Subjects\Create.cshtml" />
     <Content Include="Views\Subjects\Delete.cshtml" />
     <Content Include="Views\Subjects\Edit.cshtml" />
     <Content Include="Views\Subjects\Index.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Criterion\Index.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
-    <Content Include="Views\Task\Create.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Solution\Create.cshtml" />
     <Content Include="Views\Solution\Index.cshtml" />
@@ -332,10 +329,12 @@
     <Content Include="Views\LogIn\LogIn.cshtml" />
     <Content Include="Views\Task\Create2.cshtml" />
     <Content Include="Views\Subjects\Create2.cshtml" />
+    <Content Include="Views\Solution\CreateComment.cshtml" />
+    <Content Include="Views\Solution\ExceptionComment.cshtml" />
+    <Content Include="Views\Solution\NotFound.cshtml" />
+    <Content Include="Views\Solution\ViewComment.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\SolutionCriterionScores\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="App_Data\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="App_Data\fonts\glyphicons-halflings-regular.woff" />

@@ -1,4 +1,4 @@
-﻿@model EducationSystem.Models.Solution
+﻿@model EducationSystem.ViewModels.SolutionVM
 
 @{
     ViewBag.Title = "Create";
@@ -33,28 +33,28 @@
         @Html.HiddenFor(model => model.TaskCode,
             new { Value = ViewBag.TaskCode })
 
-        <div class="form-horizontal">
+        @*<div class="form-horizontal">
             <div class="form-group">
-                @Html.LabelFor(model => model.SolutionImage, "Решение", new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.SolutionImage, "Балл и комментарий", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <ul class="listSubjects" id="myMark" style="list-style-type: none; padding-left: 0">
-                        <li id="inputElemGroup0">
-                            <input name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
+                        <li id="SolutionVM[0].inputElemGroup[0]">
+                            <input name="SolutionVM[0].inputElemGroup.rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
                                    type="number" placeholder="0" style="max-width: 100px; margin-right: 5px;" />
-                            <select name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
+                            <select name="SolutionVM[0].inputElemGroup.rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
                                     type="" placeholder="1" style="max-width: 150px; margin-right: 5px;">
                                 <option>Верно</option>
                                 <option>Неверно</option>
                             </select>
-                            <textarea class="d-block input-form-tasks form-control col-md-2 mb-2" placeholder="Комментарии"></textarea>
+                            <textarea name="SolutionVM[0].inputElemGroup.Comment" class="d-block input-form-tasks form-control col-md-2 mb-2" placeholder="Комментарий"></textarea>
                         </li>
                     </ul>
                     <a id="addMark" class="addSol btn btn-default">+</a>
                     <a id="minusMark" class="minusMark btn btn-default">-</a>
                 </div>
 
-            </div>
-        </div>
+            </div>*@
+        @*</div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -88,14 +88,13 @@
                 } else {
                     i = 0;
                 }
-                console.log('lol')
             });
 
             $('#addMark').click(function() {
                 k++;
-                const inputMarkGroup = $('#inputElemGroup');
+                const inputMarkGroup = $('#SolutionVM[0].inputElemGroup');
                 const elem = $(`
-                    <li id="inputElemGroup${k}">
+                    <li id="SolutionVM[${k}].inputElemGroup[${k}]">
                         <input name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
                                type="number" placeholder="${k}" style="max-width: 100px; margin-right: 5px;"/>
                         <select name="rightAnswer" class="d-block input-form-tasks form-control col-md-2 mb-2"
@@ -103,7 +102,7 @@
                             <option>Верно</option>
                             <option>Неверно</option>
                         </select>
-                        <textarea class="d-block input-form-tasks form-control col-md-2 mb-2" placeholder="Комментарии"></textarea>
+                        <textarea name="SolutionVM[0].inputElemGroup.Comment" class="d-block input-form-tasks form-control col-md-2 mb-2" placeholder="Комментарии"></textarea>
                     </li>
                 `);
                 $('#myMark').append(elem);
@@ -111,7 +110,7 @@
 
             $('#minusMark').click(function() {
 
-                $(`#inputElemGroup${k}`).remove();
+                $(`#SolutionVM[${k}].inputElemGroup[${k}]`).remove();
                 if (k >= 0) {
                     k--;
                 } else {

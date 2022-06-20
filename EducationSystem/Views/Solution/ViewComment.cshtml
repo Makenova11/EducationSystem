@@ -1,0 +1,63 @@
+﻿@model List<EducationSystem.Models.SolutionCriterionScore>
+
+@{
+    ViewBag.Title = "ViewComment";
+}
+
+<h3>Комментарии к решению</h3>
+<table class="table">
+    <tr>
+        <th>
+            Возможный балл
+        </th>
+        <th>
+           Правильность
+        </th>
+        <th>
+            Комментарий
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PossibleScore)
+            </td>
+            <td>
+                @if (item.isValid)
+                {
+
+
+                    <svg class="pos-img" width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        ' +
+                        '
+                        <path d="M16.5163 8.93451L11.0597 14.7023L8.0959 11.8984" stroke="green" stroke-width="2" />' +
+                        '
+                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="green" stroke-width="2" />' +
+                        '
+                    </svg>
+                }
+                else
+                {
+                    <svg class="dis-img" width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        ' +
+                        '
+                        <path d="M7.95206 16.048L16.0769 7.92297" stroke="red" stroke-width="2" />' +
+                        '
+                        <path d="M16.0914 16.0336L7.90884 7.85101" stroke="red" stroke-width="2" />' +
+                        '
+                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="red" stroke-width="2" />' +
+                        '
+                    </svg>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    @Html.ActionLink("Назад", "SolutionTest", new { SolutionCode = Model[0].SolutionCode }, new { @class = "link-page-task btn btn-default" })
+</div>

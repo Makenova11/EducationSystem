@@ -578,6 +578,10 @@ div.msg, ul li i:before, ul li i:after {
     max-height: 380px;
     max-width: 380px;
 }
+.main-photo-task1 {
+    max-height: 380px;
+    max-width: 380px;
+}
 
 .item-subj-mini-photo-task:not(:last-child) {
     margin-right: 15px;

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EducationSystem.Models;
+using EducationSystem.ViewModels;
 
 namespace EducationSystem.Controllers
 {
@@ -26,7 +28,9 @@ namespace EducationSystem.Controllers
             for (var i = 0; i < result.Count; i++) nums[i] = i + 1;
             ViewBag.solutionNumber = nums; //Массив с нумерацией имеющихся решений выбранного задания
             ViewBag.taskCode = TaskCode;
+            ViewBag.subjTaskCode = db.Task.Where(c => c.TaskCode == TaskCode).Select(c => c.SubjectTaskCode).FirstOrDefault();
             ViewBag.TaskImage = db.Task.Where(c => c.TaskCode == TaskCode).Select(c => c.TaskImage).FirstOrDefault();
+            ViewBag.CriterionFile = db.Task.Where(c => c.TaskCode == TaskCode).Select(c => c.CriterionFile).FirstOrDefault();
             return View(result);
         }
 
@@ -63,7 +67,7 @@ namespace EducationSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SolutionCode,TaskCode")] Solution solution,
+        public ActionResult Create([Bind(Include = "TaskCode")] Solution solution,
             List<HttpPostedFileBase> SolutionImageList)
         {
             if (ModelState.IsValid)
@@ -75,7 +79,7 @@ namespace EducationSystem.Controllers
                     imageData = binaryReader.ReadBytes(SolutionImageList[0].ContentLength);
                 }
 
-                // Этап добавления Solution
+                //Этап добавления Solution
                 solution.SolutionImage = imageData;
                 SolutionImageList.RemoveAt(0);
                 db.Solution.Add(solution);
@@ -117,6 +121,9 @@ namespace EducationSystem.Controllers
         /// <returns> ActionResult. /returns>
         public ActionResult SolutionTest(int SolutionCode)
         {
+            var solutionTaskCode = db.Solution.Where(c => c.SolutionCode == SolutionCode).Select(c => c.TaskCode).FirstOrDefault();
+            ViewBag.solutionTaskCode = solutionTaskCode;
+            ViewBag.TaskImage = db.Task.Where(c => c.TaskCode == solutionTaskCode).Select(c => c.TaskImage).FirstOrDefault();
             //Первое изображение решения(нужно для отображения впервые загруженной страницы)
             ViewBag.FirstImage = db.Solution.Where(x => x.SolutionCode == SolutionCode).Select(x => x.SolutionImage)
                 .FirstOrDefault();
@@ -128,12 +135,77 @@ namespace EducationSystem.Controllers
                 .ToList();
             //Объединяем все изображения, чтобы получить общий массив решений.
             ViewBag.Images = FirstImage.Union(Images);
-
-
             //Для второго варианта
             ViewBag.AllImages = db.Solution.Where(x => x.SolutionCode == SolutionCode).Select(x => x.SolutionImage).ToList();
-
+            var taskCode = db.Solution.Where(c => c.SolutionCode == SolutionCode).Select(c => c.TaskCode).FirstOrDefault();
+            ViewBag.SolutionCode = SolutionCode;
+            var subjectTaskcode = db.Task.Where(c => c.TaskCode == solutionTaskCode).Select(c => c.SubjectTaskCode).FirstOrDefault();
+            ViewBag.CriterionCode = db.Criterion.Where(c => c.SubjectTaskCode == subjectTaskcode).Select(c => c.CriterionCode).FirstOrDefault();
+            ViewBag.Test = db.SolutionCriterionScore.Where(c => c.SolutionCode == SolutionCode).ToList();
             return View();
+        }
+
+        /// <summary>
+        /// Добавить комментарий к решению
+        /// </summary>
+        /// <param name="SolutionCode"></param>
+        /// <param name="CriterionCode"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreateComment(int SolutionCode, int CriterionCode)
+        {
+            if (CriterionCode == null)
+            {
+                return RedirectToAction("NotFound");
+            }
+            List<SelectListItem> dropdownItems = new List<SelectListItem>();
+            dropdownItems.AddRange(new[]{
+                            new SelectListItem() { Selected = true, Text = "Верно", Value= "true"},
+                            new SelectListItem() { Selected = false, Text = "Неверно", Value= "false"}});
+            ViewData.Add("DropDownItems", dropdownItems);
+            ViewBag.SolutionCode = SolutionCode;
+            ViewBag.CriterionCode = CriterionCode;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment([Bind(Include = "Comment, isValid, possibleScore, SolutionCode, CriterionCode")] 
+        SolutionCriterionCodeScoreVM solution)
+        {
+            if (ModelState.IsValid)
+            {
+                SolutionCriterionScore data = new SolutionCriterionScore
+                {
+                    PossibleScore = solution.possibleScore,
+                    Comment = solution.Comment,
+                    SolutionCode = solution.SolutionCode,
+                    CriterionCode = solution.CriterionCode,
+                    isValid = solution.isValid == "true"? true : false,
+                };
+                db.SolutionCriterionScore.Add(data);
+                db.SaveChanges();
+                return RedirectToAction("SolutionTest","Solution", new { SolutionCode = solution.SolutionCode });
+            }
+
+            return View(solution);
+        }
+
+        public ActionResult NotFound()
+        {
+            Response.StatusCode = 404;
+            return View();
+        }
+
+        /// <summary>
+        /// Посмотреть комментарии к решению
+        /// </summary>
+        /// <param name="SolutionCode"></param>
+        /// <returns></returns>
+        public ActionResult ViewComment(int SolutionCode)
+        {
+            List<SolutionCriterionScore> data = db.SolutionCriterionScore.Where(c => c.SolutionCode == SolutionCode).ToList();
+            return View(data);
         }
     }
 }

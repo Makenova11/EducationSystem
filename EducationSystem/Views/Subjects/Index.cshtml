@@ -10,13 +10,7 @@
 @*@if (User.Identity.IsAuthenticated)
 {*@
 <p>
-    @Html.ActionLink("Добавить предмет", "Create", new
-    {
-        numClass = ViewBag.classNum
-    }, new { @class = "btn btn-default insert-btn" })
-</p>
-<p>
-    @Html.ActionLink("Добавить предмет2", "Create2", new
+    @Html.ActionLink("Добавить предмет", "Create2", new
     {
         numClass = ViewBag.classNum
     }, new { @class = "btn btn-default insert-btn" })

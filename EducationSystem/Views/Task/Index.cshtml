@@ -9,7 +9,13 @@
     <h2>Предмет: @ViewBag.nameSubj, Задание: @ViewBag.numTask, Класс: @ViewBag.numClass</h2>
     <div class="question-number">
         <p class="add-question">
-            @Html.ActionLink("Добавить задание", "Create2", new { SubjectTaskCode = ViewBag.subjTaskCode }, new { @class = "link-page-task" })
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Добавить задание", "Create2", new { SubjectTaskCode = ViewBag.subjTaskCode }, new { @class = "link-page-task btn btn-default" })
+
+                @Html.ActionLink("Добавить критерий", "Create", "Criterion", new { subjectTaskCode = ViewBag.subjTaskCode }, new { @class = "link-page-task btn btn-default" })
+            }
+            @Html.ActionLink("Критерии", "Index", "Criterion", new { subjectTaskCode = ViewBag.subjTaskCode }, new { @class = "link-page-task btn btn-default" })
         </p>
         <ul class="question-number-list listquery">
             @foreach (var item in ViewBag.arrayNumber)

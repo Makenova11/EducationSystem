@@ -16,6 +16,7 @@ namespace EducationSystem.ViewModels
         /// <summary>
         ///     Класс
         /// </summary>
+        [Required]
         public int Class { get; set; }
 
     }

@@ -32,6 +32,12 @@
         <button id="showother" class="button-question btn-show-all">Показать все</button>
     </div>
 </div>
+<div>
+    @Html.ActionLink("Назад", "Index", "Task", new
+    {
+        subjTaskCode = ViewBag.subjTaskCode
+    },new { @class = "link-page-task btn btn-default" })
+</div>
 <script type="text/javascript">
 
     $(document).ready(function() { // Ждём загрузки страницы
