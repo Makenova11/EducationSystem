@@ -82,73 +82,73 @@
 
 <script type="text/javascript">
 
-    //$(document).ready(function() { // Ждём загрузки страницы
-    //    const selects = $("select");
-    //    $(".section-solution-test_btn-send").click(function() {
+    $(document).ready(function() { // Ждём загрузки страницы
+        const selects = $("select");
+        $(".section-solution-test_btn-send").click(function() {
 
-    //        const options = $('select');
+            const options = $('select');
 
-    //        const values = $.map(options,
-    //            function(option) {
-    //                return option.value;
-    //            });
-    //        console.log(values);
-    //        var nice = '<svg class="pos-img" width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-    //            '<path d="M16.5163 8.93451L11.0597 14.7023L8.0959 11.8984" stroke="green" stroke-width="2"/>' +
-    //            '<path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="green" stroke-width="2"/>' +
-    //            '</svg>';
-    //        var dis = '<svg class="dis-img" width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-    //            '<path d="M7.95206 16.048L16.0769 7.92297" stroke="red" stroke-width="2"/>' +
-    //            '<path d="M16.0914 16.0336L7.90884 7.85101" stroke="red" stroke-width="2"/>' +
-    //            '<path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="red" stroke-width="2"/>' +
-    //            '</svg>';
-    //        var panelChoice = $(".section-solution-test_check-panel-choice");
-    //        var checkPanel = $(".check-panel_item");
-    //        $("select").each(function() {
-    //            if ($(this).val() == 1) {
-    //                if (document.querySelector(".section-solution-p") && document.querySelector(".pos-img")) {
-    //                    document.querySelector(".section-solution-p").remove();
-    //                    document.querySelector(".pos-img").remove();
-    //                } else if (document.querySelector(".section-solution-p") && document.querySelector(".dis-img")) {
-    //                    document.querySelector(".section-solution-p").remove();
-    //                    document.querySelector(".dis-img").remove();
-    //                }
-    //                panelChoice.has(this).append(nice);
-    //                checkPanel.has(this).append('<p style="color: green; padding-right: 0;" class="section-solution-p">Есть несколько недочётов</p>');
-    //            } else if ($(this).val() == 2) {
-    //                if (document.querySelector(".section-solution-p") && document.querySelector(".pos-img")) {
-    //                    document.querySelector(".section-solution-p").remove();
-    //                    document.querySelector(".pos-img").remove();
-    //                } else if (document.querySelector(".section-solution-p") && document.querySelector(".dis-img")) {
-    //                    document.querySelector(".section-solution-p").remove();
-    //                    document.querySelector(".dis-img").remove();
-    //                }
-    //                panelChoice.has(this).append(nice);
-    //                checkPanel.has(this).append('<p style="color: green; padding-right: 0;" class="section-solution-p">Есть недочёт</p>');
-    //            } else if ($(this).val() == 3) {
-    //                if (document.querySelector(".section-solution-p") && document.querySelector(".pos-img")) {
-    //                    document.querySelector(".section-solution-p").remove();
-    //                    document.querySelector(".pos-img").remove();
-    //                } else if (document.querySelector(".section-solution-p") && document.querySelector(".dis-img")) {
-    //                    document.querySelector(".section-solution-p").remove();
-    //                    document.querySelector(".dis-img").remove();
-    //                }
-    //                panelChoice.has(this).append(nice);
-    //                checkPanel.has(this).append('<p style="color: green; padding-right: 0;" class="section-solution-p">Всё верно</p>');
-    //            } else if ($(this).val() == 0) {
-    //                if (document.querySelector(".section-solution-p") && document.querySelector(".pos-img")) {
-    //                    document.querySelector(".section-solution-p").remove();
-    //                    document.querySelector(".pos-img").remove();
-    //                } else if (document.querySelector(".section-solution-p") && document.querySelector(".dis-img")) {
-    //                    document.querySelector(".section-solution-p").remove();
-    //                    document.querySelector(".dis-img").remove();
-    //                }
-    //                panelChoice.has(this).append(dis);
-    //                checkPanel.has(this).append('<p style="color: red; padding-right: 0;" class="section-solution-p">Неверно</p>');
-    //            }
-    //        });
+            const values = $.map(options,
+                function(option) {
+                    return option.value;
+                });
+            console.log(values);
+            var nice = '<svg class="pos-img" width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                '<path d="M16.5163 8.93451L11.0597 14.7023L8.0959 11.8984" stroke="green" stroke-width="2"/>' +
+                '<path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="green" stroke-width="2"/>' +
+                '</svg>';
+            var dis = '<svg class="dis-img" width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                '<path d="M7.95206 16.048L16.0769 7.92297" stroke="red" stroke-width="2"/>' +
+                '<path d="M16.0914 16.0336L7.90884 7.85101" stroke="red" stroke-width="2"/>' +
+                '<path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="red" stroke-width="2"/>' +
+                '</svg>';
+            var panelChoice = $(".section-solution-test_check-panel-choice");
+            var checkPanel = $(".check-panel_item");
+            $("select").each(function() {
+                if ($(this).val() == 1) {
+                    if (document.querySelector(".section-solution-p") && document.querySelector(".pos-img")) {
+                        document.querySelector(".section-solution-p").remove();
+                        document.querySelector(".pos-img").remove();
+                    } else if (document.querySelector(".section-solution-p") && document.querySelector(".dis-img")) {
+                        document.querySelector(".section-solution-p").remove();
+                        document.querySelector(".dis-img").remove();
+                    }
+                    panelChoice.has(this).append(nice);
+                    checkPanel.has(this).append('<p style="color: green; padding-right: 0;" class="section-solution-p">Есть несколько недочётов</p>');
+                } else if ($(this).val() == 2) {
+                    if (document.querySelector(".section-solution-p") && document.querySelector(".pos-img")) {
+                        document.querySelector(".section-solution-p").remove();
+                        document.querySelector(".pos-img").remove();
+                    } else if (document.querySelector(".section-solution-p") && document.querySelector(".dis-img")) {
+                        document.querySelector(".section-solution-p").remove();
+                        document.querySelector(".dis-img").remove();
+                    }
+                    panelChoice.has(this).append(nice);
+                    checkPanel.has(this).append('<p style="color: green; padding-right: 0;" class="section-solution-p">Есть недочёт</p>');
+                } else if ($(this).val() == 3) {
+                    if (document.querySelector(".section-solution-p") && document.querySelector(".pos-img")) {
+                        document.querySelector(".section-solution-p").remove();
+                        document.querySelector(".pos-img").remove();
+                    } else if (document.querySelector(".section-solution-p") && document.querySelector(".dis-img")) {
+                        document.querySelector(".section-solution-p").remove();
+                        document.querySelector(".dis-img").remove();
+                    }
+                    panelChoice.has(this).append(nice);
+                    checkPanel.has(this).append('<p style="color: green; padding-right: 0;" class="section-solution-p">Всё верно</p>');
+                } else if ($(this).val() == 0) {
+                    if (document.querySelector(".section-solution-p") && document.querySelector(".pos-img")) {
+                        document.querySelector(".section-solution-p").remove();
+                        document.querySelector(".pos-img").remove();
+                    } else if (document.querySelector(".section-solution-p") && document.querySelector(".dis-img")) {
+                        document.querySelector(".section-solution-p").remove();
+                        document.querySelector(".dis-img").remove();
+                    }
+                    panelChoice.has(this).append(dis);
+                    checkPanel.has(this).append('<p style="color: red; padding-right: 0;" class="section-solution-p">Неверно</p>');
+                }
+            });
 
-    //    });
+        });
 
         $(".photo-task").click(function() {
             const img = $(this);
